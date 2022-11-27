@@ -1,0 +1,6 @@
+server/test/node_modules
+server/.vscode
+server/bin
+server/obj
+client/.mono
+client/.import

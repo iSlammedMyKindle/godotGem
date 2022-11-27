@@ -1,0 +1,118 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gamepadUi.gd" type="Script" id=1]
+
+[node name="gamepadUI" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="B" type="Button" parent="."]
+margin_left = 879.0
+margin_top = 268.0
+margin_right = 922.0
+margin_bottom = 307.0
+disabled = true
+text = "B"
+
+[node name="A" type="Button" parent="."]
+margin_left = 830.0
+margin_top = 314.0
+margin_right = 873.0
+margin_bottom = 353.0
+disabled = true
+text = "A"
+
+[node name="X" type="Button" parent="."]
+margin_left = 782.0
+margin_top = 268.0
+margin_right = 825.0
+margin_bottom = 307.0
+disabled = true
+text = "X"
+
+[node name="Y" type="Button" parent="."]
+margin_left = 832.0
+margin_top = 224.0
+margin_right = 875.0
+margin_bottom = 263.0
+disabled = true
+text = "Y"
+
+[node name="Right" type="Button" parent="."]
+margin_left = 166.0
+margin_top = 272.0
+margin_right = 209.0
+margin_bottom = 311.0
+disabled = true
+text = "R"
+
+[node name="Down" type="Button" parent="."]
+margin_left = 117.0
+margin_top = 318.0
+margin_right = 160.0
+margin_bottom = 357.0
+disabled = true
+text = "D"
+
+[node name="Left" type="Button" parent="."]
+margin_left = 69.0
+margin_top = 272.0
+margin_right = 112.0
+margin_bottom = 311.0
+disabled = true
+text = "L"
+
+[node name="Up" type="Button" parent="."]
+margin_left = 119.0
+margin_top = 228.0
+margin_right = 162.0
+margin_bottom = 267.0
+disabled = true
+text = "U"
+
+[node name="Start" type="Button" parent="."]
+margin_left = 590.0
+margin_top = 90.0
+margin_right = 639.0
+margin_bottom = 110.0
+disabled = true
+text = "Start"
+
+[node name="Select" type="Button" parent="."]
+margin_left = 342.0
+margin_top = 88.0
+margin_right = 393.0
+margin_bottom = 108.0
+disabled = true
+text = "Select"
+
+[node name="LB" type="Button" parent="."]
+margin_left = 119.0
+margin_top = 93.0
+margin_right = 162.0
+margin_bottom = 132.0
+disabled = true
+text = "LB"
+
+[node name="RB" type="Button" parent="."]
+margin_left = 835.0
+margin_top = 99.0
+margin_right = 878.0
+margin_bottom = 138.0
+disabled = true
+text = "RB"
+
+[node name="LB2" type="Button" parent="."]
+margin_left = 109.0
+margin_top = 461.0
+margin_right = 152.0
+margin_bottom = 500.0
+disabled = true
+text = "SL"
+
+[node name="LB3" type="Button" parent="."]
+margin_left = 829.0
+margin_top = 467.0
+margin_right = 872.0
+margin_bottom = 506.0
+disabled = true
+text = "SR"

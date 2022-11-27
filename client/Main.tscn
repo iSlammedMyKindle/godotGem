@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://connectLabel.gd" type="Script" id=2]
+[ext_resource path="res://gamepadUi.tscn" type="PackedScene" id=3]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="urlToConnect" type="TextEdit" parent="."]
+margin_left = 421.0
+margin_top = 90.0
+margin_right = 604.0
+margin_bottom = 124.0
+text = "10.235.1.165"
+
+[node name="connectionStatus" type="Label" parent="."]
+margin_left = 423.0
+margin_top = 73.0
+margin_right = 600.0
+margin_bottom = 93.0
+text = "Connect to this address:"
+script = ExtResource( 2 )
+
+[node name="gamepadUI" parent="connectionStatus" instance=ExtResource( 3 )]
+position = Vector2( -399, -3 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 605.0
+margin_top = 92.0
+margin_right = 679.0
+margin_bottom = 124.0
+text = "Connect!"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
