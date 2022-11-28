@@ -14,7 +14,7 @@ server.Start(socket =>{
     };
 
     socket.OnBinary = message=>{
-        Console.WriteLine(message[0].ToString() + ' ' + message[1].ToString() + ' ' + message[2].ToString());
+        // Console.WriteLine(message[0].ToString() + ' ' + message[1].ToString() + ' ' + message[2].ToString());
         controller.SetButtonState(message[1], message[2] == 255);
     };
 });
