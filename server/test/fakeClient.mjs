@@ -25,7 +25,13 @@ function increment(){
     },200)
 }
 
+//Tests the axis input value
+function flekStringTest(){
+    fakeController.send("[15,0]");
+}
+
 fakeController.on("open", ()=>{
     // inputTest()
-    increment();
+    // increment();
+    flekStringTest();
 });
