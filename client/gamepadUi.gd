@@ -12,7 +12,10 @@ var evtList = [
 	"Up",
 	"Down",
 	"Left",
-	"Right"
+	"Right",
+	"SL",
+	"SR",
+	"Guide"
 ]
 
 # Called when the node enters the scene tree for the first time.
