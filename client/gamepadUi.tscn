@@ -101,7 +101,7 @@ margin_bottom = 138.0
 disabled = true
 text = "RB"
 
-[node name="LB2" type="Button" parent="."]
+[node name="SL" type="Button" parent="."]
 margin_left = 109.0
 margin_top = 461.0
 margin_right = 152.0
@@ -109,10 +109,18 @@ margin_bottom = 500.0
 disabled = true
 text = "SL"
 
-[node name="LB3" type="Button" parent="."]
+[node name="SR" type="Button" parent="."]
 margin_left = 829.0
 margin_top = 467.0
 margin_right = 872.0
 margin_bottom = 506.0
 disabled = true
 text = "SR"
+
+[node name="Guide" type="Button" parent="."]
+margin_left = 439.0
+margin_top = 131.0
+margin_right = 539.0
+margin_bottom = 170.0
+disabled = true
+text = "Guide"

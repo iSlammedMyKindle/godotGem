@@ -3,19 +3,23 @@ extends Node2D
 var client = WebSocketClient.new()
 var connected = false
 
+# This list is under the mercy of ViGEm. The buttons are sorted out here based on it's indexing, *not* godot's
 var evtList = {
-	"A":0,
-	"B":1,
-	"X":2,
-	"Y":3,
-	"LB":4,
-	"RB":5,
-	"Start":11,
-	"Select":10,
-	"Up":12,
-	"Down":13,
-	"Left":14,
-	"Right":15
+	"Up":0,
+	"Down":1,
+	"Left":2,
+	"Right":3,
+	"Start":4,
+	"Select":5,
+	"SL":6,
+	"SR":7,
+	"LB":8,
+	"RB":9,
+	"Guide":10,
+	"A":11,
+	"B":12,
+	"X":13,
+	"Y":14,
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +33,7 @@ func _ready():
 func _process(_delta):
 	client.poll()
 
-func _connected(proto = ""):
+func _connected(_proto = ""):
 	connected = true
 	$connectionStatus.text = "connected to "+$urlToConnect.text;
 
