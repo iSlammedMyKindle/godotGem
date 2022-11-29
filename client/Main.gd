@@ -22,6 +22,18 @@ var evtList = {
 	"Y":14,
 }
 
+var joySticks = [
+	['LStickL', 'LStickR', 'LStickD', 'LStickU' ],
+	['RStickL', 'RStickR', 'RStickD', 'RStickU'],
+]
+
+var previousStickValues = [
+	[0,0],
+	[0,0]
+]
+
+var previousTriggerValues = [0,0]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	client.connect("connection_established", self, "_connected")
@@ -33,17 +45,59 @@ func _ready():
 func _process(_delta):
 	client.poll()
 
+func _physics_process(_delta):
+	if not connected: return
+
+	var index = 0
+	for stick in joySticks:
+		var resArray = [int(Input.get_axis(stick[0], stick[1]) * 32767), int(Input.get_axis(stick[2], stick[3]) * 32767)];
+
+		if (not previousStickValues[index][0] == resArray[0]) or (not previousStickValues[index][1] == resArray[1]):
+			previousStickValues[index] = resArray
+			# Send this off to the server This is a joystick position that hasn't been sent
+			# In order: joystick index (either 15 or 16), joystick X strength, joystick Y strength
+			setWriteMode(0)
+			var resStr = "["+str(15+(index*2))+","+str(resArray[0])+","+str(resArray[1])+"]"
+			client.get_peer(1).put_packet(resStr.to_utf8())
+		index += index+1
+
+	#Left & Right Triggers
+	var trigIndex = 0
+	for item in previousTriggerValues:
+		var action = "Trig" + ("L" if trigIndex == 0 else "R")
+		var strength = int(Input.get_action_strength(action) * 255)
+
+		if previousTriggerValues[trigIndex] != strength:
+			previousTriggerValues[trigIndex] = strength
+			setWriteMode(1)
+			var resArray = PoolByteArray();
+			resArray.push_back(0)
+			resArray.push_back(19+trigIndex)
+			resArray.push_back(strength)
+
+			client.get_peer(1).put_packet(resArray)
+			
+		trigIndex += trigIndex+1;
+
 func _connected(_proto = ""):
 	connected = true
 	$connectionStatus.text = "connected to "+$urlToConnect.text;
 
 func _on_Button_pressed():
-	$connectionStatus.text = "Connecting..."
-	print($urlToConnect.text)
-	var status = client.connect_to_url('ws://'+$urlToConnect.text+':9090')
-	if status != OK:
-		$connectionStatus.text = "Unable to connect: "+status
+	var wsPeer = client.get_peer(1)
 
+	if wsPeer.is_connected_to_host():
+		wsPeer.close()
+		$Button.text = "Connect!"
+		$connectionStatus.text = "Connect to this address:"
+	else:
+		$Button.text = "Disconnect"
+		$connectionStatus.text = "Connecting..."
+		print($urlToConnect.text)
+		var status = client.connect_to_url('ws://'+$urlToConnect.text+':9090')
+		if status != OK:
+			$connectionStatus.text = "Unable to connect: "+status
+		
 
 func _input(event):
 	for item in evtList.keys():
@@ -56,6 +110,8 @@ func _input(event):
 				controllerBuffer.push_back(evtList[item])
 				# Specifies input strength. If this is a button, just do either 0, or 255
 				controllerBuffer.push_back(255)
+
+				setWriteMode(1)
 				client.get_peer(1).put_packet(controllerBuffer)
 				print(item + " " + str(event.button_index), str(controllerBuffer));
 
@@ -66,4 +122,10 @@ func _input(event):
 				controllerBuffer.push_back(evtList[item])
 				controllerBuffer.push_back(0)
 				
+				setWriteMode(1)
 				client.get_peer(1).put_packet(controllerBuffer)
+
+# 0 for utf8 text and 1 for bytes
+func setWriteMode(writeMode):
+	if client.get_peer(1).get_write_mode() != writeMode:
+		client.get_peer(1).set_write_mode(writeMode)

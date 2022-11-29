@@ -147,6 +147,56 @@ Guide={
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":16,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+LStickL={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+LStickR={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+LStickU={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+LStickD={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
+ ]
+}
+RStickL={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
+ ]
+}
+RStickR={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
+ ]
+}
+RStickU={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)
+ ]
+}
+RStickD={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
+ ]
+}
+TrigL={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":6,"axis_value":1.0,"script":null)
+ ]
+}
+TrigR={
+"deadzone": 0.2,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":7,"axis_value":1.0,"script":null)
+ ]
+}
 
 [mono]
 
