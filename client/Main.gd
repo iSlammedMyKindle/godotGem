@@ -37,7 +37,7 @@ var previousTriggerValues = [0,0]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	client.connect("connection_established", self, "_connected")
-	# client.connect('data_received', self, '_on_data')
+	client.connect("data_received", self, "_on_data")
 	# client.connect("connection_error", self, "_closed")
 	# client.connect("connection_closed", self, "_closed")
 
@@ -82,6 +82,15 @@ func _physics_process(_delta):
 func _connected(_proto = ""):
 	connected = true
 	$connectionStatus.text = "connected to "+$urlToConnect.text;
+
+func _on_data():
+	#So far this is for rumble data only. First index of the array is target controller, second is small motor, and third is the large motor
+	var data = client.get_peer(1).get_packet()
+	if data[1] == 0 and data[2] == 0:
+		Input.stop_joy_vibration(0)
+		return
+	
+	Input.start_joy_vibration(0, (1 / 255.0) * data[1], (1 / 255.0) * data[2])
 
 func _on_Button_pressed():
 	var wsPeer = client.get_peer(1)
