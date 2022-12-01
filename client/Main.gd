@@ -2,6 +2,7 @@ extends Node2D
 
 var client = WebSocketClient.new()
 var connected = false
+var config = ConfigFile.new()
 
 # This list is under the mercy of ViGEm. The buttons are sorted out here based on it's indexing, *not* godot's
 var evtList = {
@@ -41,10 +42,16 @@ func _ready():
 	# client.connect("connection_error", self, "_closed")
 	# client.connect("connection_closed", self, "_closed")
 
+	# Load the config file:
+	var err = config.load("user://godotGem.cfg")
+	if err == OK:
+		$urlToConnect.text = config.get_value("general","ip")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	client.poll()
 
+# Responsible for joysticks and trigger inputs
 func _physics_process(_delta):
 	if not connected: return
 
@@ -82,6 +89,8 @@ func _physics_process(_delta):
 func _connected(_proto = ""):
 	connected = true
 	$connectionStatus.text = "connected to "+$urlToConnect.text;
+	config.set_value("general", "ip", $urlToConnect.text)
+	config.save("user://godotGem.cfg")
 
 func _on_data():
 	#So far this is for rumble data only. First index of the array is target controller, second is small motor, and third is the large motor

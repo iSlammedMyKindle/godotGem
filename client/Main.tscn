@@ -40,7 +40,7 @@ margin_left = 421.0
 margin_top = 90.0
 margin_right = 604.0
 margin_bottom = 124.0
-text = "10.235.1.165"
+text = "111.222.33.44"
 
 [node name="connectionStatus" type="Label" parent="."]
 margin_left = 423.0
