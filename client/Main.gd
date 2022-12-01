@@ -106,9 +106,17 @@ func _on_Button_pressed():
 		var status = client.connect_to_url('ws://'+$urlToConnect.text+':9090')
 		if status != OK:
 			$connectionStatus.text = "Unable to connect: "+status
+
+func _on_BlinderBtn_pressed():
+	$AnimationPlayer.play('fade')
 		
 
 func _input(event):
+	if event is InputEventMouseButton and event.pressed and $Blinder.visible:
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play_backwards('fade')
+
+		return
 	for item in evtList.keys():
 		if connected:
 			if Input.is_action_just_pressed(item) and not event is InputEventJoypadMotion:

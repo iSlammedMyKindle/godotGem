@@ -1,8 +1,36 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://connectLabel.gd" type="Script" id=2]
 [ext_resource path="res://gamepadUi.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blinder:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.13 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blinder:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -25,6 +53,13 @@ script = ExtResource( 2 )
 [node name="gamepadUI" parent="connectionStatus" instance=ExtResource( 3 )]
 position = Vector2( -399, -3 )
 
+[node name="BlinderBtn" type="Button" parent="."]
+margin_left = 363.0
+margin_top = 91.0
+margin_right = 421.0
+margin_bottom = 124.0
+text = "Blinder"
+
 [node name="Button" type="Button" parent="."]
 margin_left = 605.0
 margin_top = 92.0
@@ -32,4 +67,14 @@ margin_right = 679.0
 margin_bottom = 124.0
 text = "Connect!"
 
+[node name="Blinder" type="ColorRect" parent="."]
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.021655 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade = SubResource( 1 )
+
+[connection signal="pressed" from="BlinderBtn" to="." method="_on_BlinderBtn_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
