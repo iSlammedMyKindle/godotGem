@@ -21,9 +21,11 @@ server.Start(socket =>{
     socket.OnOpen = ()=>{
         Console.WriteLine("connected!");
 
-        // controller.FeedbackReceived += (param1, param2) =>{
-        //     Console.WriteLine("asdf");
-        // };
+        controller.FeedbackReceived += (controller, motorActivity) =>{
+            byte[] rumble = new byte[]{0, motorActivity.SmallMotor, motorActivity.LargeMotor};
+            socket.Send(rumble);
+            Console.WriteLine("M " + 0 + " " + motorActivity.SmallMotor + " " + motorActivity.LargeMotor);
+        };
 
         controller.Connect();
     };
