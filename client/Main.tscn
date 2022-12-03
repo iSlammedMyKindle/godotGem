@@ -1,8 +1,63 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://connectLabel.gd" type="Script" id=2]
 [ext_resource path="res://gamepadUi.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/rylan.png" type="Texture" id=4]
+[ext_resource path="res://assets/cough.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Rylan.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=2]
+resource_name = "spin"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade"
@@ -67,11 +122,25 @@ margin_right = 679.0
 margin_bottom = 124.0
 text = "Connect!"
 
+[node name="Rylan" type="Sprite" parent="."]
+visible = false
+position = Vector2( 469, 410 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+centered = false
+script = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Rylan"]
+stream = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rylan"]
+anims/spin = SubResource( 2 )
+
 [node name="Blinder" type="ColorRect" parent="."]
 visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
-color = Color( 0, 0, 0, 0.021655 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade = SubResource( 1 )

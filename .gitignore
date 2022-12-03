@@ -4,3 +4,4 @@ server/bin
 server/obj
 client/.mono
 client/.import
+client/out
