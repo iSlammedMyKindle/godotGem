@@ -17,3 +17,9 @@
 
 * Client should really only focus on it's own controllers sending inputs
 * Server should focus on organizing those inputs based on connection and each controller
+
+### Publishing
+
+* Get started working on the flatpak so this application can be installed easily
+* create a glorious icon in inkscape!
+* create some documentation to tell how to install and run
