@@ -155,3 +155,7 @@ func _input(event):
 func setWriteMode(writeMode):
 	if client.get_peer(1).get_write_mode() != writeMode:
 		client.get_peer(1).set_write_mode(writeMode)
+
+
+func _on_githubPage_pressed():
+	OS.shell_open("https://github.com/iSlammedMyKindle/godotGem")

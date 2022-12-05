@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://firstTimeRun.gd" type="Script" id=1]
+[ext_resource path="res://LinkButton.gd" type="Script" id=2]
+
+[node name="firstTimeRun" type="Node2D" groups=["dontShowAgain"]]
+script = ExtResource( 1 )
+
+[node name="bg" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.196078 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 256.0
+margin_top = 225.0
+margin_right = 778.0
+margin_bottom = 405.0
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 19.0
+margin_top = 24.0
+margin_right = 506.0
+margin_bottom = 106.0
+text = "Hello! It looksl like you're new around here.
+
+To use this program, you will also need the Windows server so that you can
+play your games from this machine. To find it, head on over to github:
+"
+
+[node name="LinkButton" type="LinkButton" parent="Panel"]
+margin_left = 66.0
+margin_top = 105.0
+margin_right = 444.0
+margin_bottom = 119.0
+text = "https://github.com/iSlammedMyKindle/godotGem/releases"
+script = ExtResource( 2 )
+
+[node name="dontShowAgain" type="Button" parent="Panel"]
+margin_left = 76.0
+margin_top = 142.0
+margin_right = 196.0
+margin_bottom = 170.0
+text = "Don't show again"
+
+[node name="showAgain" type="Button" parent="Panel"]
+margin_left = 236.0
+margin_top = 142.0
+margin_right = 472.0
+margin_bottom = 170.0
+text = "Totally show again for some reason"
+
+[connection signal="pressed" from="Panel/LinkButton" to="Panel/LinkButton" method="_on_LinkButton_pressed"]
+[connection signal="pressed" from="Panel/dontShowAgain" to="." method="_on_dontShowAgain_pressed"]
+[connection signal="pressed" from="Panel/showAgain" to="." method="_on_showAgain_pressed"]
