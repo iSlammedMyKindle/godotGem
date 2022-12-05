@@ -46,6 +46,10 @@ func _ready():
 	var err = config.load("user://godotGem.cfg")
 	if err == OK:
 		$urlToConnect.text = config.get_value("general","ip")
+	
+	if config.get_value("general", "hideGithubSplash")	== null:
+		$firstTimeRun.visible = true
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
