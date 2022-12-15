@@ -44,8 +44,8 @@ func _ready():
 
 	# Load the config file:
 	var err = config.load("user://godotGem.cfg")
-	if err == OK:
-		$urlToConnect.text = config.get_value("general","ip")
+	if err == OK and config.get_value("general", "ip") != null:
+		$urlToConnect.text = config.get_value("general", "ip")
 	
 	if config.get_value("general", "hideGithubSplash")	== null:
 		$firstTimeRun.visible = true

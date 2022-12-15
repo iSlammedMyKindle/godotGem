@@ -5,6 +5,7 @@ using System.Text.Json;
 
 var server = new WebSocketServer("ws://0.0.0.0:9090");
 var controller = new ViGEmClient().CreateXbox360Controller();
+byte connected = 0;
 
 // We don't have anymore buttons above index 14, so these will be used to determine which axis is being detected.
 Dictionary<byte, Xbox360Property> analogMap = new Dictionary<byte, Xbox360Property>{
@@ -19,20 +20,33 @@ Dictionary<byte, Xbox360Property> analogMap = new Dictionary<byte, Xbox360Proper
 server.Start(socket =>{
     //socket.ConnectionInfo.Id should provide what we need in the event we have multiple clients connecting at once.
     socket.OnOpen = ()=>{
-        Console.WriteLine("connected!");
+        if(connected == 0){
+            controller.Connect();
+            connected++;
 
-        controller.FeedbackReceived += (controller, motorActivity) =>{
-            byte[] rumble = new byte[]{0, motorActivity.SmallMotor, motorActivity.LargeMotor};
-            socket.Send(rumble);
-            Console.WriteLine("M " + 0 + " " + motorActivity.SmallMotor + " " + motorActivity.LargeMotor);
-        };
+            Console.WriteLine("Connected!");
 
-        controller.Connect();
+            controller.FeedbackReceived += (controller, motorActivity) =>{
+                byte[] rumble = new byte[]{0, motorActivity.SmallMotor, motorActivity.LargeMotor};
+                socket.Send(rumble);
+                Console.WriteLine("M " + 0 + " " + motorActivity.SmallMotor + " " + motorActivity.LargeMotor);
+            };
+        }
+
+        else{
+            Console.WriteLine("Controller tried re-connecting while still connected? Ok o_O");
+            connected++;
+        }
     };
 
     socket.OnClose = ()=>{
-        controller.Disconnect();
-        Console.WriteLine("Disconnected");
+        connected--;
+        Console.WriteLine("A client disconnected");
+
+        if(connected == 0){
+            controller.Disconnect();
+            Console.WriteLine("The controller disconnected");
+        }
     };
 
     //This webSocket library does the Lord's work and automatically detects and parses strings :D
