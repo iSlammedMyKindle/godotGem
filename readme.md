@@ -17,20 +17,35 @@ This program was designed with the **Steam Deck** in mind. It features a "blinde
 
 ## Flathub
 
-If you are on linux, `godotGem` should be available as a flatpak on flathub. If you are using the Steam Deck, this is going to be your easiest option to install it.
+If you are on Linux, `godotGem` should be available as a flatpak on flathub. If you are using the Steam Deck, this is going to be your easiest option to install it.
 
-## Manual
+```bash
+# Install
+flatpak install io.github.iSlammedMyKindle.godotGem
+
+# run
+io.github.iSlammedMyKindle.godotGem
+```
+
+<a href='https://flathub.org/apps/details/io.github.iSlammedMyKindle.godotGem'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
+## Manual Install
 
 * Please download the latest version in the [releases](https://github.com/iSlammedMyKindle/godotGem/releases) page.
-* On the computer you will be playing games on (host), download the `server.exe`. You can place this anywhere and execute it. Windows will ask to verify what networks this should work on. Select "Private Networks".
+* On the computer you will be playing games on (host):
+    * [You will need the ViGEm controller driver](https://github.com/ViGEm/ViGEmBus/releases/). Install that and move on to the next step
+    * download the `serverWindows.zip`. You can extract this anywhere and execute `server.exe`. Windows will ask to verify what networks this should work on. Select "Private Networks".
 * On the machine you're sharing the controller with (guest), download the `client`.
-    * If you are on **windows**, you are basically good, just run the exe and slect "private networks" on your first run
-    * If you are on **linux**, you will need to ensure the binary has `execute` permissions. In the terminal, you can do this by running `chmod +x /path/to/godotGemClient.x86_64`. Alternatvely, linx file managers also support changing the file to executable as well. You can then start the program by double-clicking on it in the file mananger, or by running it in the terminal.
+    * If you are on **Windows** (`godotGemClientWindow.zip`), you are basically good, just run the exe and slect "private networks" on your first run
+    * If you are on **Linux** (`godotGemClient.zip`), you should be fine as well; the binary can be launched by double clicking it on the file manager or running it via termianl.
+        * If for some reason the binary doesn't run the first time, you will need to ensure it has `execute` permissions. In the terminal, you can do this by running `chmod +x /path/to/godotGemClient.x86_64`.
+        * Alternatvely, **Linux** file managers also support changing the file to executable as well. (Right click -> properties -> permissions -> Make the file executable)
+    * On **Linux**, you can also add the program's directory directly to your `$PATH` environment varible so you can execute it without callind the path each time.
 
-# How to start godotGem
+## How to start godotGem
 
-1. On your windows PC needing a controller, double-click `server.exe`
-1. launch command prompt or powershell, run `ipconfig`
+1. On your Windows PC needing a controller, double-click `server.exe`
+1. Launch command prompt or powershell, run `ipconfig`
     * Look for the connection you're using right now. under that you should see something like `IPV4 Address`, alongside a ip that may look like `10.235.1.XXX` or `192.168.1.XX` (these vary). Take note of this ip address
 1. Open the client on the machine you're sharing the controller with. Type in the ip address you found in the command prompt. Click `Connect!`
 
