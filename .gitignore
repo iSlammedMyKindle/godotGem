@@ -1,8 +1,8 @@
-server/test/node_modules
-server/.vscode
-server/bin
-server/obj
-client/.mono
-client/.import
+*/test/node_modules
+*/.vscode
+*/bin
+*/obj
+*/.mono
+*/.import
 clientOut
 .mono
