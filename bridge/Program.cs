@@ -59,13 +59,20 @@ bridge.Start(socket=>{
     };
 
     socket.OnClose = ()=>{
-        Console.WriteLine("Closed connection from: "+socket.ConnectionInfo.Host);
+        Console.WriteLine("Closed connection from: "+socket.ConnectionInfo.ClientIpAddress);
         if(serverConnected && serverGuid == socket.ConnectionInfo.Id){
             serverConnected = false;
             server[0] = null;
-            Console.WriteLine("Server is no longer set (Was "+socket.ConnectionInfo.Host+")");
+            Console.WriteLine("Server is no longer set (Was "+socket.ConnectionInfo.ClientIpAddress+")");
         }
     };
+
+    socket.OnError = exception=>{
+        Console.WriteLine("Something broke... closing connection to "+socket.ConnectionInfo.ClientIpAddress);
+        socket.Close();
+        socket.OnClose();
+    };
+
 });
 
 while(true) Thread.Sleep(1000);

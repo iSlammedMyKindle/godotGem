@@ -24,9 +24,10 @@ class Program{
 
     static IXbox360Controller controller = new ViGEmClient().CreateXbox360Controller();
     static byte connected = 0;
+    static Action? manualClose;
 
     //Below are a collection of actions that need to be defined here, because both modes require the same functionality
-    static Action<Action<byte[]>> connectionOpened = sendRumble =>
+    static void connectionOpened(Action<byte[]> sendRumble)
     {
         if (connected == 0)
         {
@@ -48,9 +49,9 @@ class Program{
             Console.WriteLine("Controller tried re-connecting while still connected? Ok o_O");
             connected++;
         }
-    };
+    }
 
-    static Action connectionClosed = () =>
+    static void connectionClosed()
     {
         connected--;
         Console.WriteLine("A client disconnected");
@@ -60,9 +61,9 @@ class Program{
             controller.Disconnect();
             Console.WriteLine("The controller disconnected");
         }
-    };
+    }
 
-    static Action<string> stringMsg = message =>
+    static void stringMsg(string message)
     {
         //So far the only thing we're using this for is for joystick movement, there's no way to send the joystick strength in bytes without heavily compressing information.
         var resArray = JsonDocument.Parse(message);
@@ -78,15 +79,15 @@ class Program{
             controller.SetAxisValue((Xbox360Axis)analogMap[(byte)(resArray.RootElement[0].GetInt16() + 1)],
             (short)resArray.RootElement[2].GetInt16());
         }
-    };
+    }
 
     //Non-strings go here, most inputs will come down this way
-    static Action<byte[]> binMsg = message =>
+    static void binMsg(byte[] message)
     {
         Console.WriteLine(message[0].ToString() + ' ' + message[1].ToString() + ' ' + message[2].ToString());
         if (message[1] < 18) controller.SetButtonState(message[1], message[2] == 255);
         else if (message[1] == 19 || message[1] == 20) controller.SetSliderValue((Xbox360Slider)analogMap[message[1]], message[2]);
-    };
+    }
 
     private static async void connectToBridge(string address)
     {
@@ -103,6 +104,10 @@ class Program{
         cancelTokenRumble.Token.Register(() => Console.WriteLine("Could not get data from bridge! (cancelled)"));
 
         var connection = new ClientWebSocket();
+        manualClose = ()=>{
+            connection.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed upon godotGem bridge request", cancelTokenSrc.Token);
+            connectionClosed();
+        };
 
         try{
             await connection.ConnectAsync(new Uri("ws://" + address + ":9090"), cancelTokenSrc.Token);
@@ -129,15 +134,20 @@ class Program{
                 stringMsg(new string(new ASCIIEncoding().GetString(new ArraySegment<byte>(bridgeData, 0, res.Count))));
             }
 
-            else if (res.MessageType == WebSocketMessageType.Binary)
-                binMsg(bridgeData);
+            else if (res.MessageType == WebSocketMessageType.Binary){
+                //If it's just a ping, pong:
+                if(res.Count == 1 && bridgeData[0] == 1)
+                    await connection.SendAsync(new byte[]{1}, WebSocketMessageType.Binary, true, cancelTokenSrc.Token);
+
+                //Otherwise handle button/trigger data
+                else binMsg(bridgeData);
+            }
         }
 
         //At this point we need to close the connection properly
         try
         {
-            await connection.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed upon godotGem bridge request", cancelTokenSrc.Token);
-            connectionClosed();
+            manualClose();
         }
         catch (Exception e)
         {
@@ -179,13 +189,22 @@ class Program{
                 socket.OnOpen = () => connectionOpened(sendRumble);
                 socket.OnClose = connectionClosed;
 
+                manualClose = ()=>socket.Close();
+
                 //This webSocket library does the Lord's work and automatically detects and parses strings :D
                 socket.OnMessage = stringMsg;
                 socket.OnBinary = binMsg;
             });
         }
+
+        // https://learn.microsoft.com/en-us/dotnet/api/system.consolecanceleventargs?view=net-7.0
+        Console.CancelKeyPress += new ConsoleCancelEventHandler((sender, args)=>{
+            Console.WriteLine("Interrupt signal hit, closing connections...");
+            //Close the connection cleanly. C# doesn't seem to like that this could potentially be null, so it's making me do this -_-
+            if(manualClose != null) manualClose();
+        });
+
         // Very basic loop to keep the program alive. It's event driven, so this loop won't impact anything as things are happenning in other threads.
-        // todo: use this instead so the connection can be properly stopped - https://learn.microsoft.com/en-us/dotnet/api/system.consolecanceleventargs?view=net-7.0
-        while(Console.ReadKey(true).Key != ConsoleKey.Enter){}
+        while(true) Thread.Sleep(1000);
     }
 }
