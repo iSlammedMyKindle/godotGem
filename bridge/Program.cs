@@ -51,7 +51,7 @@ bridge.Start(socket=>{
             server[0].Send(message);
 
         //Simple vibration feedback if we don't have a server connected. (Because controller vibration is fun)
-        else if(message[2] == 1)
+        else if(message[2] == 255)
             socket.Send(new byte[]{0, 255, 255});
 
         else if(message[2] == 0)
