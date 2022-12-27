@@ -150,6 +150,14 @@ stream = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Rylan"]
 anims/spin = SubResource( 2 )
 
+[node name="IgnoreVibration" type="CheckButton" parent="."]
+margin_left = 512.0
+margin_top = 693.0
+margin_right = 694.0
+margin_bottom = 733.0
+rect_scale = Vector2( 1.5, 1.5 )
+text = "Ignore Vibration"
+
 [node name="Blinder" type="ColorRect" parent="."]
 visible = false
 margin_right = 1280.0
@@ -161,14 +169,6 @@ anims/fade = SubResource( 1 )
 
 [node name="firstTimeRun" parent="." instance=ExtResource( 8 )]
 visible = false
-
-[node name="IgnoreVibration" type="CheckButton" parent="."]
-margin_left = 512.0
-margin_top = 693.0
-margin_right = 694.0
-margin_bottom = 733.0
-rect_scale = Vector2( 1.5, 1.5 )
-text = "Ignore Vibration"
 
 [connection signal="pressed" from="githubPage" to="." method="_on_githubPage_pressed"]
 [connection signal="pressed" from="BlinderBtn" to="." method="_on_BlinderBtn_pressed"]
