@@ -26,20 +26,28 @@ class Program{
     static byte connected = 0;
     static Action? manualClose;
 
+    //Ripped straight out of the bridge; the core purpose for now is literally to just send vibration feedback to everyone at once.
+    //...This is more convoluted for some reason o_O
+    static Dictionary<Guid, Action<byte[]>> clients = new Dictionary<Guid, Action<byte[]>>();
+
     //Below are a collection of actions that need to be defined here, because both modes require the same functionality
-    static void connectionOpened(Action<byte[]> sendRumble)
+    static void connectionOpened(Guid connectionId, Action<byte[]> sendRumble)
     {
         if (connected == 0)
         {
             controller.Connect();
             connected++;
+            clients.Add(connectionId, sendRumble);
 
             Console.WriteLine("Connected!");
 
             controller.FeedbackReceived += (controller, motorActivity) =>
             {
                 byte[] rumble = new byte[] { 0, motorActivity.SmallMotor, motorActivity.LargeMotor };
-                sendRumble(rumble);
+
+                foreach(Action<byte[]> act in clients.Values)
+                    act(rumble);
+
                 Console.WriteLine("M " + 0 + " " + motorActivity.SmallMotor + " " + motorActivity.LargeMotor);
             };
         }
@@ -48,6 +56,7 @@ class Program{
         {
             Console.WriteLine("Controller tried re-connecting while still connected? Ok o_O");
             connected++;
+            clients.Add(connectionId, sendRumble);
         }
     }
 
@@ -119,7 +128,9 @@ class Program{
         }
 
         //Initialize for client listening
-        connectionOpened(rumble => connection.SendAsync(new ArraySegment<byte>(rumble), WebSocketMessageType.Binary, true, cancelTokenRumble.Token));
+        //When the server connects to the bridge, we don't need to worry about multiple clients connecting over here because the bridge takes care of that already!
+        //Therefore the Guid will be blank.
+        connectionOpened(new Guid(), rumble => connection.SendAsync(new ArraySegment<byte>(rumble), WebSocketMessageType.Binary, true, cancelTokenRumble.Token));
 
         //Store results that come in from receiving stuff. The buffer should be waaay more than what we should ever get.
         byte[] bridgeData = new byte[1024];
@@ -186,10 +197,21 @@ class Program{
             {
                 //socket.ConnectionInfo.Id should provide what we need in the event we have multiple clients connecting at once.
                 Action<byte[]> sendRumble = rumble => socket.Send(rumble);
-                socket.OnOpen = () => connectionOpened(sendRumble);
-                socket.OnClose = connectionClosed;
 
-                manualClose = ()=>socket.Close();
+                //This is used in more than one place, so it's defined here.
+                Action closeRoutine = ()=>{
+                    //Remove this connection from the list of connections
+                    clients.Remove(socket.ConnectionInfo.Id);
+                    connectionClosed();
+                };
+
+                socket.OnOpen = () => connectionOpened(socket.ConnectionInfo.Id, sendRumble);
+                socket.OnClose = closeRoutine;
+
+                manualClose = ()=>{
+                    socket.Close();
+                    closeRoutine();
+                };
 
                 //This webSocket library does the Lord's work and automatically detects and parses strings :D
                 socket.OnMessage = stringMsg;
