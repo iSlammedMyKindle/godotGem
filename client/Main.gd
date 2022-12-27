@@ -3,6 +3,7 @@ extends Node2D
 var client = WebSocketClient.new()
 var connected = false
 var config = ConfigFile.new()
+var ignoreVibrationBool = false
 
 # This list is under the mercy of ViGEm. The buttons are sorted out here based on it's indexing, *not* godot's
 var evtList = {
@@ -98,6 +99,9 @@ func _connected(_proto = ""):
 
 func _on_data():
 	#So far this is for rumble data only. First index of the array is target controller, second is small motor, and third is the large motor
+	if ignoreVibrationBool:
+		return
+		
 	var data = client.get_peer(1).get_packet()
 	if data[1] == 0 and data[2] == 0:
 		Input.stop_joy_vibration(0)
@@ -163,3 +167,7 @@ func setWriteMode(writeMode):
 
 func _on_githubPage_pressed():
 	OS.shell_open("https://github.com/iSlammedMyKindle/godotGem")
+
+
+func _on_CheckButton_pressed():
+	ignoreVibrationBool = !ignoreVibrationBool
