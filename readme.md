@@ -4,6 +4,8 @@
 
 This program was designed with the **Steam Deck** in mind. It features a "blinder" button that fades the screen to black, so that your deck doesn't have burn-in while sending it's inputs over to the other machine.
 
+## [Stop by the discord support server!](https://discord.gg/xSqWsARMMH)
+
 # Use cases!
 
 * You have a wired controller that you want to effectivlye make wireless
