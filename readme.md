@@ -4,7 +4,7 @@
 
 This program was designed with the **Steam Deck** in mind. It features a "blinder" button that fades the screen to black, so that your deck doesn't have burn-in while sending it's inputs over to the other machine.
 
-## Watch the youtube tutorial video!
+## [Watch the youtube tutorial video!](https://www.youtube.com/watch?v=VS80voWUoS8)
 
 ![Watch The Youtube video!](https://i.imgur.com/SIypDNE.png)
 
