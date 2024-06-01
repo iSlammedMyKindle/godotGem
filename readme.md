@@ -6,7 +6,7 @@ This program was designed with the **Steam Deck** in mind. It features a "blinde
 
 ## [Watch the youtube tutorial video!](https://www.youtube.com/watch?v=VS80voWUoS8)
 
-<a href="https://www.youtube.com/watch?v=VS80voWUoS8">
+<a href="https://www.youtube.com/watch?v=VS80voWUoS8" target="_blank">
   <img src="https://i.imgur.com/SIypDNE.png" alt="Watch The Youtube video!" />
 </a>
 
