@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3cnt4vye7q7" path="res://Main.gd" id="1"]
 [ext_resource type="Script" uid="uid://bpneym18dt1bn" path="res://connectLabel.gd" id="2"]
-[ext_resource type="PackedScene" path="res://gamepadUi.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bc0keobxw4aqk" path="res://gamepadUi.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dj58upoaxqc27" path="res://assets/rylan.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
 [ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://Rylan.gd" id="6"]
@@ -128,7 +128,7 @@ text = "Connect to this address:"
 script = ExtResource("2")
 
 [node name="gamepadUI" parent="." instance=ExtResource("3")]
-position = Vector2(24, 70)
+position = Vector2(88, 138)
 
 [node name="BlinderBtn" type="Button" parent="."]
 offset_left = 416.0

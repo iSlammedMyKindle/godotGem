@@ -1,8 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://cybf6napyai44"]
+[gd_scene load_steps=8 format=3 uid="uid://cybf6napyai44"]
 
+[ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://button.gd" id="1_lt4la"]
 [ext_resource type="Texture2D" uid="uid://boxsv8dql1bx7" path="res://assets/buttonShaft.png" id="1_vxja4"]
 [ext_resource type="Texture2D" uid="uid://dprxr3ha3sdlb" path="res://assets/src/button.svg" id="2_lt4la"]
 [ext_resource type="Texture2D" uid="uid://ck0re7m68wm7r" path="res://assets/A.png" id="3_4amfo"]
+
+[sub_resource type="Animation" id="Animation_lt4la"]
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("plate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 25)]
+}
 
 [sub_resource type="Animation" id="Animation_vxja4"]
 resource_name = "press"
@@ -20,21 +36,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 24)]
 }
 
-[sub_resource type="Animation" id="Animation_lt4la"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("plate:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4amfo"]
 _data = {
 &"RESET": SubResource("Animation_lt4la"),
@@ -42,6 +43,7 @@ _data = {
 }
 
 [node name="Button" type="Node2D"]
+script = ExtResource("1_lt4la")
 
 [node name="shaft" type="Sprite2D" parent="."]
 position = Vector2(0, 24)

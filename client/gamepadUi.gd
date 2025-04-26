@@ -18,10 +18,6 @@ var evtList = [
 	"Guide"
 ]
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -30,7 +26,11 @@ func _ready():
 func _input(event):
 	for item in evtList:
 		if Input.is_action_just_pressed(item) and not event is InputEventJoypadMotion:
-			get_node(item).disabled = false;
+			if get_node_or_null(item) is Button:
+				get_node(item).disabled = false;
+			else: get_tree().call_group(item, 'press', item)
 			
 		if Input.is_action_just_released(item) and not event is InputEventJoypadMotion:
-			get_node(item).disabled = true;
+			if get_node_or_null(item) is Button:
+				get_node(item).disabled = true;
+			else: get_tree().call_group(item, 'release', item)
