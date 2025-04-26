@@ -31,6 +31,6 @@ func _input(event):
 	for item in evtList:
 		if Input.is_action_just_pressed(item) and not event is InputEventJoypadMotion:
 			get_node(item).disabled = false;
-			#print(item + " " + str(event.button_index));
+			
 		if Input.is_action_just_released(item) and not event is InputEventJoypadMotion:
 			get_node(item).disabled = true;

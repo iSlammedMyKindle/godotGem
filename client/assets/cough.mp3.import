@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/cough.mp3-09eb24e4b71e2c2e565970170d9456ac.mp3str"
+uid="uid://iu2qecixnqw8"
+path="res://.godot/imported/cough.mp3-09eb24e4b71e2c2e565970170d9456ac.mp3str"
 
 [deps]
 
 source_file="res://assets/cough.mp3"
-dest_files=[ "res://.import/cough.mp3-09eb24e4b71e2c2e565970170d9456ac.mp3str" ]
+dest_files=["res://.godot/imported/cough.mp3-09eb24e4b71e2c2e565970170d9456ac.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

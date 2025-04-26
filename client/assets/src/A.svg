@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200"
+   height="200"
+   viewBox="0 0 52.916665 52.916666"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   sodipodi:docname="A.svg"
+   inkscape:export-filename="A.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#424242"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4701546"
+     inkscape:cx="122.4361"
+     inkscape:cy="96.248378"
+     inkscape:window-width="1805"
+     inkscape:window-height="1131"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <filter
+       y="-0.39571955"
+       height="1.7914391"
+       inkscape:menu-tooltip="Darkens the edge with an inner blur and adds a flexible glow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:label="Dark and Glow"
+       style="color-interpolation-filters:sRGB;"
+       id="filter2"
+       x="-0.38211818"
+       width="1.7642364">
+      <feGaussianBlur
+         stdDeviation="5"
+         result="result6"
+         id="feGaussianBlur1" />
+      <feComposite
+         result="result8"
+         in="SourceGraphic"
+         operator="atop"
+         in2="result6"
+         id="feComposite1" />
+      <feComposite
+         result="result9"
+         operator="over"
+         in2="SourceAlpha"
+         in="result8"
+         id="feComposite2" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 "
+         result="result10"
+         id="feColorMatrix2" />
+      <feBlend
+         in="result10"
+         mode="normal"
+         in2="result6"
+         id="feBlend2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter11"
+       x="-0.15284727"
+       y="-0.15828782"
+       width="1.3368495"
+       height="1.375044">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.705882"
+         flood-color="rgb(17,91,18)"
+         id="feFlood10" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="2.000000"
+         id="feGaussianBlur10" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="0.978388"
+         dy="1.773024"
+         id="feOffset10" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite10" />
+      <feComposite
+         result="comp2"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite11" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="display:none;fill:#000000;fill-opacity:1;stroke:none;stroke-width:17.5321;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path1663"
+       cx="26.529222"
+       cy="26.529221"
+       r="26.387445" />
+    <path
+       d="m 42.160282,41.620586 h -8.085189 l -2.097657,-6.13007 H 20.735581 l -2.097694,6.13007 H 10.756385 L 21.957524,11.29608 h 9.001619 z M 30.083429,29.930684 26.35649,19.055406 22.629587,29.930684 Z"
+       id="path337"
+       style="font-weight:bold;font-size:11.2889px;font-family:'UD Digi Kyokasho NP-B';-inkscape-font-specification:'UD Digi Kyokasho NP-B Bold';fill:#aecc53;stroke-width:14.6633;stroke-linecap:round;paint-order:markers fill stroke;filter:url(#filter2)" />
+    <path
+       d="m 41.899511,39.273645 h -8.085189 l -2.097657,-6.13007 H 20.47481 l -2.097694,6.13007 H 10.495614 L 21.696753,8.9491384 h 9.001619 z M 29.822658,27.583743 26.095719,16.708465 22.368816,27.583743 Z"
+       id="path1"
+       style="font-weight:bold;font-size:11.2889px;font-family:'UD Digi Kyokasho NP-B';-inkscape-font-specification:'UD Digi Kyokasho NP-B Bold';fill:#aecc53;stroke-width:14.6633;stroke-linecap:round;paint-order:markers fill stroke;filter:url(#filter11)" />
+  </g>
+</svg>

@@ -1,4 +1,4 @@
-extends Sprite
+extends Sprite2D
 
 var kCode = [12, 12, 13, 13, 14, 15, 14, 15, 1, 0, 11]
 var correctIndex = 0

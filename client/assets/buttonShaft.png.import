@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ums7vv8egf4v"
-path="res://.godot/imported/godotGemLogo.svg-8b2e9b1b231e59bba46f235a7602c688.ctex"
+uid="uid://boxsv8dql1bx7"
+path="res://.godot/imported/buttonShaft.png-45c1b9a2ae63b39a18cc7277bbd2191b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/godotGemLogo.svg"
-dest_files=["res://.godot/imported/godotGemLogo.svg-8b2e9b1b231e59bba46f235a7602c688.ctex"]
+source_file="res://assets/buttonShaft.png"
+dest_files=["res://.godot/imported/buttonShaft.png-45c1b9a2ae63b39a18cc7277bbd2191b.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
