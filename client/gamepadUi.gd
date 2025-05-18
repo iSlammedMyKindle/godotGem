@@ -28,7 +28,8 @@ func _input(event):
 		if Input.is_action_just_pressed(item) and not event is InputEventJoypadMotion:
 			if get_node_or_null(item) is Button:
 				get_node(item).disabled = false;
-			else: get_tree().call_group(item, 'press', item)
+			else:
+				get_tree().call_group(item, 'press', item)
 			
 		if Input.is_action_just_released(item) and not event is InputEventJoypadMotion:
 			if get_node_or_null(item) is Button:

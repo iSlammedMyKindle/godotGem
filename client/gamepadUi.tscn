@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc0keobxw4aqk"]
+[gd_scene load_steps=9 format=3 uid="uid://bc0keobxw4aqk"]
 
 [ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c27bdgwuwsskf" path="res://assets/src/controllerHousing.svg" id="2_ttcah"]
 [ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://button.tscn" id="2_u1mn1"]
 [ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://sideButtonR.tscn" id="3_7yqh2"]
 [ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://sideButtonL.tscn" id="3_tdk0p"]
+[ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://dPad.tscn" id="5_rrs3a"]
+[ext_resource type="Texture2D" uid="uid://bqfldhal207lj" path="res://assets/dpadShaft.png" id="6_t6gqd"]
+
+[sub_resource type="World3D" id="World3D_rrs3a"]
 
 [node name="gamepadUI" type="Node2D"]
 position = Vector2(112, -5)
@@ -20,46 +24,6 @@ position = Vector2(696, 69)
 position = Vector2(552, 335)
 scale = Vector2(0.857882, 0.865809)
 texture = ExtResource("2_ttcah")
-
-[node name="Right" type="Button" parent="."]
-offset_left = 448.0
-offset_top = 337.0
-offset_right = 491.0
-offset_bottom = 376.0
-scale = Vector2(1.5, 1.5)
-disabled = true
-text = "R"
-metadata/_edit_use_anchors_ = true
-
-[node name="Down" type="Button" parent="."]
-offset_left = 376.0
-offset_top = 401.0
-offset_right = 419.0
-offset_bottom = 440.0
-scale = Vector2(1.5, 1.5)
-disabled = true
-text = "D"
-metadata/_edit_use_anchors_ = true
-
-[node name="Left" type="Button" parent="."]
-offset_left = 304.0
-offset_top = 337.0
-offset_right = 347.0
-offset_bottom = 376.0
-scale = Vector2(1.5, 1.5)
-disabled = true
-text = "L"
-metadata/_edit_use_anchors_ = true
-
-[node name="Up" type="Button" parent="."]
-offset_left = 376.0
-offset_top = 273.0
-offset_right = 419.0
-offset_bottom = 312.0
-scale = Vector2(1.5, 1.5)
-disabled = true
-text = "U"
-metadata/_edit_use_anchors_ = true
 
 [node name="SL" type="Button" parent="."]
 offset_left = 281.0
@@ -108,3 +72,23 @@ scale = Vector2(0.360002, 0.360002)
 [node name="Y" parent="." instance=ExtResource("2_u1mn1")]
 position = Vector2(808, 173)
 scale = Vector2(0.360002, 0.360002)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(408, 373)
+scale = Vector2(0.269851, 0.269851)
+texture = ExtResource("6_t6gqd")
+
+[node name="dpadVPContainer" type="SubViewportContainer" parent="."]
+offset_left = 240.0
+offset_top = 196.0
+offset_right = 752.0
+offset_bottom = 708.0
+scale = Vector2(0.68, 0.68)
+
+[node name="dpadVP" type="SubViewport" parent="dpadVPContainer"]
+world_3d = SubResource("World3D_rrs3a")
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="DPad" parent="dpadVPContainer/dpadVP" instance=ExtResource("5_rrs3a")]

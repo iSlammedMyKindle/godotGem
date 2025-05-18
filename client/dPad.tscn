@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxycnuef1a7un"]
+
+[ext_resource type="Script" uid="uid://i6px0psovceg" path="res://d_pad.gd" id="1_7umuv"]
+[ext_resource type="Texture2D" uid="uid://dybj0ri8m1knf" path="res://assets/dpad.png" id="2_7umuv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t6gqd"]
+transparency = 1
+albedo_texture = ExtResource("2_7umuv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_hc0pe"]
+material = SubResource("StandardMaterial3D_t6gqd")
+
+[node name="DPad" type="Node3D"]
+script = ExtResource("1_7umuv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, -1.19975)
+mesh = SubResource("QuadMesh_hc0pe")

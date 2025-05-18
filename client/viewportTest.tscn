@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://b5jybkqixywt2"]
+
+[ext_resource type="Texture2D" uid="uid://b7avr0e5dua5p" path="res://assets/controllerHousing.png" id="1_klxso"]
+[ext_resource type="Texture2D" uid="uid://cnneo4is1dm7h" path="res://assets/godotGemLogo.png" id="1_u0gna"]
+[ext_resource type="PackedScene" uid="uid://cu44qdu4atklp" path="res://test.tscn" id="2_2hojv"]
+[ext_resource type="Texture2D" uid="uid://dj58upoaxqc27" path="res://assets/rylan.png" id="2_p8oqq"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_klxso"]
+auto_exposure_enabled = true
+
+[sub_resource type="Environment" id="Environment_klxso"]
+
+[sub_resource type="World3D" id="World3D_2hojv"]
+environment = SubResource("Environment_klxso")
+camera_attributes = SubResource("CameraAttributesPractical_klxso")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tf7m"]
+transparency = 1
+albedo_texture = ExtResource("2_p8oqq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qbwxe"]
+
+[sub_resource type="Environment" id="Environment_2hojv"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2hojv"]
+
+[node name="ViewportTest" type="Node2D"]
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(500, 324)
+texture = ExtResource("1_klxso")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 196.0
+offset_top = 36.0
+offset_right = 708.0
+offset_bottom = 548.0
+metadata/_edit_use_anchors_ = true
+
+[node name="yes" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Test" parent="SubViewportContainer/yes" instance=ExtResource("2_2hojv")]
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+world_3d = SubResource("World3D_2hojv")
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+material_override = SubResource("StandardMaterial3D_1tf7m")
+mesh = SubResource("QuadMesh_qbwxe")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.32046)
+environment = SubResource("Environment_2hojv")
+attributes = SubResource("CameraAttributesPractical_2hojv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(628, 292)
+scale = Vector2(0.196, 0.196)
+texture = ExtResource("1_u0gna")
