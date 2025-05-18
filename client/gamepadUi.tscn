@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://sideButtonR.tscn" id="3_7yqh2"]
 [ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://sideButtonL.tscn" id="3_tdk0p"]
 [ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://dPad.tscn" id="5_rrs3a"]
-[ext_resource type="Texture2D" uid="uid://bqfldhal207lj" path="res://assets/dpadShaft.png" id="6_t6gqd"]
+[ext_resource type="PackedScene" uid="uid://dvibaeomn4a2i" path="res://shaft.tscn" id="6_t6gqd"]
 
 [sub_resource type="World3D" id="World3D_rrs3a"]
 
@@ -73,10 +73,9 @@ scale = Vector2(0.360002, 0.360002)
 position = Vector2(808, 173)
 scale = Vector2(0.360002, 0.360002)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(408, 373)
-scale = Vector2(0.269851, 0.269851)
-texture = ExtResource("6_t6gqd")
+[node name="Shaft" parent="." instance=ExtResource("6_t6gqd")]
+position = Vector2(412, 370)
+scale = Vector2(0.26, 0.26)
 
 [node name="dpadVPContainer" type="SubViewportContainer" parent="."]
 offset_left = 240.0

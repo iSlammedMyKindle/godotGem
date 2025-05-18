@@ -24,8 +24,8 @@ func rock():
 	pressTween = create_tween()
 	pressTween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SPRING)
 	
-	var y = -.25 if presses['Left'] else .25 if presses['Right'] else 0
-	var x = -.25 if presses['Up'] else .25 if presses['Down'] else 0
+	var y = -.25 if presses['Left'] else .10 if presses['Right'] else 0
+	var x = -.25 if presses['Up'] else .10 if presses['Down'] else 0
 	
 	pressTween.tween_property($MeshInstance3D, "rotation", Vector3(x, y, 0), .100)
 	pressTween.play()
@@ -34,9 +34,7 @@ func press(udlr: String):
 	# Press the button so we know which ones to change
 	presses[udlr] = true
 	rock()
-	print('test')
 
 func release(udlr):
 	presses[udlr] = false
 	rock()
-	print('test2')

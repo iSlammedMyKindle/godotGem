@@ -7,9 +7,9 @@
    viewBox="0 0 211.66666 211.66667"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    sodipodi:docname="dpad.svg"
-   inkscape:export-filename="../dpadShaft.png"
+   inkscape:export-filename="../shaftL.png"
    inkscape:export-xdpi="96.761902"
    inkscape:export-ydpi="96.761902"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -26,14 +26,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.74077045"
-     inkscape:cx="380.68473"
-     inkscape:cy="553.4778"
-     inkscape:window-width="2556"
-     inkscape:window-height="1386"
+     inkscape:zoom="1.0228069"
+     inkscape:cx="517.20417"
+     inkscape:cy="406.72389"
+     inkscape:window-width="2560"
+     inkscape:window-height="1412"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
      id="defs1">
@@ -41,13 +41,13 @@
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
        id="filter7"
-       x="-0.16005332"
-       y="-0.16005321"
-       width="1.3201066"
-       height="1.3201064">
+       x="-0.24455731"
+       y="-0.38795094"
+       width="1.4891146"
+       height="1.7759019">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="3.070841"
+         stdDeviation="2.4439166"
          id="feGaussianBlur7" />
     </filter>
   </defs>
@@ -57,10 +57,11 @@
      id="layer1">
     <g
        id="g1"
-       transform="matrix(3.8372698,0,0,3.8372698,-851.59224,-157.14237)"
-       style="display:inline;mix-blend-mode:normal;filter:url(#filter7)">
+       transform="matrix(3.4820848,0,0,3.4820848,-762.97112,-132.80084)"
+       style="display:inline;mix-blend-mode:normal;filter:url(#filter7)"
+       inkscape:label="g1">
       <rect
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+         style="display:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
          id="rect17322"
          width="15.118921"
          height="23.983744"
@@ -71,7 +72,7 @@
          inkscape:transform-center-x="-0.098498866"
          inkscape:transform-center-y="-11.03177" />
       <rect
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+         style="display:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
          id="rect21380"
          width="15.118921"
          height="23.983744"
@@ -83,7 +84,7 @@
          inkscape:transform-center-y="0.098486637"
          transform="rotate(90)" />
       <rect
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+         style="display:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
          id="rect21382"
          width="15.118921"
          height="23.983744"
@@ -95,7 +96,7 @@
          inkscape:transform-center-y="11.031773"
          transform="scale(-1)" />
       <rect
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+         style="display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
          id="rect21384"
          width="15.118921"
          height="23.983744"
@@ -110,7 +111,7 @@
     <g
        id="g4"
        transform="matrix(3.8372698,0,0,3.8372698,-851.59224,-157.14237)"
-       style="display:inline">
+       style="display:none">
       <rect
          style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00633;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
          id="rect1"

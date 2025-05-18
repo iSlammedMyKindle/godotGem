@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvibaeomn4a2i"]
+
+[ext_resource type="Script" uid="uid://cwf68mpvc25wy" path="res://shaft.gd" id="1_f0h1c"]
+[ext_resource type="Texture2D" uid="uid://df5jll8ip3yrw" path="res://assets/shaftU.png" id="1_ssqbi"]
+[ext_resource type="Texture2D" uid="uid://c3shpj2ch4eyy" path="res://assets/shaftR.png" id="2_f0h1c"]
+[ext_resource type="Texture2D" uid="uid://c4f31bnl6lgd3" path="res://assets/shaftD.png" id="3_aq8v4"]
+[ext_resource type="Texture2D" uid="uid://bra8k65j61esi" path="res://assets/shaftL.png" id="4_mrtar"]
+
+[node name="Shaft" type="Node2D"]
+script = ExtResource("1_f0h1c")
+
+[node name="Up" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_ssqbi")
+
+[node name="Right" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_f0h1c")
+
+[node name="Down" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3_aq8v4")
+
+[node name="Left" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("4_mrtar")

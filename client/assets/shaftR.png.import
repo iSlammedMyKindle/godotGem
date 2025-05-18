@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byjagghls6lr"
-path="res://.godot/imported/dpadShaft.png-90f7aba8e699eafbcde13d1bf17f1841.ctex"
+uid="uid://c3shpj2ch4eyy"
+path="res://.godot/imported/shaftR.png-9441df82011b6a179d728280237b0b1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dpadShaft.png"
-dest_files=["res://.godot/imported/dpadShaft.png-90f7aba8e699eafbcde13d1bf17f1841.ctex"]
+source_file="res://assets/shaftR.png"
+dest_files=["res://.godot/imported/shaftR.png-9441df82011b6a179d728280237b0b1b.ctex"]
 
 [params]
 
