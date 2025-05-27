@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://70fnvrl4fp3v"]
+[gd_scene load_steps=7 format=3 uid="uid://70fnvrl4fp3v"]
 
 [ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://button.gd" id="1_ra8jp"]
 [ext_resource type="Texture2D" uid="uid://bw7jk5025it5m" path="res://assets/src/RB.svg" id="2_ra8jp"]
@@ -34,10 +34,27 @@ tracks/0/keys = {
 "values": [0.0, -0.349066, -0.0872665]
 }
 
+[sub_resource type="Animation" id="Animation_ra8jp"]
+resource_name = "release"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4amfo"]
 _data = {
 &"RESET": SubResource("Animation_lt4la"),
-&"press": SubResource("Animation_vxja4")
+&"press": SubResource("Animation_vxja4"),
+&"release": SubResource("Animation_ra8jp")
 }
 
 [node name="Button" type="Node2D"]
