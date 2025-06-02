@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://bc0keobxw4aqk"]
 
-[ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi.gd" id="1"]
+[ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi/gamepadUi.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c27bdgwuwsskf" path="res://assets/src/controllerHousing.svg" id="2_ttcah"]
-[ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://button.tscn" id="2_u1mn1"]
-[ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://sideButtonR.tscn" id="3_7yqh2"]
-[ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://sideButtonL.tscn" id="3_tdk0p"]
-[ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://dPad.tscn" id="5_rrs3a"]
-[ext_resource type="PackedScene" uid="uid://cnkrcitq2d0ui" path="res://joystick.tscn" id="6_ftokp"]
-[ext_resource type="PackedScene" uid="uid://dvibaeomn4a2i" path="res://shaft.tscn" id="6_t6gqd"]
+[ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://gamepadUi/buttonsAndSticks/button.tscn" id="2_u1mn1"]
+[ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://gamepadUi/buttonsAndSticks/sideButtonR.tscn" id="3_7yqh2"]
+[ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://gamepadUi/buttonsAndSticks/sideButtonL.tscn" id="3_tdk0p"]
+[ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://gamepadUi/buttonsAndSticks/dPad.tscn" id="5_rrs3a"]
+[ext_resource type="PackedScene" uid="uid://cnkrcitq2d0ui" path="res://gamepadUi/buttonsAndSticks/joystick.tscn" id="6_ftokp"]
+[ext_resource type="PackedScene" uid="uid://dvibaeomn4a2i" path="res://gamepadUi/buttonsAndSticks/shaft.tscn" id="6_t6gqd"]
 
 [sub_resource type="World3D" id="World3D_rrs3a"]
 

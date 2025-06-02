@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnkrcitq2d0ui"]
 
-[ext_resource type="Script" uid="uid://q3iwstja5qp2" path="res://joystick.gd" id="1_413m4"]
+[ext_resource type="Script" uid="uid://q3iwstja5qp2" path="res://gamepadUi/buttonsAndSticks/joystick.gd" id="1_413m4"]
 [ext_resource type="Texture2D" uid="uid://cbnb4acxmhlcf" path="res://assets/joystickBottom.png" id="1_dm1l1"]
 [ext_resource type="Texture2D" uid="uid://b6uj6d8d8v741" path="res://assets/joystickTop.png" id="2_413m4"]
 [ext_resource type="Texture2D" uid="uid://lyvuuv3lfb6d" path="res://assets/joystickShaft.png" id="2_jhikm"]

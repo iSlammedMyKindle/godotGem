@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cuq5w8la4e1uu"]
 
-[ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://button.gd" id="1_63xhb"]
+[ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_63xhb"]
 [ext_resource type="Texture2D" uid="uid://dktf6ae5q5y6m" path="res://assets/LB.png" id="2_cvfum"]
 
 [sub_resource type="Animation" id="Animation_lt4la"]

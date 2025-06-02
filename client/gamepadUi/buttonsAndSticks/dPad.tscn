@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxycnuef1a7un"]
 
-[ext_resource type="Script" uid="uid://i6px0psovceg" path="res://d_pad.gd" id="1_7umuv"]
+[ext_resource type="Script" uid="uid://i6px0psovceg" path="res://gamepadUi/buttonsAndSticks/d_pad.gd" id="1_7umuv"]
 [ext_resource type="Texture2D" uid="uid://dybj0ri8m1knf" path="res://assets/dpad.png" id="2_7umuv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t6gqd"]
