@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://b7avr0e5dua5p" path="res://assets/controllerHousing.png" id="1_klxso"]
 [ext_resource type="Texture2D" uid="uid://cnneo4is1dm7h" path="res://assets/godotGemLogo.png" id="1_u0gna"]
-[ext_resource type="PackedScene" uid="uid://cu44qdu4atklp" path="res://test.tscn" id="2_2hojv"]
-[ext_resource type="Texture2D" uid="uid://dj58upoaxqc27" path="res://assets/rylan.png" id="2_p8oqq"]
+[ext_resource type="PackedScene" uid="uid://cu44qdu4atklp" path="res://tests/test.tscn" id="2_2hojv"]
+[ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="2_p8oqq"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_klxso"]
 auto_exposure_enabled = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://firstTimeRun.gd" type="Script" id=1]
-[ext_resource path="res://LinkButton.gd" type="Script" id=2]
+[ext_resource type="Script" uid="uid://de74ncchxega1" path="res://primaryUI/firstTimeRun.gd" id="1"]
+[ext_resource type="Script" uid="uid://cvlv3yys4nd06" path="res://primaryUI/LinkButton.gd" id="2"]
 
 [node name="firstTimeRun" type="Node2D"]
 script = ExtResource( 1 )

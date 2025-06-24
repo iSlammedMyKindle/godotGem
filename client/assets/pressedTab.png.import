@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqulof8b7mume"
-path="res://.godot/imported/rylan.png-3ef9fbd4fe5016084ee93f5bba3ff85a.ctex"
+uid="uid://blxspxmcfxcte"
+path="res://.godot/imported/pressedTab.png-b986260c4e72b42cc628f9f3b01d8483.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rylan.png"
-dest_files=["res://.godot/imported/rylan.png-3ef9fbd4fe5016084ee93f5bba3ff85a.ctex"]
+source_file="res://assets/pressedTab.png"
+dest_files=["res://.godot/imported/pressedTab.png-b986260c4e72b42cc628f9f3b01d8483.ctex"]
 
 [params]
 

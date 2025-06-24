@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqulof8b7mume"
-path="res://.godot/imported/rylan.png-3ef9fbd4fe5016084ee93f5bba3ff85a.ctex"
+uid="uid://w6s2er422loj"
+path="res://.godot/imported/menuClick.svg-a905a372162d36660a2621983260346f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rylan.png"
-dest_files=["res://.godot/imported/rylan.png-3ef9fbd4fe5016084ee93f5bba3ff85a.ctex"]
+source_file="res://assets/menuClick.svg"
+dest_files=["res://.godot/imported/menuClick.svg-a905a372162d36660a2621983260346f.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

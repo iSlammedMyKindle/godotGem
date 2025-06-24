@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpgcb13r8ekpy"]
+
+[ext_resource type="Script" uid="uid://bvg0hy76u45cs" path="res://primaryUI/menu.gd" id="1_1um31"]
+[ext_resource type="Texture2D" uid="uid://bg07parvm3057" path="res://assets/uiPanel.png" id="1_5xnov"]
+[ext_resource type="PackedScene" uid="uid://dcjg3jxo4oe0w" path="res://primaryUI/tab.tscn" id="1_rhplt"]
+
+[sub_resource type="SystemFont" id="SystemFont_h7vav"]
+font_names = PackedStringArray("Arial Black")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhplt"]
+font = SubResource("SystemFont_h7vav")
+font_size = 50
+font_color = Color(0.933333, 0.827451, 0.45098, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1um31"]
+font = SubResource("SystemFont_h7vav")
+font_size = 50
+font_color = Color(0.933333, 0.827451, 0.45098, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g8mnm"]
+font = SubResource("SystemFont_h7vav")
+font_size = 50
+font_color = Color(0.933333, 0.827451, 0.45098, 1)
+shadow_offset = Vector2(2, 2)
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_1um31")
+
+[node name="General" parent="." instance=ExtResource("1_rhplt")]
+position = Vector2(296, 104)
+
+[node name="Label" parent="General/Body" index="0"]
+text = "General"
+label_settings = SubResource("LabelSettings_rhplt")
+
+[node name="BG" parent="." instance=ExtResource("1_rhplt")]
+position = Vector2(632, 104)
+
+[node name="Label" parent="BG/Body" index="0"]
+text = "BG"
+label_settings = SubResource("LabelSettings_1um31")
+
+[node name="Other" parent="." instance=ExtResource("1_rhplt")]
+position = Vector2(968, 104)
+
+[node name="Label" parent="Other/Body" index="0"]
+label_settings = SubResource("LabelSettings_g8mnm")
+
+[node name="pane" type="Sprite2D" parent="."]
+position = Vector2(640, 408)
+texture = ExtResource("1_5xnov")
+
+[editable path="General"]
+[editable path="BG"]
+[editable path="Other"]
