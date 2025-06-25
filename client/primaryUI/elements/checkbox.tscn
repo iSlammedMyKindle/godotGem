@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://7i118uxxc6ox"]
+
+[ext_resource type="Script" uid="uid://d13t6hbvt55k0" path="res://primaryUI/elements/checkbox.gd" id="1_72kbx"]
+[ext_resource type="Texture2D" uid="uid://dnd8a6b5yvkyl" path="res://assets/emptyCheck.png" id="1_sp2vs"]
+[ext_resource type="Texture2D" uid="uid://8bedcolu5ckv" path="res://assets/pressedEmptyCheck.png" id="3_66uaq"]
+
+[sub_resource type="SystemFont" id="SystemFont_wv16d"]
+font_names = PackedStringArray("Arial Black")
+
+[sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
+font = SubResource("SystemFont_wv16d")
+font_size = 42
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Checkbox" type="Node2D"]
+script = ExtResource("1_72kbx")
+
+[node name="Box" type="TextureButton" parent="."]
+offset_right = 145.0
+offset_bottom = 176.0
+texture_normal = ExtResource("1_sp2vs")
+texture_pressed = ExtResource("3_66uaq")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 184.0
+offset_top = 80.0
+offset_right = 618.0
+offset_bottom = 152.0
+text = "Lorem Ipsum Dolar"
+label_settings = SubResource("LabelSettings_72kbx")
+
+[connection signal="button_up" from="Box" to="." method="_on_texture_button_button_up"]

@@ -27,16 +27,17 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.0547699"
-     inkscape:cx="609.13759"
-     inkscape:cy="240.33678"
-     inkscape:window-width="1805"
-     inkscape:window-height="1131"
+     inkscape:zoom="0.74583495"
+     inkscape:cx="669.71922"
+     inkscape:cy="398.88182"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g84"
-     showgrid="false" />
+     inkscape:current-layer="layer3"
+     showgrid="false"
+     showguides="false" />
   <defs
      id="defs1">
     <linearGradient
@@ -549,7 +550,7 @@
     </filter>
     <filter
        style="color-interpolation-filters:sRGB;"
-       inkscape:label="Drop Shadow"
+       inkscape:label="checkedShadow"
        id="filter3"
        x="-0.092990731"
        y="-0.22975944"
@@ -585,6 +586,10 @@
          in2="comp1"
          id="feComposite3" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter4"
+       inkscape:label="filter14" />
   </defs>
   <g
      inkscape:label="tabs"
@@ -698,8 +703,8 @@
        inkscape:export-ydpi="96" />
     <g
        id="g86"
-       transform="translate(51.423141,-44.79284)"
-       inkscape:export-filename="../pressedCheckedCheck.png"
+       transform="translate(-0.37004289,-44.79284)"
+       inkscape:export-filename="../pressedEmptyCheck.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <use
@@ -709,15 +714,15 @@
          id="use48"
          transform="translate(0,96.516947)" />
       <path
-         style="fill:#19b016;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="display:inline;opacity:1;fill:#19b016;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 66.998494,175.1971 9.642494,10.63522 16.6883,-27.76717 -0.195189,13.04175 -15.84187,21.08522 -10.679558,-7.544 z"
          id="path49"
          sodipodi:nodetypes="ccccccc" />
     </g>
     <g
        id="g87"
-       transform="translate(0,-4.6824369)"
-       inkscape:export-filename="../checkedCheck.png"
+       transform="translate(50.187821,-5.0570404)"
+       inkscape:export-filename="../emptyCheck.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <use
@@ -785,6 +790,38 @@
          ry="10.679559"
          rx="10.679559"
          transform="matrix(0.70745177,0,0,0.70745177,41.531644,20.420806)" />
+    </g>
+    <g
+       id="g5"
+       inkscape:export-filename="../pressedEmptyCheck.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="display:inline;opacity:1;fill:#b7b7b7;fill-opacity:1;stroke:none;stroke-width:5.98019;stroke-linecap:round;stroke-dasharray:none"
+         id="rect4"
+         width="49.322926"
+         height="49.322926"
+         x="196.33641"
+         y="127.17857"
+         rx="0"
+         ry="0"
+         inkscape:label="boundingRect" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g86"
+         id="use4"
+         transform="translate(143.14831,18.599591)"
+         inkscape:label="uncheckRef"
+         style="display:inline" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g87"
+         id="use5"
+         transform="translate(92.607875,19.384832)"
+         inkscape:label="checkRef"
+         style="display:none" />
     </g>
   </g>
 </svg>
