@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtx0a00ko6v14"]
+
+[ext_resource type="Script" uid="uid://puk1jhcgk406" path="res://primaryUI/panes/general.gd" id="1_aigvo"]
+[ext_resource type="PackedScene" uid="uid://7i118uxxc6ox" path="res://primaryUI/elements/checkbox.tscn" id="2_34n8b"]
+
+[node name="General" type="Node2D"]
+script = ExtResource("1_aigvo")
+
+[node name="touchScreenButtons" parent="." instance=ExtResource("2_34n8b")]
+position = Vector2(-32, 392)
+
+[node name="buttonSounds" parent="." instance=ExtResource("2_34n8b")]
+position = Vector2(-32, 264)
+
+[node name="turboFeedback" parent="." instance=ExtResource("2_34n8b")]
+position = Vector2(-32, 136)
+
+[node name="ignoreVibration" parent="." instance=ExtResource("2_34n8b")]
+position = Vector2(-32, 8)

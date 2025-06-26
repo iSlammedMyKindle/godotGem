@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://3cnt4vye7q7" path="res://Main.gd" id="1"]
 [ext_resource type="Script" uid="uid://bpneym18dt1bn" path="res://primaryUI/connectLabel.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cck8rbj7yeox7" path="res://primaryUI/bg/bg.tscn" id="2_03owx"]
+[ext_resource type="Script" uid="uid://cjvwbywbisn06" path="res://hud.gd" id="2_c6i3y"]
 [ext_resource type="PackedScene" uid="uid://bc0keobxw4aqk" path="res://gamepadUi/gamepadUi.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
 [ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://primaryUI/Rylan.gd" id="6"]
-[ext_resource type="Texture2D" uid="uid://ums7vv8egf4v" path="res://assets/godotGemLogo.svg" id="7"]
 [ext_resource type="PackedScene" path="res://primaryUI/firstTimeRun.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://bfm4c6lo00s4b" path="res://assets/menu.svg" id="10_20pc6"]
 [ext_resource type="Texture2D" uid="uid://w6s2er422loj" path="res://assets/menuClick.svg" id="11_5vvyt"]
@@ -71,39 +71,6 @@ _data = {
 &"spin": SubResource("2")
 }
 
-[sub_resource type="Animation" id="1"]
-resource_name = "fade"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Blinder:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.13),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Blinder:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_03owx"]
-_data = {
-&"fade": SubResource("1")
-}
-
 [sub_resource type="Animation" id="Animation_c2ibq"]
 length = 0.001
 tracks/0/type = "value"
@@ -165,20 +132,51 @@ _data = {
 &"toggle": SubResource("Animation_c6i3y")
 }
 
+[sub_resource type="Animation" id="1"]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blinder:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.13),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blinder:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03owx"]
+_data = {
+&"fade": SubResource("1")
+}
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
 
 [node name="Bg" parent="." instance=ExtResource("2_03owx")]
 
-[node name="githubPage" type="Button" parent="."]
-offset_top = 696.0
-offset_right = 512.0
-offset_bottom = 1204.0
-scale = Vector2(0.15, 0.15)
-icon = ExtResource("7")
-metadata/_edit_use_anchors_ = true
+[node name="gamepadUI" parent="." instance=ExtResource("3")]
+position = Vector2(88, 104)
 
-[node name="urlToConnect" type="TextEdit" parent="."]
+[node name="HUD" type="Node2D" parent="."]
+script = ExtResource("2_c6i3y")
+
+[node name="urlToConnect" type="TextEdit" parent="HUD"]
 offset_left = 504.0
 offset_top = 72.0
 offset_right = 611.0
@@ -191,7 +189,7 @@ caret_blink = true
 caret_multiple = false
 metadata/_edit_use_anchors_ = true
 
-[node name="connectionStatus" type="Label" parent="."]
+[node name="connectionStatus" type="Label" parent="HUD"]
 offset_left = 504.0
 offset_top = 32.0
 offset_right = 691.0
@@ -201,10 +199,7 @@ text = "Connect to this address:"
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true
 
-[node name="gamepadUI" parent="." instance=ExtResource("3")]
-position = Vector2(88, 104)
-
-[node name="BlinderBtn" type="Button" parent="."]
+[node name="BlinderBtn" type="Button" parent="HUD"]
 offset_left = 416.0
 offset_top = 72.0
 offset_right = 480.0
@@ -213,7 +208,7 @@ scale = Vector2(1.5, 1.5)
 text = "Blinder"
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="HUD"]
 offset_left = 768.0
 offset_top = 72.0
 offset_right = 845.0
@@ -222,23 +217,7 @@ scale = Vector2(1.5, 1.5)
 text = "Connect!"
 metadata/_edit_use_anchors_ = true
 
-[node name="Rylan" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(592, 520)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4")
-centered = false
-script = ExtResource("6")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Rylan"]
-stream = ExtResource("5")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Rylan"]
-libraries = {
-&"": SubResource("AnimationLibrary_trn2v")
-}
-
-[node name="IgnoreVibration" type="CheckButton" parent="."]
+[node name="IgnoreVibration" type="CheckButton" parent="HUD"]
 offset_left = 512.0
 offset_top = 672.0
 offset_right = 694.0
@@ -246,6 +225,41 @@ offset_bottom = 712.0
 scale = Vector2(1.5, 1.5)
 text = "Ignore Vibration"
 metadata/_edit_use_anchors_ = true
+
+[node name="Rylan" type="Sprite2D" parent="HUD"]
+visible = false
+position = Vector2(592, 520)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4")
+centered = false
+script = ExtResource("6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD/Rylan"]
+stream = ExtResource("5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Rylan"]
+libraries = {
+&"": SubResource("AnimationLibrary_trn2v")
+}
+
+[node name="Settings" type="TextureButton" parent="HUD"]
+offset_left = 1184.0
+offset_top = 2.00002
+offset_right = 1484.0
+offset_bottom = 327.0
+scale = Vector2(0.312347, 0.312347)
+texture_normal = ExtResource("10_20pc6")
+texture_pressed = ExtResource("11_5vvyt")
+script = ExtResource("12_c6i3y")
+
+[node name="Menu" parent="HUD/Settings" instance=ExtResource("13_c2ibq")]
+position = Vector2(-3790.66, -2500)
+scale = Vector2(3.20157, 3.20157)
+
+[node name="SettingsAnimations" type="AnimationPlayer" parent="HUD/Settings"]
+libraries = {
+&"": SubResource("AnimationLibrary_j4qnp")
+}
 
 [node name="Blinder" type="ColorRect" parent="."]
 visible = false
@@ -261,27 +275,7 @@ libraries = {
 [node name="firstTimeRun" parent="." instance=ExtResource("8")]
 visible = false
 
-[node name="Settings" type="TextureButton" parent="."]
-offset_left = 1184.0
-offset_top = 2.00002
-offset_right = 1484.0
-offset_bottom = 327.0
-scale = Vector2(0.312347, 0.312347)
-texture_normal = ExtResource("10_20pc6")
-texture_pressed = ExtResource("11_5vvyt")
-script = ExtResource("12_c6i3y")
-
-[node name="Menu" parent="Settings" instance=ExtResource("13_c2ibq")]
-position = Vector2(-3790.66, -2500)
-scale = Vector2(3.20157, 3.20157)
-
-[node name="SettingsAnimations" type="AnimationPlayer" parent="Settings"]
-libraries = {
-&"": SubResource("AnimationLibrary_j4qnp")
-}
-
-[connection signal="pressed" from="githubPage" to="." method="_on_githubPage_pressed"]
-[connection signal="pressed" from="BlinderBtn" to="." method="_on_BlinderBtn_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="IgnoreVibration" to="." method="_on_CheckButton_pressed"]
-[connection signal="pressed" from="Settings" to="Settings" method="_on_pressed"]
+[connection signal="pressed" from="HUD/BlinderBtn" to="." method="_on_BlinderBtn_pressed"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HUD/IgnoreVibration" to="." method="_on_CheckButton_pressed"]
+[connection signal="pressed" from="HUD/Settings" to="HUD/Settings" method="_on_pressed"]

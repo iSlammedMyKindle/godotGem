@@ -1,6 +1,8 @@
 extends Node2D
 
 var checked = false
+var type = 'check'
+var settingKey = '' #This will be used to bind a setting.
 signal checkSig
 
 # Texture land

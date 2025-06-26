@@ -159,10 +159,5 @@ func _input(event):
 				
 				client.send(controllerBuffer)
 
-
-func _on_githubPage_pressed():
-	OS.shell_open("https://github.com/iSlammedMyKindle/godotGem")
-
-
 func _on_CheckButton_pressed():
 	ignoreVibrationBool = !ignoreVibrationBool
