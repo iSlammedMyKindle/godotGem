@@ -6,6 +6,7 @@
 
 [sub_resource type="SystemFont" id="SystemFont_wv16d"]
 font_names = PackedStringArray("Arial Black")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
 font = SubResource("SystemFont_wv16d")

@@ -6,5 +6,4 @@ func _on_showAgain_pressed():
 func _on_dontShowAgain_pressed():
 	visible = false
 	var config = get_node("..").config
-	config.set_value("general", "hideGithubSplash", 1)
-	config.save("user://godotGem.cfg")
+	config.set_val("general", "hideGithubSplash", 1)

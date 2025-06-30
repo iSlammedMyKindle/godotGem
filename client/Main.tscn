@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://cmrkjib5bk7xi"]
+[gd_scene load_steps=22 format=3 uid="uid://cmrkjib5bk7xi"]
 
 [ext_resource type="Script" uid="uid://3cnt4vye7q7" path="res://Main.gd" id="1"]
 [ext_resource type="Script" uid="uid://bpneym18dt1bn" path="res://primaryUI/connectLabel.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cck8rbj7yeox7" path="res://primaryUI/bg/bg.tscn" id="2_03owx"]
+[ext_resource type="Script" uid="uid://dt6xye1g1q4pm" path="res://save_logic.gd" id="2_c2ibq"]
 [ext_resource type="Script" uid="uid://cjvwbywbisn06" path="res://hud.gd" id="2_c6i3y"]
 [ext_resource type="PackedScene" uid="uid://bc0keobxw4aqk" path="res://gamepadUi/gamepadUi.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
@@ -167,6 +168,9 @@ _data = {
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
+
+[node name="saveLogic" type="Node" parent="."]
+script = ExtResource("2_c2ibq")
 
 [node name="Bg" parent="." instance=ExtResource("2_03owx")]
 

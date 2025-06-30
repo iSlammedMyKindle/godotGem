@@ -26,7 +26,6 @@ var evtList = {
 }
 
 var joySticks = [
-	
 	['LStickL', 'LStickR', 'LStickD', 'LStickU'],
 	['RStickL', 'RStickR', 'RStickD', 'RStickU'],
 ]
@@ -38,17 +37,26 @@ var previousStickValues = [
 
 var previousTriggerValues = [0, 0]
 
+# Save data loads from [root] -> saveLogic
+func receive_save(save: Node, status: int):
+	config = save
+	
+	if status == OK and config.get_val("general", "ip") != null:
+		$urlToConnect.text = config.get_val("general", "ip")
+	
+	if config.get_val("general", "hideGithubSplash") == null:
+		$firstTimeRun.visible = true
+
+# We don't really need to update anything here
+func update_save_val(_sec, _key, _val):
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	client.connect("data_received", Callable(self, "_on_data"))
-
-	# Load the config file:
-	var err = config.load("user://godotGem.cfg")
-	if err == OK and config.get_value("general", "ip") != null:
-		$urlToConnect.text = config.get_value("general", "ip")
+	add_to_group('save')
+	$saveLogic.invoke_manual_receive(self)
 	
-	if config.get_value("general", "hideGithubSplash") == null:
-		$firstTimeRun.visible = true
+	client.connect("data_received", Callable(self, "_on_data"))
 		
 
 func _process(_delta):
@@ -59,8 +67,7 @@ func _process(_delta):
 		if connecting:
 			connecting = false;
 			$connectionStatus.text = "connected to " + $urlToConnect.text;
-			config.set_value("general", "ip", $urlToConnect.text)
-			config.save("user://godotGem.cfg")
+			config.set_val("general", "ip", $urlToConnect.text)
 	elif state == WebSocketPeer.STATE_CLOSED:
 		connected = false
 
@@ -128,7 +135,6 @@ func _on_Button_pressed():
 
 func _on_BlinderBtn_pressed():
 	$AnimationPlayer.play('fade')
-		
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and $Blinder.visible:
