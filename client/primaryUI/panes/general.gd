@@ -1,20 +1,42 @@
 extends Node2D
 
-func _ready():
-	$ignoreVibration/Label.text = "Ignore Vibration";
-	$ignoreVibration.settingKey = 'ignoreVibration';
+var checkIndex
+var save
+var sectionName = 'general'
 
-	$turboFeedback/Label.text = "Turbo Feedback";
-	$turboFeedback.settingKey = 'turboFeedback';
-	
-	$buttonSounds/Label.text = "Button Sounds";
-	$buttonSounds.settingKey = 'buttonSounds';
-	
-	$touchScreenButtons/Label.text = "Touch Screen Buttons";
-	$touchScreenButtons.settingKey = 'ignoreVibration';
-	
+func _ready():
 	# Add to the group
 	add_to_group('tabs')
+	add_to_group('save')
+	
+	checkIndex = {
+		$ignoreVibration: "Ignore Vibration",
+		$turboFeedback: "Turbo Feedback",
+		$buttonSounds: "Button Sounds",
+		$touchScreenButtons: "Touch Screen Buttons"
+	}
+	
+	# Initialize the connections
+	for node in checkIndex.keys():
+		node.get_node('Label').text = checkIndex[node]
+		node.checkSig.connect(onSettingChecked)
 
-func changeTab(tabName):
+func changeTab(tabName: String):
 	visible = tabName == name
+
+func onSettingChecked(caller: Node2D, checked: bool):
+	save.set_val(sectionName, caller.name.to_lower(), checked)
+
+# From save_logic
+func receive_save(config, _status):
+	save = config
+	
+	# Go through all keys and set the values
+	for node in checkIndex.keys():
+		var savedVal = save.get_val(sectionName, node.name.to_lower(), false)
+		if not savedVal == null:
+			node.setCheckbox(savedVal)
+	
+# We don't need to do anyting here, all that would do is re-check the checkboxes!
+func update_save_val(_section, _key, _val):
+	pass

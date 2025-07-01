@@ -2,8 +2,7 @@ extends Node2D
 
 var checked = false
 var type = 'check'
-var settingKey = '' #This will be used to bind a setting.
-signal checkSig
+signal checkSig()
 
 # Texture land
 var textures = {
@@ -27,9 +26,13 @@ func _ready():
 	textures['checked']['pressed'] = load("res://assets/pressedCheckedCheck.png")
 
 
-func _on_texture_button_button_up():
-	checked = not checked
+func setCheckbox(isChecked):
+	checked = isChecked
 	
 	var changedTextures = textures[("un" if not checked else "") + "checked"]
 	$Box.texture_normal = changedTextures['normal']
 	$Box.texture_pressed = changedTextures['pressed']
+
+func _on_texture_button_button_up():
+	setCheckbox(not checked)
+	checkSig.emit(self, checked)

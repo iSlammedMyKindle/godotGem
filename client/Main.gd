@@ -47,9 +47,9 @@ func receive_save(save: Node, status: int):
 	if config.get_val("general", "hideGithubSplash") == null:
 		$firstTimeRun.visible = true
 
-# We don't really need to update anything here
-func update_save_val(_sec, _key, _val):
-	pass
+func update_save_val(sec, key, val):
+	if sec == 'general' and key == 'ignoreVibration':
+		ignoreVibrationBool = val
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -140,7 +140,6 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and $Blinder.visible:
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play_backwards('fade')
-
 		return
 	for item in evtList.keys():
 		if connected:
@@ -164,6 +163,3 @@ func _input(event):
 				controllerBuffer.push_back(0)
 				
 				client.send(controllerBuffer)
-
-func _on_CheckButton_pressed():
-	ignoreVibrationBool = !ignoreVibrationBool
