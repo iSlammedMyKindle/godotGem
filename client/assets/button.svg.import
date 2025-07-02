@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg6ongrhh7108"
-path="res://.godot/imported/joystick.svg-ef5d593a1ae208cd551a9a1a0139e553.ctex"
+uid="uid://f0ixy2prycd6"
+path="res://.godot/imported/button.svg-f49004b9779a0b45871c3519b64b92cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/src/joystick.svg"
-dest_files=["res://.godot/imported/joystick.svg-ef5d593a1ae208cd551a9a1a0139e553.ctex"]
+source_file="res://assets/button.svg"
+dest_files=["res://.godot/imported/button.svg-f49004b9779a0b45871c3519b64b92cd.ctex"]
 
 [params]
 

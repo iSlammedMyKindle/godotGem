@@ -27,11 +27,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.74583495"
-     inkscape:cx="669.71922"
-     inkscape:cy="398.88182"
-     inkscape:window-width="1920"
-     inkscape:window-height="1052"
+     inkscape:zoom="1.0547699"
+     inkscape:cx="730.96511"
+     inkscape:cy="414.78241"
+     inkscape:window-width="2560"
+     inkscape:window-height="1368"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -40,6 +40,34 @@
      showguides="false" />
   <defs
      id="defs1">
+    <linearGradient
+       id="linearGradient5"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ff6e6e;stop-opacity:1;"
+         offset="0"
+         id="stop5" />
+      <stop
+         style="stop-color:#f9b62e;stop-opacity:1;"
+         offset="0.13072243"
+         id="stop10" />
+      <stop
+         style="stop-color:#f6f155;stop-opacity:1;"
+         offset="0.30735892"
+         id="stop11" />
+      <stop
+         style="stop-color:#78f95d;stop-opacity:1;"
+         offset="0.54302156"
+         id="stop12" />
+      <stop
+         style="stop-color:#038ff4;stop-opacity:1;"
+         offset="0.758753"
+         id="stop13" />
+      <stop
+         style="stop-color:#e281ff;stop-opacity:1;"
+         offset="0.99237007"
+         id="stop7" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3"
        inkscape:collect="always">
@@ -590,6 +618,53 @@
        style="color-interpolation-filters:sRGB"
        id="filter4"
        inkscape:label="filter14" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5"
+       id="linearGradient7"
+       x1="261.31244"
+       y1="78.32132"
+       x2="279.75934"
+       y2="96.768204"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter32"
+       x="-0.17632738"
+       y="-0.17632738"
+       width="1.3143227"
+       height="1.3143227">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.807843"
+         flood-color="rgb(0,0,0)"
+         id="feFlood31" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.500000"
+         id="feGaussianBlur31" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="-1.000000"
+         dy="-1.000000"
+         id="feOffset31" />
+      <feComposite
+         result="comp1"
+         operator="out"
+         in="flood"
+         in2="offset"
+         id="feComposite31" />
+      <feComposite
+         result="comp2"
+         operator="atop"
+         in="comp1"
+         in2="SourceGraphic"
+         id="feComposite32" />
+    </filter>
   </defs>
   <g
      inkscape:label="tabs"
@@ -823,5 +898,38 @@
          inkscape:label="checkRef"
          style="display:none" />
     </g>
+    <rect
+       style="fill:url(#linearGradient7);fill-opacity:1;stroke:none;stroke-width:6.61458;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;filter:url(#filter32)"
+       id="rect2"
+       width="26.087837"
+       height="26.087837"
+       x="257.49197"
+       y="74.500847"
+       ry="7.0236487"
+       inkscape:export-filename="../rainbow.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:6.61458;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;filter:url(#filter32)"
+       id="rect32"
+       width="26.087837"
+       height="26.087837"
+       x="299.13217"
+       y="74.500847"
+       ry="7.0236487"
+       inkscape:export-filename="../greenIcon.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ff00f5;fill-opacity:1;stroke:none;stroke-width:6.61458;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;filter:url(#filter32)"
+       id="rect33"
+       width="26.087837"
+       height="26.087837"
+       x="299.13217"
+       y="111.375"
+       ry="7.0236487"
+       inkscape:export-filename="../magentaIcon.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
 </svg>

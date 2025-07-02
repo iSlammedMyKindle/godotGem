@@ -22,7 +22,7 @@ func _ready():
 		node.checkSig.connect(onSettingChecked)
 
 func changeTab(tabName: String):
-	visible = tabName == name
+	visible = tabName.to_lower() == sectionName
 
 func onSettingChecked(caller: Node2D, checked: bool):
 	save.set_val(sectionName, caller.name.to_lower(), checked)

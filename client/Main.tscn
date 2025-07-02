@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
 [ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://primaryUI/Rylan.gd" id="6"]
-[ext_resource type="PackedScene" path="res://primaryUI/firstTimeRun.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://bf3t5ws6wr4lt" path="res://primaryUI/firstTimeRun.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://bfm4c6lo00s4b" path="res://assets/menu.svg" id="10_20pc6"]
 [ext_resource type="Texture2D" uid="uid://w6s2er422loj" path="res://assets/menuClick.svg" id="11_5vvyt"]
 [ext_resource type="Script" uid="uid://dunbl3mqrd8ma" path="res://primaryUI/settings.gd" id="12_c6i3y"]

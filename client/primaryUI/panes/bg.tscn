@@ -1,6 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://drug6sdug2vs"]
+[gd_scene load_steps=7 format=3 uid="uid://drug6sdug2vs"]
 
 [ext_resource type="Script" uid="uid://ciaomfrn1qeov" path="res://primaryUI/panes/bg.gd" id="1_j8k0g"]
+[ext_resource type="PackedScene" uid="uid://0t21gdo7o5ri" path="res://primaryUI/elements/radio.tscn" id="2_p61xd"]
+[ext_resource type="ButtonGroup" uid="uid://bfuu0wsmbltgn" path="res://primaryUI/bg/background_group.tres" id="3_s3vev"]
+[ext_resource type="Texture2D" uid="uid://cgn340xrvn6ax" path="res://assets/rainbowIcon.png" id="4_ee2w5"]
+[ext_resource type="Texture2D" uid="uid://c1ciqgbw7er3q" path="res://assets/greenIcon.png" id="5_dr25u"]
+[ext_resource type="Texture2D" uid="uid://b37bl6gragfix" path="res://assets/magentaIcon.png" id="6_nrrr0"]
 
 [node name="Bg" type="Node2D"]
 script = ExtResource("1_j8k0g")
+
+[node name="Default" parent="." instance=ExtResource("2_p61xd")]
+position = Vector2(0, -56)
+
+[node name="Box" parent="Default" index="0"]
+button_group = ExtResource("3_s3vev")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Default" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Green" parent="." instance=ExtResource("2_p61xd")]
+position = Vector2(0, 72)
+
+[node name="Box" parent="Green" index="0"]
+button_group = ExtResource("3_s3vev")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Green" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Magenta" parent="." instance=ExtResource("2_p61xd")]
+position = Vector2(0, 208)
+
+[node name="Box" parent="Magenta" index="0"]
+button_group = ExtResource("3_s3vev")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Magenta" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="DefaultIcon" type="Sprite2D" parent="."]
+position = Vector2(474, 65)
+texture = ExtResource("4_ee2w5")
+
+[node name="GreenIcon" type="Sprite2D" parent="."]
+position = Vector2(473, 192)
+texture = ExtResource("5_dr25u")
+
+[node name="MagentaIcon" type="Sprite2D" parent="."]
+position = Vector2(473, 320)
+texture = ExtResource("6_nrrr0")
+
+[editable path="Default"]
+[editable path="Green"]
+[editable path="Magenta"]

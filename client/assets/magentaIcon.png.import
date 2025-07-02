@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://decv7wh72icp5"
-path="res://.godot/imported/A.svg-b749b371547aea2142471974d0d549e3.ctex"
+uid="uid://b37bl6gragfix"
+path="res://.godot/imported/magentaIcon.png-f634978756867a31ea537d234138ed2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/src/A.svg"
-dest_files=["res://.godot/imported/A.svg-b749b371547aea2142471974d0d549e3.ctex"]
+source_file="res://assets/magentaIcon.png"
+dest_files=["res://.godot/imported/magentaIcon.png-f634978756867a31ea537d234138ed2c.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

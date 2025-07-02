@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://70fnvrl4fp3v"]
 
 [ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_ra8jp"]
-[ext_resource type="Texture2D" uid="uid://bw7jk5025it5m" path="res://assets/src/RB.svg" id="2_ra8jp"]
+[ext_resource type="Texture2D" uid="uid://bt3fuc5w0is35" path="res://assets/RB.png" id="2_2q0gk"]
 
 [sub_resource type="Animation" id="Animation_lt4la"]
 length = 0.05
@@ -62,7 +62,7 @@ script = ExtResource("1_ra8jp")
 
 [node name="plate" type="Sprite2D" parent="."]
 position = Vector2(-80, 0)
-texture = ExtResource("2_ra8jp")
+texture = ExtResource("2_2q0gk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_lt4la"]
 [ext_resource type="Texture2D" uid="uid://boxsv8dql1bx7" path="res://assets/buttonShaft.png" id="1_vxja4"]
-[ext_resource type="Texture2D" uid="uid://dprxr3ha3sdlb" path="res://assets/src/button.svg" id="2_lt4la"]
 [ext_resource type="Texture2D" uid="uid://ck0re7m68wm7r" path="res://assets/A.png" id="3_4amfo"]
+[ext_resource type="Texture2D" uid="uid://f0ixy2prycd6" path="res://assets/button.svg" id="3_ch4dw"]
 
 [sub_resource type="Animation" id="Animation_lt4la"]
 length = 0.05
@@ -50,7 +50,7 @@ position = Vector2(0, 24)
 texture = ExtResource("1_vxja4")
 
 [node name="plate" type="Sprite2D" parent="."]
-texture = ExtResource("2_lt4la")
+texture = ExtResource("3_ch4dw")
 
 [node name="letter" type="Sprite2D" parent="plate"]
 position = Vector2(0, -8)
