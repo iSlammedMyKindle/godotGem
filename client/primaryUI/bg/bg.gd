@@ -1,4 +1,6 @@
 extends Node2D
+var bgIndex: Dictionary
+var currBg: String
 var colors = [
 	Color("#e06441"),
 	Color("#d6cb6b"),
@@ -13,6 +15,15 @@ var colorIndex = 0
 
 func _ready():
 	$background.modulate = colors[0];
+	currBg = "Default"
+	
+	bgIndex = {
+		'Default': $background,
+		'Green': $chromaGreen,
+		'Magenta': $chromaMagenta
+	}
+	
+	add_to_group('save')
 
 func bgAnim():
 	var tween = create_tween()
@@ -25,3 +36,25 @@ func bgAnim():
 
 func _on_timer_timeout() -> void:
 	bgAnim()
+
+# Save logic
+func receive_save(saveNode: Node, _status):
+	var currSavedBg = saveNode.get_val('bg', 'color', null)
+	
+	# Change the background
+	if not bgIndex.has(currSavedBg): return
+	
+	if not currSavedBg == "Default": $Timer.stop()
+	
+	bgIndex[currBg].visible = false
+	currBg = currSavedBg
+	bgIndex[currBg].visible = true
+
+func update_save_val(sec, key, val):
+	if not (sec == 'bg' and key == 'color'): return
+	
+	if val == 'Default' and $Timer.is_stopped(): $Timer.start()
+	
+	bgIndex[currBg].visible = false
+	currBg = val
+	bgIndex[currBg].visible = true

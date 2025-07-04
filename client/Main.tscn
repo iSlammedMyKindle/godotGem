@@ -220,7 +220,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Rylan" type="Sprite2D" parent="HUD"]
 visible = false
-position = Vector2(592, 520)
+position = Vector2(605, 655)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4")
 centered = false
@@ -259,7 +259,8 @@ offset_right = 1280.0
 offset_bottom = 800.0
 color = Color(0, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="blinderAnimation" type="AnimationPlayer" parent="Blinder"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_03owx")
 }

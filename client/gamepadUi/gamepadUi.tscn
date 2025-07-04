@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc0keobxw4aqk"]
+[gd_scene load_steps=13 format=3 uid="uid://bc0keobxw4aqk"]
 
 [ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi/gamepadUi.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://gamepadUi/buttonsAndSticks/button.tscn" id="2_u1mn1"]
 [ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://gamepadUi/buttonsAndSticks/sideButtonR.tscn" id="3_7yqh2"]
 [ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://gamepadUi/buttonsAndSticks/sideButtonL.tscn" id="3_tdk0p"]
 [ext_resource type="Texture2D" uid="uid://b7avr0e5dua5p" path="res://assets/controllerHousing.png" id="4_6thga"]
+[ext_resource type="Texture2D" uid="uid://3247mg2jwp0e" path="res://assets/controllerHousingShadow.png" id="4_bw2s0"]
+[ext_resource type="Script" uid="uid://cdxeicuaronjw" path="res://gamepadUi/controller_shadow.gd" id="5_021lf"]
 [ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://gamepadUi/buttonsAndSticks/dPad.tscn" id="5_rrs3a"]
 [ext_resource type="PackedScene" uid="uid://cnkrcitq2d0ui" path="res://gamepadUi/buttonsAndSticks/joystick.tscn" id="6_ftokp"]
 [ext_resource type="PackedScene" uid="uid://dvibaeomn4a2i" path="res://gamepadUi/buttonsAndSticks/shaft.tscn" id="6_t6gqd"]
@@ -21,6 +23,12 @@ position = Vector2(424, 77)
 
 [node name="RB" parent="." instance=ExtResource("3_7yqh2")]
 position = Vector2(696, 69)
+
+[node name="controllerShadow" type="Sprite2D" parent="."]
+position = Vector2(560, 365)
+scale = Vector2(0.857882, 0.865809)
+texture = ExtResource("4_bw2s0")
+script = ExtResource("5_021lf")
 
 [node name="controllerShell" type="Sprite2D" parent="."]
 position = Vector2(560, 365)

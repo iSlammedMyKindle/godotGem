@@ -12,6 +12,16 @@ position = Vector2(632, 400)
 scale = Vector2(0.737662, 0.737662)
 texture = ExtResource("1_ay5w6")
 
+[node name="chromaGreen" type="Polygon2D" parent="."]
+visible = false
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 800, 0, 800)
+
+[node name="chromaMagenta" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.943358, 0.000827271, 0.959374, 1)
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 800, 0, 800)
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true

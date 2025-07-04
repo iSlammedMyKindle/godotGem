@@ -1,6 +1,6 @@
 extends Sprite2D
 
-var kCode = [12, 12, 13, 13, 14, 15, 14, 15, 1, 0, 11]
+var kCode = [11, 11, 12, 12, 13, 14, 13, 14, 1, 0, 6]
 var correctIndex = 0
 
 func _input(evt):
@@ -9,7 +9,7 @@ func _input(evt):
 		if evt.position.x >= position.x and evt.position.x < (position.x + position.x) and evt.position.y > position.y and evt.position.y < (position.y + position.y):
 			visible = false
 	elif evt is InputEventJoypadButton and evt.pressed:
-		# print(str(correctIndex) + " " + str(evt.button_index) + " " + str(kCode[correctIndex]) + " " + str(kCode[correctIndex] == evt.button_index))
+		print(str(correctIndex) + " " + str(evt.button_index) + " " + str(kCode[correctIndex]) + " " + str(kCode[correctIndex] == evt.button_index))
 		if kCode[correctIndex] == evt.button_index:
 			if correctIndex == kCode.size()-1:
 				$AnimationPlayer.stop()

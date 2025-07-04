@@ -66,8 +66,8 @@ func _process(_delta):
 		connected = true
 		if connecting:
 			connecting = false;
-			$connectionStatus.text = "connected to " + $urlToConnect.text;
-			config.set_val("general", "ip", $urlToConnect.text)
+			$HUD/connectionStatus.text = "connected to " + $HUD/urlToConnect.text;
+			config.set_val("general", "ip", $HUD/urlToConnect.text)
 	elif state == WebSocketPeer.STATE_CLOSED:
 		connected = false
 
@@ -119,27 +119,27 @@ func _on_data():
 func _on_Button_pressed():
 	if connected:
 		client.close()
-		$Button.text = "Connect!"
-		$connectionStatus.text = "Connect to this address:"
+		$HUD/Button.text = "Connect!"
+		$HUD/connectionStatus.text = "Connect to this address:"
 	else:
-		$Button.text = "Disconnect"
-		$connectionStatus.text = "Connecting..."
-		print($urlToConnect.text)
+		$HUD/Button.text = "Disconnect"
+		$HUD/connectionStatus.text = "Connecting..."
+		print($HUD/urlToConnect.text)
 
-		var status = client.connect_to_url('ws://' + $urlToConnect.text + ':9090')
+		var status = client.connect_to_url('ws://' + $HUD/urlToConnect.text + ':9090')
 		
 		connecting = true
 		if status != OK:
-			$connectionStatus.text = "Unable to connect: " + status
+			$HUD/connectionStatus.text = "Unable to connect: " + str(status)
 			connecting = false
 
 func _on_BlinderBtn_pressed():
-	$AnimationPlayer.play('fade')
+	$Blinder/blinderAnimation.play('fade')
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and $Blinder.visible:
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play_backwards('fade')
+		$Blinder/blinderAnimation.stop()
+		$Blinder/blinderAnimation.play_backwards('fade')
 		return
 	for item in evtList.keys():
 		if connected:
