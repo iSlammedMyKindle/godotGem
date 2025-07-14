@@ -12,3 +12,6 @@ func press(_btnname):
 func release(_btnname):
 	$AnimationPlayer.stop();
 	$AnimationPlayer.play_backwards('press');
+
+func sound():
+	$audio.play()

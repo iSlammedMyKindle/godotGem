@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuq5w8la4e1uu"]
+[gd_scene load_steps=9 format=3 uid="uid://cuq5w8la4e1uu"]
 
 [ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_63xhb"]
 [ext_resource type="Texture2D" uid="uid://dktf6ae5q5y6m" path="res://assets/LB.png" id="2_cvfum"]
+[ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="3_ue0jk"]
 
 [sub_resource type="Animation" id="Animation_lt4la"]
 length = 0.05
@@ -57,6 +58,11 @@ _data = {
 &"release": SubResource("Animation_siywy")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_x2vv1"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("3_ue0jk")
+
 [node name="Button" type="Node2D"]
 script = ExtResource("1_63xhb")
 
@@ -68,3 +74,8 @@ texture = ExtResource("2_cvfum")
 libraries = {
 &"": SubResource("AnimationLibrary_4amfo")
 }
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_x2vv1")
+volume_db = -5.0
+pitch_scale = 1.5

@@ -1,9 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnkrcitq2d0ui"]
+[gd_scene load_steps=10 format=3 uid="uid://cnkrcitq2d0ui"]
 
 [ext_resource type="Script" uid="uid://q3iwstja5qp2" path="res://gamepadUi/buttonsAndSticks/joystick.gd" id="1_413m4"]
 [ext_resource type="Texture2D" uid="uid://cbnb4acxmhlcf" path="res://assets/joystickBottom.png" id="1_dm1l1"]
 [ext_resource type="Texture2D" uid="uid://b6uj6d8d8v741" path="res://assets/joystickTop.png" id="2_413m4"]
 [ext_resource type="Texture2D" uid="uid://lyvuuv3lfb6d" path="res://assets/joystickShaft.png" id="2_jhikm"]
+[ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="5_fivjq"]
+
+[sub_resource type="Animation" id="Animation_e821k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_jhikm"]
 resource_name = "press"
@@ -21,26 +37,16 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 20)]
 }
 
-[sub_resource type="Animation" id="Animation_e821k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("container:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dbkwe"]
 _data = {
 &"RESET": SubResource("Animation_e821k"),
 &"press": SubResource("Animation_jhikm")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_54q5s"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("5_fivjq")
 
 [node name="Joystick" type="Node2D"]
 script = ExtResource("1_413m4")
@@ -61,3 +67,8 @@ texture = ExtResource("2_413m4")
 libraries = {
 &"": SubResource("AnimationLibrary_dbkwe")
 }
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_54q5s")
+volume_db = -5.0
+pitch_scale = 0.5

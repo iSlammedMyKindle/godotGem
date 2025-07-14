@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bc0keobxw4aqk"]
+[gd_scene load_steps=16 format=3 uid="uid://bc0keobxw4aqk"]
 
 [ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi/gamepadUi.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://gamepadUi/buttonsAndSticks/button.tscn" id="2_u1mn1"]
@@ -11,8 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://cnkrcitq2d0ui" path="res://gamepadUi/buttonsAndSticks/joystick.tscn" id="6_ftokp"]
 [ext_resource type="PackedScene" uid="uid://dvibaeomn4a2i" path="res://gamepadUi/buttonsAndSticks/shaft.tscn" id="6_t6gqd"]
 [ext_resource type="PackedScene" uid="uid://rs45mxwjhxde" path="res://gamepadUi/buttonsAndSticks/trigger.tscn" id="8_6thga"]
+[ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="12_jcj5b"]
+[ext_resource type="Script" uid="uid://bjawm7wjw32cq" path="res://gamepadUi/dpadAudio.gd" id="13_bl1fc"]
 
 [sub_resource type="World3D" id="World3D_rrs3a"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mvmqu"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("12_jcj5b")
 
 [node name="gamepadUI" type="Node2D"]
 position = Vector2(112, -5)
@@ -97,3 +104,7 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="DPad" parent="dpadVPContainer/dpadVP" instance=ExtResource("5_rrs3a")]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="dpadVPContainer"]
+stream = SubResource("AudioStreamRandomizer_mvmqu")
+script = ExtResource("13_bl1fc")

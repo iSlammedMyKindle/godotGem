@@ -27,3 +27,6 @@ func press(_stick):
 func release(_stick):
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play_backwards('press')
+
+func sound():
+	$audio.play()

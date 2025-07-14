@@ -9,7 +9,7 @@ func _input(evt):
 		if evt.position.x >= position.x and evt.position.x < (position.x + position.x) and evt.position.y > position.y and evt.position.y < (position.y + position.y):
 			visible = false
 	elif evt is InputEventJoypadButton and evt.pressed:
-		print(str(correctIndex) + " " + str(evt.button_index) + " " + str(kCode[correctIndex]) + " " + str(kCode[correctIndex] == evt.button_index))
+		#print(str(correctIndex) + " " + str(evt.button_index) + " " + str(kCode[correctIndex]) + " " + str(kCode[correctIndex] == evt.button_index))
 		if kCode[correctIndex] == evt.button_index:
 			if correctIndex == kCode.size()-1:
 				$AnimationPlayer.stop()
