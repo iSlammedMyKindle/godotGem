@@ -7,7 +7,7 @@
    viewBox="0 0 60.854165 60.854166"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    sodipodi:docname="buttonShaft.svg"
    inkscape:export-filename="../buttonShaft.png"
    inkscape:export-xdpi="96"
@@ -18,7 +18,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
-     pagecolor="#ffffff"
+     pagecolor="#000000"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:showpageshadow="2"
@@ -56,7 +56,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <circle
-       style="fill:#373737;stroke-width:10.0463;stroke-linecap:round;stroke-linejoin:round;filter:url(#filter1);fill-opacity:1"
+       style="fill:#ffffff;stroke-width:10.0463;stroke-linecap:round;stroke-linejoin:round;filter:url(#filter1);fill-opacity:1"
        id="path1"
        cx="30.427084"
        cy="30.427084"

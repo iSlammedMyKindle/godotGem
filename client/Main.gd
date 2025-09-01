@@ -38,11 +38,8 @@ var previousStickValues = [
 var previousTriggerValues = [0, 0]
 
 # Save data loads from [root] -> saveLogic
-func receive_save(save: Node, status: int):
+func receive_save(save: Node, _status: int):
 	config = save
-	
-	if status == OK and config.get_val("general", "ip") != null:
-		$urlToConnect.text = config.get_val("general", "ip")
 	
 	if config.get_val("general", "hideGithubSplash") == null:
 		$firstTimeRun.visible = true

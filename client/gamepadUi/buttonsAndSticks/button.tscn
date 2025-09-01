@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cybf6napyai44"]
 
-[ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_lt4la"]
+[ext_resource type="Script" uid="uid://7xsf8ifpcqt7" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_lt4la"]
 [ext_resource type="Texture2D" uid="uid://boxsv8dql1bx7" path="res://assets/buttonShaft.png" id="1_vxja4"]
 [ext_resource type="Texture2D" uid="uid://ck0re7m68wm7r" path="res://assets/A.png" id="3_4amfo"]
 [ext_resource type="Texture2D" uid="uid://f0ixy2prycd6" path="res://assets/button.svg" id="3_ch4dw"]
@@ -52,6 +52,7 @@ stream_0/stream = ExtResource("5_v1ut2")
 script = ExtResource("1_lt4la")
 
 [node name="shaft" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 1)
 position = Vector2(0, 24)
 texture = ExtResource("1_vxja4")
 
@@ -71,3 +72,11 @@ libraries = {
 stream = SubResource("AudioStreamRandomizer_v1ut2")
 volume_db = -5.0
 pitch_scale = 2.0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -104.0
+offset_top = -100.0
+offset_right = 104.0
+offset_bottom = 128.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

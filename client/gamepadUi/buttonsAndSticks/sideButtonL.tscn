@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://70fnvrl4fp3v"]
 
-[ext_resource type="Script" uid="uid://dkroq6lcsjfnl" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_ra8jp"]
+[ext_resource type="Script" uid="uid://7xsf8ifpcqt7" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_ra8jp"]
 [ext_resource type="Texture2D" uid="uid://bt3fuc5w0is35" path="res://assets/RB.png" id="2_2q0gk"]
 [ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="3_ef4b1"]
 
