@@ -8,5 +8,5 @@ func _ready():
 	add_to_group('Left')
 	add_to_group('Right')
 
-func sound():
+func press(_btnname):
 	play()

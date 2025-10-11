@@ -79,3 +79,5 @@ libraries = {
 stream = SubResource("AudioStreamRandomizer_x2vv1")
 volume_db = -5.0
 pitch_scale = 1.5
+
+[node name="turboTimer" type="Timer" parent="."]

@@ -69,10 +69,8 @@ func _process(delta: float):
 func press(_stick):
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play('press')
+	$audio.play()
 
 func release(_stick):
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play_backwards('press')
-
-func sound():
-	$audio.play()
