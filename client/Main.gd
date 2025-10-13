@@ -140,9 +140,9 @@ func _input(event):
 		$Blinder/blinderAnimation.stop()
 		$Blinder/blinderAnimation.play_backwards('fade')
 
-func toggle(btn: String, press: bool):
+func toggle(_btn: String, press: bool):
 	
-	print('btn ', btn, 'press ', str(press))
+	#print('btn ', _btn, 'press ', str(press))
 	
 	if not connected: return
 	

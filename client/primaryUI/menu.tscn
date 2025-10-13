@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpgcb13r8ekpy"]
+[gd_scene load_steps=12 format=3 uid="uid://dpgcb13r8ekpy"]
 
 [ext_resource type="Script" uid="uid://bvg0hy76u45cs" path="res://primaryUI/menu.gd" id="1_1um31"]
 [ext_resource type="Texture2D" uid="uid://bg07parvm3057" path="res://assets/uiPanel.png" id="1_5xnov"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dtx0a00ko6v14" path="res://primaryUI/panes/General.tscn" id="4_g8mnm"]
 [ext_resource type="Texture2D" uid="uid://c00m3uw5ed75r" path="res://assets/docs.png" id="5_d73ic"]
 [ext_resource type="PackedScene" uid="uid://drug6sdug2vs" path="res://primaryUI/panes/bg.tscn" id="5_f36gn"]
+[ext_resource type="PackedScene" uid="uid://blewrsug707d6" path="res://primaryUI/panes/other.tscn" id="6_1eps8"]
 
 [sub_resource type="SystemFont" id="SystemFont_h7vav"]
 font_names = PackedStringArray("Arial Black")
@@ -62,6 +63,9 @@ position = Vector2(-336, -264)
 
 [node name="Bg" parent="pane" instance=ExtResource("5_f36gn")]
 position = Vector2(-368, -128)
+
+[node name="Other" parent="pane" instance=ExtResource("6_1eps8")]
+position = Vector2(-336, -448)
 
 [node name="githubPage" type="Button" parent="."]
 offset_left = 1040.0
