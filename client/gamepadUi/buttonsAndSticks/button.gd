@@ -33,16 +33,20 @@ func update_save_val(section: String, key: String, val):
 # press / release vs press_internal / release_internal
 # press / release is a direct input event coming from gamepadUI, while the _internal counterparts are for here, so that turbo is functional
 func press(_btnname):
-	if turboActivated and turboMode > 0:
-		$turboTimer.start(shaftColors[shaftColors.keys()[turboMode]])
+	if turboMode > 0:
+		var time = shaftColors[shaftColors.keys()[turboMode]]
+		$turboTimer.start(time)
 	else: press_internal()
 
 func press_internal():
 	$AnimationPlayer.stop();
 	$AnimationPlayer.play('press');
+	# Ultimately this goes back to Main.gd
 	if buttonSounds:
 		sound()
-	# Ultimately this goes back to Main.gd
+	if turboActivated and turboMode > 0:
+		var time = shaftColors[shaftColors.keys()[turboMode]]
+		Input.start_joy_vibration(1, 0, 1, .05)
 	get_tree().call_group('btnPresses', 'toggle', name, true) # Scope, all buttons recieve this
 
 func release(_btnname):
@@ -60,8 +64,6 @@ func sound():
 	$audio.play()
 
 func _on_texture_button_pressed() -> void:
-	
-	if not turboActivated: return
 	
 	# Change the color based on index. If the index is too big, default to the original one
 	turboMode = turboMode + 1
