@@ -46,7 +46,7 @@ func press_internal():
 		sound()
 	if turboActivated and turboMode > 0:
 		var time = shaftColors[shaftColors.keys()[turboMode]]
-		Input.start_joy_vibration(1, 0, 1, .05)
+		Input.start_joy_vibration(0, 0, 1, .05)
 	get_tree().call_group('btnPresses', 'toggle', name, true) # Scope, all buttons recieve this
 
 func release(_btnname):
