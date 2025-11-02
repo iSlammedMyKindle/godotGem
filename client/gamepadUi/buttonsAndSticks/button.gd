@@ -6,12 +6,7 @@ var turboActivated = false
 var shaftTween
 var originalScale
 var buttonSounds = false
-var shaftColors = {
-	'333333': -1,
-	'0da399': .2,
-	'fbff00': .1,
-	'ffaa00': .05
-}
+var shaftColors = {}
 
 
 func _ready():
@@ -19,6 +14,19 @@ func _ready():
 	add_to_group('save')
 	if get_node_or_null('plate/letter') != null:
 		$plate.get_node('letter').texture = load('res://assets/' + self.name + '.png')
+	
+	if name == 'LB' or name == 'RB':
+		shaftColors['00000000'] = -1
+	else: shaftColors['333333'] = -1
+	
+	var restOfShaftColors = {
+		'0da399': .2,
+		'fbff00': .1,
+		'ffaa00': .05
+	}
+	
+	for key in restOfShaftColors.keys():
+		shaftColors[key] = restOfShaftColors[key]
 		
 func receive_save(save: Node, _status: int):
 	saveObj = save

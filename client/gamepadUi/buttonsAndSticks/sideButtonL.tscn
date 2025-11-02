@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://70fnvrl4fp3v"]
+[gd_scene load_steps=11 format=3 uid="uid://70fnvrl4fp3v"]
 
 [ext_resource type="Script" uid="uid://7xsf8ifpcqt7" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_ra8jp"]
 [ext_resource type="Texture2D" uid="uid://bt3fuc5w0is35" path="res://assets/RB.png" id="2_2q0gk"]
 [ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="3_ef4b1"]
+[ext_resource type="Script" uid="uid://cw8vcrqmw6mue" path="res://gamepadUi/buttonsAndSticks/turbo_timer.gd" id="4_4fxlj"]
+[ext_resource type="Texture2D" uid="uid://boxsv8dql1bx7" path="res://assets/buttonShaft.png" id="4_eh4ag"]
 
 [sub_resource type="Animation" id="Animation_lt4la"]
 length = 0.05
@@ -81,3 +83,18 @@ volume_db = -5.0
 pitch_scale = 1.5
 
 [node name="turboTimer" type="Timer" parent="."]
+script = ExtResource("4_4fxlj")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -192.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 40.0
+
+[node name="shaft" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
+scale = Vector2(0.09347826, 0.09347826)
+texture = ExtResource("4_eh4ag")
+
+[connection signal="timeout" from="turboTimer" to="turboTimer" method="_on_timeout"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
