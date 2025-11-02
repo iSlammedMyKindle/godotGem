@@ -5,6 +5,16 @@ var prev = 0
 var volume = 0
 var save: Node
 var buttonSounds = false
+var turboActivated
+var turboMode = 0
+var originalScale
+var shaftTween
+var shaftColors = {
+	'333333': -1,
+	'0da399': .2,
+	'fbff00': .1,
+	'ffaa00': .05
+}
 
 func _ready():
 	prefix = 'L' if name == 'SL' else 'R'
@@ -15,10 +25,12 @@ func _ready():
 func receive_save(node, _status):
 	save = node
 	buttonSounds = save.get_val('general', 'buttonsounds', false)
+	turboActivated = save.get_val('general', 'turbofeedback', false)
 	
 func update_save_val(sec, key, val):
 	if sec == 'general' and key == 'buttonsounds':
 		buttonSounds = val
+	if key == 'turbofeedback': turboActivated = val
 # End save boilerplate
 
 func _process(delta: float):
@@ -67,10 +79,47 @@ func _process(delta: float):
 		prev = newVal
 
 func press(_stick):
+	if turboMode > 0:
+		var time = shaftColors[shaftColors.keys()[turboMode]]
+		$turboTimer.start(time)
+	else: press_internal()
+
+func press_internal():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play('press')
 	$audio.play()
+	if turboMode > 0:
+		Input.start_joy_vibration(0, 0, 1, .05)
+	get_tree().call_group('btnPresses', 'toggle', name, true)
 
 func release(_stick):
+	if not $turboTimer.paused:
+		$turboTimer.stop()
+		release_internal()
+	else: release_internal()
+
+func release_internal():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play_backwards('press')
+	get_tree().call_group('btnPresses', 'toggle', name, false)
+
+func _on_turbo_toggle_button_pressed():
+	# Change the color based on index. If the index is too big, default to the original one
+	turboMode = turboMode + 1
+	if turboMode > shaftColors.keys().size() -1:
+		turboMode = 0
+	
+	$shaft.modulate = Color(shaftColors.keys()[turboMode])
+	
+	if originalScale == null:
+		originalScale = $shaft.scale
+
+	$shaft.scale = Vector2(originalScale.x * 1.3, originalScale.y * 1.3)
+	
+	if shaftTween != null and shaftTween.is_running():
+		shaftTween.stop()
+	
+	shaftTween = create_tween()
+	shaftTween.tween_property($shaft, 'scale', originalScale, .15)
+	shaftTween.set_trans(Tween.TRANS_BOUNCE)
+	shaftTween.play()

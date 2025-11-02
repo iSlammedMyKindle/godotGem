@@ -20,3 +20,11 @@ script = ExtResource("1_7umuv")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, -1.19975)
 mesh = SubResource("QuadMesh_hc0pe")
+
+[node name="timerU" type="Timer" parent="."]
+
+[node name="timerR" type="Timer" parent="."]
+
+[node name="timerD" type="Timer" parent="."]
+
+[node name="timerL" type="Timer" parent="."]

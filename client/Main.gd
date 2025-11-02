@@ -140,15 +140,15 @@ func _input(event):
 		$Blinder/blinderAnimation.stop()
 		$Blinder/blinderAnimation.play_backwards('fade')
 
-func toggle(_btn: String, press: bool):
+func toggle(btn: String, press: bool):
 	
-	#print('btn ', _btn, 'press ', str(press))
+	#print('btn ', btn, 'press ', str(press))
 	
 	if not connected: return
 	
 	var controllerBuffer = PackedByteArray()
 	controllerBuffer.push_back(0) #This byte is for the controller number (P1, P2, etc)
-	controllerBuffer.push_back(evtList[str]) # controller button index
+	controllerBuffer.push_back(evtList[btn]) # controller button index
 	controllerBuffer.push_back(255 if press else 0) # Specifies input strength. If this is a button, just do either 0, or 255
 
 	client.send(controllerBuffer)

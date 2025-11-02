@@ -64,7 +64,6 @@ func sound():
 	$audio.play()
 
 func _on_texture_button_pressed() -> void:
-	
 	# Change the color based on index. If the index is too big, default to the original one
 	turboMode = turboMode + 1
 	if turboMode > shaftColors.keys().size() -1:

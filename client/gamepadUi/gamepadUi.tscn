@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bc0keobxw4aqk"]
+[gd_scene load_steps=17 format=3 uid="uid://bc0keobxw4aqk"]
 
 [ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi/gamepadUi.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://gamepadUi/buttonsAndSticks/button.tscn" id="2_u1mn1"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rs45mxwjhxde" path="res://gamepadUi/buttonsAndSticks/trigger.tscn" id="8_6thga"]
 [ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="12_jcj5b"]
 [ext_resource type="Script" uid="uid://bjawm7wjw32cq" path="res://gamepadUi/dpadAudio.gd" id="13_bl1fc"]
+[ext_resource type="Script" uid="uid://6g2iyj4u8ey5" path="res://gamepadUi/d_pad_turbo_texture_btn.gd" id="14_bl1fc"]
 
 [sub_resource type="World3D" id="World3D_rrs3a"]
 
@@ -70,17 +71,9 @@ scale = Vector2(0.360002, 0.360002)
 position = Vector2(808, 173)
 scale = Vector2(0.360002, 0.360002)
 
-[node name="SL" parent="." instance=ExtResource("6_ftokp")]
-position = Vector2(336, 205)
-scale = Vector2(0.4, 0.4)
-
 [node name="SR" parent="." instance=ExtResource("6_ftokp")]
 position = Vector2(696, 381)
 scale = Vector2(0.4, 0.4)
-
-[node name="Shaft" parent="." instance=ExtResource("6_t6gqd")]
-position = Vector2(412, 370)
-scale = Vector2(0.26, 0.26)
 
 [node name="TrigR" parent="." instance=ExtResource("8_6thga")]
 position = Vector2(976, 85)
@@ -89,6 +82,10 @@ scale = Vector2(0.292573, 0.292573)
 [node name="TrigL" parent="." instance=ExtResource("8_6thga")]
 position = Vector2(144, 85)
 scale = Vector2(0.292573, 0.292573)
+
+[node name="Shaft" parent="." instance=ExtResource("6_t6gqd")]
+position = Vector2(412, 370)
+scale = Vector2(0.26, 0.26)
 
 [node name="dpadVPContainer" type="SubViewportContainer" parent="."]
 offset_left = 240.0
@@ -108,3 +105,45 @@ render_target_update_mode = 4
 [node name="audio" type="AudioStreamPlayer2D" parent="dpadVPContainer"]
 stream = SubResource("AudioStreamRandomizer_mvmqu")
 script = ExtResource("13_bl1fc")
+
+[node name="DPadTurboOverlay" type="Node2D" parent="."]
+editor_description = "These are texture buttons in order to make toggling turbo mode possible on the DPad.
+
+This will involve talking to the dpad component indirectly in order to change shadow colors"
+
+[node name="Up" type="TextureButton" parent="DPadTurboOverlay"]
+offset_left = 385.0
+offset_top = 291.0
+offset_right = 437.0
+offset_bottom = 348.0
+script = ExtResource("14_bl1fc")
+
+[node name="Right" type="TextureButton" parent="DPadTurboOverlay"]
+offset_left = 436.0
+offset_top = 344.0
+offset_right = 490.0
+offset_bottom = 396.0
+script = ExtResource("14_bl1fc")
+
+[node name="Down" type="TextureButton" parent="DPadTurboOverlay"]
+offset_left = 385.0
+offset_top = 392.0
+offset_right = 437.0
+offset_bottom = 449.0
+script = ExtResource("14_bl1fc")
+
+[node name="Left" type="TextureButton" parent="DPadTurboOverlay"]
+offset_left = 332.0
+offset_top = 343.0
+offset_right = 386.0
+offset_bottom = 395.0
+script = ExtResource("14_bl1fc")
+
+[node name="SL" parent="." instance=ExtResource("6_ftokp")]
+position = Vector2(336, 205)
+scale = Vector2(0.4, 0.4)
+
+[connection signal="pressed" from="DPadTurboOverlay/Up" to="DPadTurboOverlay/Up" method="_on_pressed"]
+[connection signal="pressed" from="DPadTurboOverlay/Right" to="DPadTurboOverlay/Right" method="_on_pressed"]
+[connection signal="pressed" from="DPadTurboOverlay/Down" to="DPadTurboOverlay/Down" method="_on_pressed"]
+[connection signal="pressed" from="DPadTurboOverlay/Left" to="DPadTurboOverlay/Left" method="_on_pressed"]

@@ -1,5 +1,17 @@
 extends Node2D
 
+var shaftColors = [ '333333', '0da399', 'fbff00', 'e16f00' ]
+var originalScale
+var shaftTween
+var tweenedObj
+
+var turboStatuses = {
+	"Up": 0,
+	"Right": 0,
+	"Down": 0,
+	"Left": 0,
+}
+
 var tweens = {
 	"Up" : null,
 	"Right" : null,
@@ -61,5 +73,29 @@ func release(udlr):
 		
 	var currTween = tweens[udlr] as Tween
 	currTween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	currTween.tween_property(get_node(udlr), "modulate", Color(0, 0, 0, 1), .200)
+	currTween.tween_property(get_node(udlr), "modulate", Color(shaftColors[turboStatuses[udlr]]), .200)
 	currTween.play()
+
+func setTurbo(btnName):
+	# Increase the index if we're still in margin
+	turboStatuses[btnName] = turboStatuses[btnName] + 1
+	if turboStatuses[btnName] > shaftColors.size() -1:
+		turboStatuses[btnName] = 0
+	
+	var targetNode = get_node('./'+btnName)
+	targetNode.modulate = Color(shaftColors[turboStatuses[btnName]])
+	
+	if originalScale == null:
+		originalScale = targetNode.scale
+
+	targetNode.scale = Vector2(originalScale.x * 1.3, originalScale.y * 1.3)
+	
+	if shaftTween != null and shaftTween.is_running():
+		shaftTween.stop()
+		tweenedObj.scale = originalScale
+	
+	tweenedObj = targetNode
+	shaftTween = create_tween()
+	shaftTween.tween_property(targetNode, 'scale', originalScale, .15)
+	shaftTween.set_trans(Tween.TRANS_BOUNCE)
+	shaftTween.play()

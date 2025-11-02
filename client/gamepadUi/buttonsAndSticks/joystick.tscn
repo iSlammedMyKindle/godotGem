@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnkrcitq2d0ui"]
+[gd_scene load_steps=12 format=3 uid="uid://cnkrcitq2d0ui"]
 
 [ext_resource type="Script" uid="uid://q3iwstja5qp2" path="res://gamepadUi/buttonsAndSticks/joystick.gd" id="1_413m4"]
 [ext_resource type="Texture2D" uid="uid://cbnb4acxmhlcf" path="res://assets/joystickBottom.png" id="1_dm1l1"]
 [ext_resource type="Texture2D" uid="uid://b6uj6d8d8v741" path="res://assets/joystickTop.png" id="2_413m4"]
-[ext_resource type="Texture2D" uid="uid://lyvuuv3lfb6d" path="res://assets/joystickShaft.png" id="2_jhikm"]
+[ext_resource type="Texture2D" uid="uid://b1bhu0lhifpda" path="res://assets/joystickShaft2.png" id="2_qlr0a"]
 [ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="5_fivjq"]
 [ext_resource type="AudioStream" uid="uid://chfem5h610y8h" path="res://assets/straw.mp3" id="6_fivjq"]
+[ext_resource type="Script" uid="uid://cw8vcrqmw6mue" path="res://gamepadUi/buttonsAndSticks/turbo_timer.gd" id="7_qlr0a"]
 
 [sub_resource type="Animation" id="Animation_e821k"]
 length = 0.001
@@ -53,8 +54,9 @@ stream_0/stream = ExtResource("5_fivjq")
 script = ExtResource("1_413m4")
 
 [node name="shaft" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 1)
 position = Vector2(0, 22)
-texture = ExtResource("2_jhikm")
+texture = ExtResource("2_qlr0a")
 
 [node name="container" type="Node2D" parent="."]
 
@@ -63,6 +65,12 @@ texture = ExtResource("1_dm1l1")
 
 [node name="top" type="Sprite2D" parent="container/bottom"]
 texture = ExtResource("2_413m4")
+
+[node name="turboToggleButton" type="TextureButton" parent="."]
+offset_left = -136.0
+offset_top = -136.0
+offset_right = 136.0
+offset_bottom = 144.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -78,3 +86,9 @@ pitch_scale = 0.5
 stream = ExtResource("6_fivjq")
 pitch_scale = 0.58
 bus = &"stickBus"
+
+[node name="turboTimer" type="Timer" parent="."]
+script = ExtResource("7_qlr0a")
+
+[connection signal="pressed" from="turboToggleButton" to="." method="_on_turbo_toggle_button_pressed"]
+[connection signal="timeout" from="turboTimer" to="turboTimer" method="_on_timeout"]
