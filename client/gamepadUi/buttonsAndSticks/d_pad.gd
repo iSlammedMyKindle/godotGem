@@ -56,7 +56,7 @@ func rock():
 	var y = -.25 if presses['Left'] else .10 if presses['Right'] else 0.0
 	var x = -.25 if presses['Up'] else .10 if presses['Down'] else 0.0
 	
-	pressTween.tween_property($MeshInstance3D, "rotation", Vector3(x, y, 0), .1)
+	pressTween.tween_property($dpadButtonContainer, "rotation", Vector3(x, y, 0), .1)
 	pressTween.play()
 
 func press(btnname):
@@ -71,6 +71,7 @@ func press_internal(udlr: String):
 	presses[udlr] = true
 	rock()
 	get_tree().call_group('dpadAudio', 'playSound')
+	get_tree().call_group('heatMap', 'heatMapPress', udlr)
 
 func release(btnname):
 	var timerNode = get_node('timer' + (btnname[0]))

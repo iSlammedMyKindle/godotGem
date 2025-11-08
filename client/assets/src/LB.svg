@@ -7,9 +7,9 @@
    viewBox="0 0 66.145831 52.916666"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    sodipodi:docname="LB.svg"
-   inkscape:export-filename="../src/LB.png"
+   inkscape:export-filename="../LB.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -18,7 +18,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
-     pagecolor="#ffffff"
+     pagecolor="#707070"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:showpageshadow="2"
@@ -27,10 +27,10 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="2.0952152"
-     inkscape:cx="109.05801"
-     inkscape:cy="80.182694"
-     inkscape:window-width="2556"
-     inkscape:window-height="1386"
+     inkscape:cx="109.29665"
+     inkscape:cy="79.944055"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -43,7 +43,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#2f2f2f;fill-opacity:1;stroke:none;stroke-width:1.75846;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       style="fill:#d1d1d1;fill-opacity:1;stroke:none;stroke-width:1.75846;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
        d="m 62.861375,37.629203 -4.7635,-10.43183 c -10.72489,-8.26696 -25.06118,-10.63441 -39.281787,-11.90991 l -15.5316298,7.3131 8.2199898,12.64019 12.14842,2.078061 z"
        id="path1442-3"
        sodipodi:nodetypes="ccccccc" />

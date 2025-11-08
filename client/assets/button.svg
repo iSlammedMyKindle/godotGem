@@ -7,7 +7,7 @@
    viewBox="0 0 52.916665 52.916667"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    sodipodi:docname="button.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -15,7 +15,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
-     pagecolor="#ffffff"
+     pagecolor="#000000"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:showpageshadow="2"
@@ -23,11 +23,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.3769531"
-     inkscape:cx="29.412766"
-     inkscape:cy="131.08652"
-     inkscape:window-width="1805"
-     inkscape:window-height="1131"
+     inkscape:zoom="3.8946115"
+     inkscape:cx="154.05901"
+     inkscape:cy="104.11822"
+     inkscape:window-width="2560"
+     inkscape:window-height="1368"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -39,7 +39,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <circle
-       style="fill:#212121;fill-opacity:1;stroke:none;stroke-width:11.6769;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#dedede;fill-opacity:1;stroke:none;stroke-width:11.6769;stroke-linecap:round;stroke-linejoin:round"
        id="path1"
        cx="26.458334"
        cy="26.458332"

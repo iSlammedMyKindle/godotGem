@@ -1,14 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxycnuef1a7un"]
+[gd_scene load_steps=15 format=3 uid="uid://dxycnuef1a7un"]
 
 [ext_resource type="Script" uid="uid://i6px0psovceg" path="res://gamepadUi/buttonsAndSticks/d_pad.gd" id="1_7umuv"]
-[ext_resource type="Texture2D" uid="uid://dybj0ri8m1knf" path="res://assets/dpad.png" id="2_7umuv"]
+[ext_resource type="Texture2D" uid="uid://cm448p6c2v6mu" path="res://assets/dpadU.png" id="2_s3sqd"]
+[ext_resource type="Texture2D" uid="uid://bye51jhjecb6l" path="res://assets/dpadR.png" id="3_lktly"]
+[ext_resource type="Script" uid="uid://dlnqnahdoumoo" path="res://gamepadUi/buttonsAndSticks/dpad_direction.gd" id="3_r8w13"]
+[ext_resource type="Texture2D" uid="uid://buolmr7nu2l4c" path="res://assets/dpadD.png" id="4_r8w13"]
+[ext_resource type="Texture2D" uid="uid://xiksj2sbcfmx" path="res://assets/dpadL.png" id="5_v6axv"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t6gqd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rlov2"]
 transparency = 1
-albedo_texture = ExtResource("2_7umuv")
+albedo_color = Color(0.12, 0.12, 0.12, 1)
+albedo_texture = ExtResource("2_s3sqd")
 
 [sub_resource type="QuadMesh" id="QuadMesh_hc0pe"]
-material = SubResource("StandardMaterial3D_t6gqd")
+material = SubResource("StandardMaterial3D_rlov2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hpyc"]
+transparency = 1
+albedo_color = Color(0.12156863, 0.12156863, 0.12156863, 1)
+albedo_texture = ExtResource("3_lktly")
+
+[sub_resource type="QuadMesh" id="QuadMesh_q1apk"]
+material = SubResource("StandardMaterial3D_2hpyc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oesqu"]
+transparency = 1
+albedo_color = Color(0.12156863, 0.12156863, 0.12156863, 1)
+albedo_texture = ExtResource("4_r8w13")
+
+[sub_resource type="QuadMesh" id="QuadMesh_a3vql"]
+material = SubResource("StandardMaterial3D_oesqu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibhol"]
+transparency = 1
+albedo_color = Color(0.12156863, 0.12156863, 0.12156863, 1)
+albedo_texture = ExtResource("5_v6axv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_50e6q"]
+material = SubResource("StandardMaterial3D_ibhol")
 
 [node name="DPad" type="Node3D"]
 script = ExtResource("1_7umuv")
@@ -17,9 +46,32 @@ script = ExtResource("1_7umuv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, -1.19975)
+[node name="dpadButtonContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)
+
+[node name="Up" type="MeshInstance3D" parent="dpadButtonContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
 mesh = SubResource("QuadMesh_hc0pe")
+skeleton = NodePath("../..")
+script = ExtResource("3_r8w13")
+
+[node name="Right" type="MeshInstance3D" parent="dpadButtonContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
+mesh = SubResource("QuadMesh_q1apk")
+skeleton = NodePath("../..")
+script = ExtResource("3_r8w13")
+
+[node name="Down" type="MeshInstance3D" parent="dpadButtonContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
+mesh = SubResource("QuadMesh_a3vql")
+skeleton = NodePath("../..")
+script = ExtResource("3_r8w13")
+
+[node name="Left" type="MeshInstance3D" parent="dpadButtonContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
+mesh = SubResource("QuadMesh_50e6q")
+skeleton = NodePath("../..")
+script = ExtResource("3_r8w13")
 
 [node name="timerU" type="Timer" parent="."]
 

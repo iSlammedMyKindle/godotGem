@@ -67,6 +67,7 @@ stream_0/stream = ExtResource("3_ef4b1")
 script = ExtResource("1_ra8jp")
 
 [node name="plate" type="Sprite2D" parent="."]
+self_modulate = Color(0.12, 0.12, 0.12, 1)
 position = Vector2(-80, 0)
 texture = ExtResource("2_2q0gk")
 

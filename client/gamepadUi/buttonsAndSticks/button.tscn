@@ -58,6 +58,7 @@ position = Vector2(0, 24)
 texture = ExtResource("1_vxja4")
 
 [node name="plate" type="Sprite2D" parent="."]
+self_modulate = Color(0.12941177, 0.12941177, 0.12941177, 1)
 texture = ExtResource("3_ch4dw")
 
 [node name="letter" type="Sprite2D" parent="plate"]

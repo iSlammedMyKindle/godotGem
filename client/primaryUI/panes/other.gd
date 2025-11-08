@@ -11,6 +11,7 @@ func _ready():
 	
 	checkIndex = {
 		$keyToController: "Key To Controller",
+		$buttonHeatMap: "Button Heat Map",
 	}
 	
 	# Initialize the connections
