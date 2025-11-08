@@ -2,6 +2,8 @@ extends Node3D
 
 # The current position gets animated here. Stop the animation if we're gonna move somewhere else
 var pressTween
+var saveObj: Node
+var heatMapActivated = false
 
 var presses = {
 	"Up":false,
@@ -23,6 +25,7 @@ func _ready():
 	
 	# When turbo is activated on one of the buttons, record it:
 	add_to_group('setTurbo')
+	add_to_group('save')
 	
 	for btn in presses.keys():
 		# The DPad is more than one button, for each direction, it should be added to a group
@@ -30,6 +33,18 @@ func _ready():
 		var timerNode = get_node('timer'+(btn[0]))
 		timerNode.timeout.connect(func(): 
 			turboToggle(btn))
+			
+
+func receive_save(save: Node, _status: int):
+	saveObj = save
+	heatMapActivated = save.get_val('other', 'buttonheatmap', false)
+
+func update_save_val(section: String, key: String, val):
+	if section == 'other' and key == 'buttonheatmap':
+		heatMapActivated = val
+		if not heatMapActivated:
+			for btn in presses.keys():
+				$dpadButtonContainer.get_node(btn).resetColor()
 
 # Upon the turbo being incremented for a turbo state, record that in our object above:
 func setTurbo(udlr):
@@ -71,7 +86,8 @@ func press_internal(udlr: String):
 	presses[udlr] = true
 	rock()
 	get_tree().call_group('dpadAudio', 'playSound')
-	get_tree().call_group('heatMap', 'heatMapPress', udlr)
+	if heatMapActivated:
+		get_tree().call_group('heatMap', 'heatMapPress', udlr)
 
 func release(btnname):
 	var timerNode = get_node('timer' + (btnname[0]))

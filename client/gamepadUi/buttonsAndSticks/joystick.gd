@@ -9,28 +9,41 @@ var turboActivated
 var turboMode = 0
 var originalScale
 var shaftTween
+var originalPlateColor
+var heatMapActivated = false
 var shaftColors = {
 	'333333': -1,
 	'0da399': .2,
 	'fbff00': .1,
 	'ffaa00': .05
 }
+var heatMap = {
+	'selfPress': 0.0,
+	'everyoneElse': 0.0
+}
 
 func _ready():
 	prefix = 'L' if name == 'SL' else 'R'
 	add_to_group('S' + prefix)
 	add_to_group('save')
+	add_to_group('heatMap')
+	originalPlateColor = $container/bottom/top.self_modulate
 
 # Boilerplate code I stole from gamepadUi.gd
 func receive_save(node, _status):
 	save = node
 	buttonSounds = save.get_val('general', 'buttonsounds', false)
 	turboActivated = save.get_val('general', 'turbofeedback', false)
+	heatMapActivated = save.get_val('other', 'buttonheatmap', false)
 	
 func update_save_val(sec, key, val):
 	if sec == 'general' and key == 'buttonsounds':
 		buttonSounds = val
 	if key == 'turbofeedback': turboActivated = val
+	if sec == 'other' and key == 'buttonheatmap':
+		heatMapActivated = val
+		if not heatMapActivated:
+			$container/bottom/top.self_modulate = originalPlateColor
 # End save boilerplate
 
 func _process(delta: float):
@@ -91,6 +104,8 @@ func press_internal():
 	if turboMode > 0:
 		Input.start_joy_vibration(0, 0, 1, .05)
 	get_tree().call_group('btnPresses', 'toggle', name, true)
+	if heatMapActivated:
+		get_tree().call_group('heatMap', 'heatMapPress', name)
 
 func release(_stick):
 	if not $turboTimer.paused:
@@ -123,3 +138,11 @@ func _on_turbo_toggle_button_pressed():
 	shaftTween.tween_property($shaft, 'scale', originalScale, .15)
 	shaftTween.set_trans(Tween.TRANS_BOUNCE)
 	shaftTween.play()
+
+func heatMapPress(btnName):
+	if btnName == name:
+		heatMap.selfPress = heatMap.selfPress + 1.0
+	else: heatMap.everyoneElse = heatMap.everyoneElse + 1.0
+	
+	var fadeMath = ((1.0 / (heatMap.selfPress + heatMap.everyoneElse)) * heatMap.selfPress)
+	$container/bottom/top.self_modulate = originalPlateColor + Color( fadeMath, 0, 0, 0)

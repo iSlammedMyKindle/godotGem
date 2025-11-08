@@ -7,6 +7,7 @@ var shaftTween
 var originalScale
 var buttonSounds = false
 var originalPlateColor
+var heatMapActivated = false
 var heatMap = {
 	'selfPress': 0.0,
 	'everyoneElse': 0.0
@@ -40,11 +41,16 @@ func receive_save(save: Node, _status: int):
 	saveObj = save
 	turboActivated = save.get_val('general', 'turbofeedback', false)
 	buttonSounds = save.get_val('general', 'buttonsounds', false)
+	heatMapActivated = save.get_val('other', 'buttonheatmap', false)
 
 func update_save_val(section: String, key: String, val):
 	if key == 'turbofeedback': turboActivated = val
 	if section == 'general' and key == 'buttonsounds':
 		buttonSounds = val
+	if section == 'other' and key == 'buttonheatmap':
+		heatMapActivated = val
+		if not heatMapActivated:
+			$plate.self_modulate = originalPlateColor
 
 # press / release vs press_internal / release_internal
 # press / release is a direct input event coming from gamepadUI, while the _internal counterparts are for here, so that turbo is functional
@@ -63,7 +69,8 @@ func press_internal():
 	if turboActivated and turboMode > 0:
 		Input.start_joy_vibration(0, 0, 1, .05)
 	get_tree().call_group('btnPresses', 'toggle', name, true) # Scope, all buttons recieve this
-	get_tree().call_group('heatMap', 'heatMapPress', name)
+	if heatMapActivated:
+		get_tree().call_group('heatMap', 'heatMapPress', name)
 
 func release(_btnname):
 	if not $turboTimer.paused:
@@ -106,9 +113,4 @@ func heatMapPress(btnName):
 	else: heatMap.everyoneElse = heatMap.everyoneElse + 1.0
 	
 	var fadeMath = ((1.0 / (heatMap.selfPress + heatMap.everyoneElse)) * heatMap.selfPress)
-	if name == 'A':
-		print('fademath '+str(fadeMath))
-		print('before: '+str($plate.self_modulate))
 	$plate.self_modulate = originalPlateColor + Color( fadeMath, 0, 0, 0)
-	if name == 'A':
-		print('after: '+str($plate.self_modulate))

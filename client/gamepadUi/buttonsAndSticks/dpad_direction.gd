@@ -19,3 +19,5 @@ func heatMapPress(btnName):
 	
 	var fadeMath = ((1.0 / (heatMap.selfPress + heatMap.everyoneElse)) * heatMap.selfPress)
 	mesh.material.albedo_color = originalPlateColor + Color( fadeMath, 0, 0, 0)
+
+func resetColor(): mesh.material.albedo_color = originalPlateColor
