@@ -11,12 +11,8 @@ var heatMap = {
 	'selfPress': 0.0,
 	'everyoneElse': 0.0
 }
-var shaftColors = {
-	'333333': -1,
-	'0da399': .2,
-	'fbff00': .1,
-	'ffaa00': .05
-}
+
+var shaftColors = {}
 
 # 212121 is the default color for the button plate
 func _ready():
@@ -26,6 +22,19 @@ func _ready():
 	if get_node_or_null('plate/letter') != null:
 		$plate.get_node('letter').texture = load('res://assets/' + self.name + '.png')
 	originalPlateColor = $plate.self_modulate
+	
+	if name == 'LB' or name == 'RB':
+		shaftColors['00000000'] = -1
+	else: shaftColors['333333'] = -1
+	
+	var restOfShaftColors = {
+		'0da399': .2,
+		'fbff00': .1,
+		'ffaa00': .05
+	}
+	
+	for key in restOfShaftColors.keys():
+		shaftColors[key] = restOfShaftColors[key]
 		
 func receive_save(save: Node, _status: int):
 	saveObj = save
@@ -52,7 +61,6 @@ func press_internal():
 	if buttonSounds:
 		sound()
 	if turboActivated and turboMode > 0:
-		var time = shaftColors[shaftColors.keys()[turboMode]]
 		Input.start_joy_vibration(0, 0, 1, .05)
 	get_tree().call_group('btnPresses', 'toggle', name, true) # Scope, all buttons recieve this
 	get_tree().call_group('heatMap', 'heatMapPress', name)
