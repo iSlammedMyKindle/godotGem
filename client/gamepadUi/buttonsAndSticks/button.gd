@@ -51,6 +51,8 @@ func update_save_val(section: String, key: String, val):
 		heatMapActivated = val
 		if not heatMapActivated:
 			$plate.self_modulate = originalPlateColor
+			heatMap.selfPress = 0.0
+			heatMap.everyoneElse = 0.0
 
 # press / release vs press_internal / release_internal
 # press / release is a direct input event coming from gamepadUI, while the _internal counterparts are for here, so that turbo is functional

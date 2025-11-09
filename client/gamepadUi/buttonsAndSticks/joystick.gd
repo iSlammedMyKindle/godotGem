@@ -44,6 +44,8 @@ func update_save_val(sec, key, val):
 		heatMapActivated = val
 		if not heatMapActivated:
 			$container/bottom/top.self_modulate = originalPlateColor
+			heatMap.selfPress = 0.0
+			heatMap.everyoneElse = 0.0
 # End save boilerplate
 
 func _process(delta: float):
