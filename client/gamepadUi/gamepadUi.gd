@@ -35,10 +35,14 @@ func _ready():
 func receive_save(save: Node, _status: int):
 	saveObj = save
 	keyToCon = saveObj.get_val('other', 'keytocontroller', false)
+	$controllerShell.self_modulate = Color(saveObj.get_val('color', 'controllercolor', 'ffffff'))
 	
 func update_save_val(_sec: String, key: String, val):
+	print('yay')
 	if key == 'keytocontroller':
 		keyToCon = val
+	if key == 'controllercolor':
+		$controllerShell.self_modulate = Color(val)
 
 func _process(_delta):
 	# This is for keyboard D-Pad emulation; pressing shift should switch between joystick and D-Pad

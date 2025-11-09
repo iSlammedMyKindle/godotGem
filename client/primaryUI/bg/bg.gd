@@ -39,7 +39,7 @@ func _on_timer_timeout() -> void:
 
 # Save logic
 func receive_save(saveNode: Node, _status):
-	var currSavedBg = saveNode.get_val('bg', 'color', null)
+	var currSavedBg = saveNode.get_val('color', 'color', null)
 	
 	# Change the background
 	if not bgIndex.has(currSavedBg): return
@@ -51,7 +51,7 @@ func receive_save(saveNode: Node, _status):
 	bgIndex[currBg].visible = true
 
 func update_save_val(sec, key, val):
-	if not (sec == 'bg' and key == 'color'): return
+	if not (sec == 'color' and key == 'color'): return
 	
 	if val == 'Default' and $Timer.is_stopped(): $Timer.start()
 	

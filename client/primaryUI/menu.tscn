@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dcjg3jxo4oe0w" path="res://primaryUI/tab.tscn" id="1_rhplt"]
 [ext_resource type="PackedScene" uid="uid://dtx0a00ko6v14" path="res://primaryUI/panes/General.tscn" id="4_g8mnm"]
 [ext_resource type="Texture2D" uid="uid://c00m3uw5ed75r" path="res://assets/docs.png" id="5_d73ic"]
-[ext_resource type="PackedScene" uid="uid://drug6sdug2vs" path="res://primaryUI/panes/bg.tscn" id="5_f36gn"]
+[ext_resource type="PackedScene" uid="uid://drug6sdug2vs" path="res://primaryUI/panes/color.tscn" id="5_f36gn"]
 [ext_resource type="PackedScene" uid="uid://blewrsug707d6" path="res://primaryUI/panes/other.tscn" id="6_1eps8"]
 
 [sub_resource type="SystemFont" id="SystemFont_h7vav"]
@@ -39,13 +39,15 @@ position = Vector2(296, 104)
 [node name="Label" parent="General/Body" index="0"]
 text = "General"
 label_settings = SubResource("LabelSettings_rhplt")
+metadata/_edit_use_anchors_ = true
 
-[node name="BG" parent="." instance=ExtResource("1_rhplt")]
+[node name="Color" parent="." instance=ExtResource("1_rhplt")]
 position = Vector2(632, 104)
 
-[node name="Label" parent="BG/Body" index="0"]
-text = "BG"
+[node name="Label" parent="Color/Body" index="0"]
+text = "Color"
 label_settings = SubResource("LabelSettings_1um31")
+metadata/_edit_use_anchors_ = true
 
 [node name="Other" parent="." instance=ExtResource("1_rhplt")]
 position = Vector2(968, 104)
@@ -53,18 +55,21 @@ position = Vector2(968, 104)
 [node name="Label" parent="Other/Body" index="0"]
 text = "Other"
 label_settings = SubResource("LabelSettings_g8mnm")
+metadata/_edit_use_anchors_ = true
 
 [node name="pane" type="Sprite2D" parent="."]
 position = Vector2(640, 408)
 texture = ExtResource("1_5xnov")
 
 [node name="General" parent="pane" instance=ExtResource("4_g8mnm")]
+visible = false
 position = Vector2(-336, -264)
 
-[node name="Bg" parent="pane" instance=ExtResource("5_f36gn")]
-position = Vector2(-368, -128)
+[node name="Color" parent="pane" instance=ExtResource("5_f36gn")]
+position = Vector2(-304, -176)
 
 [node name="Other" parent="pane" instance=ExtResource("6_1eps8")]
+visible = false
 position = Vector2(-336, -360)
 
 [node name="githubPage" type="Button" parent="."]
@@ -80,5 +85,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="githubPage" to="." method="_on_github_page_pressed"]
 
 [editable path="General"]
-[editable path="BG"]
+[editable path="Color"]
 [editable path="Other"]

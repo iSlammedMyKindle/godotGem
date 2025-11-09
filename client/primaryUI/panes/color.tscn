@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://drug6sdug2vs"]
+
+[ext_resource type="Script" uid="uid://ciaomfrn1qeov" path="res://primaryUI/panes/color.gd" id="1_4by7r"]
+[ext_resource type="PackedScene" uid="uid://0t21gdo7o5ri" path="res://primaryUI/elements/radio.tscn" id="2_jb6ys"]
+[ext_resource type="ButtonGroup" uid="uid://bfuu0wsmbltgn" path="res://primaryUI/bg/background_group.tres" id="3_gqfor"]
+[ext_resource type="Texture2D" uid="uid://cgn340xrvn6ax" path="res://assets/rainbowIcon.png" id="4_xe4w6"]
+[ext_resource type="Texture2D" uid="uid://c1ciqgbw7er3q" path="res://assets/greenIcon.png" id="5_ux5gn"]
+[ext_resource type="Texture2D" uid="uid://b37bl6gragfix" path="res://assets/magentaIcon.png" id="6_8rukb"]
+
+[sub_resource type="SystemFont" id="SystemFont_wv16d"]
+font_names = PackedStringArray("Arial Black")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
+font = SubResource("SystemFont_wv16d")
+font_size = 42
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="color" type="Node2D"]
+script = ExtResource("1_4by7r")
+
+[node name="Default" parent="." instance=ExtResource("2_jb6ys")]
+position = Vector2(0, -56)
+
+[node name="Box" parent="Default" index="0"]
+button_group = ExtResource("3_gqfor")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Default" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Green" parent="." instance=ExtResource("2_jb6ys")]
+position = Vector2(0, 72)
+
+[node name="Box" parent="Green" index="0"]
+button_group = ExtResource("3_gqfor")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Green" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Magenta" parent="." instance=ExtResource("2_jb6ys")]
+position = Vector2(0, 208)
+
+[node name="Box" parent="Magenta" index="0"]
+button_group = ExtResource("3_gqfor")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Magenta" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="DefaultIcon" type="Sprite2D" parent="."]
+position = Vector2(474, 65)
+texture = ExtResource("4_xe4w6")
+
+[node name="GreenIcon" type="Sprite2D" parent="."]
+position = Vector2(473, 192)
+texture = ExtResource("5_ux5gn")
+
+[node name="MagentaIcon" type="Sprite2D" parent="."]
+position = Vector2(473, 320)
+texture = ExtResource("6_8rukb")
+
+[node name="controllerColor" type="ColorPickerButton" parent="."]
+offset_left = 104.0
+offset_top = 399.99997
+offset_right = 204.0
+offset_bottom = 499.99997
+scale = Vector2(0.73788273, 0.73788273)
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Label" type="Label" parent="controllerColor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.09090909
+anchor_bottom = -0.09090909
+offset_left = 119.260124
+offset_top = 30.774597
+offset_right = 553.26013
+offset_bottom = 102.77463
+text = "Controller's Color"
+label_settings = SubResource("LabelSettings_72kbx")
+
+[connection signal="color_changed" from="controllerColor" to="." method="_on_controller_color_color_changed"]
+[connection signal="popup_closed" from="controllerColor" to="." method="_on_controller_color_popup_closed"]
+
+[editable path="Default"]
+[editable path="Green"]
+[editable path="Magenta"]

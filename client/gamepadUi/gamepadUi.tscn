@@ -43,46 +43,6 @@ position = Vector2(560, 365)
 scale = Vector2(0.857882, 0.865809)
 texture = ExtResource("4_6thga")
 
-[node name="Start" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(648, 205)
-scale = Vector2(0.240002, 0.240002)
-
-[node name="Guide" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(568, 101)
-scale = Vector2(0.400003, 0.400003)
-
-[node name="Select" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(496, 205)
-scale = Vector2(0.240002, 0.240002)
-
-[node name="A" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(808, 293)
-scale = Vector2(0.360002, 0.360002)
-
-[node name="B" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(872, 229)
-scale = Vector2(0.360002, 0.360002)
-
-[node name="X" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(744, 229)
-scale = Vector2(0.360002, 0.360002)
-
-[node name="Y" parent="." instance=ExtResource("2_u1mn1")]
-position = Vector2(808, 173)
-scale = Vector2(0.360002, 0.360002)
-
-[node name="SR" parent="." instance=ExtResource("6_ftokp")]
-position = Vector2(696, 381)
-scale = Vector2(0.4, 0.4)
-
-[node name="TrigR" parent="." instance=ExtResource("8_6thga")]
-position = Vector2(976, 85)
-scale = Vector2(0.292573, 0.292573)
-
-[node name="TrigL" parent="." instance=ExtResource("8_6thga")]
-position = Vector2(144, 85)
-scale = Vector2(0.292573, 0.292573)
-
 [node name="Shaft" parent="." instance=ExtResource("6_t6gqd")]
 position = Vector2(412, 370)
 scale = Vector2(0.26, 0.26)
@@ -138,6 +98,46 @@ offset_top = 343.0
 offset_right = 386.0
 offset_bottom = 395.0
 script = ExtResource("14_bl1fc")
+
+[node name="Start" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(648, 205)
+scale = Vector2(0.240002, 0.240002)
+
+[node name="Guide" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(568, 101)
+scale = Vector2(0.400003, 0.400003)
+
+[node name="Select" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(496, 205)
+scale = Vector2(0.240002, 0.240002)
+
+[node name="A" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(808, 293)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="B" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(872, 229)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="X" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(744, 229)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="Y" parent="." instance=ExtResource("2_u1mn1")]
+position = Vector2(808, 173)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="SR" parent="." instance=ExtResource("6_ftokp")]
+position = Vector2(696, 381)
+scale = Vector2(0.4, 0.4)
+
+[node name="TrigR" parent="." instance=ExtResource("8_6thga")]
+position = Vector2(976, 85)
+scale = Vector2(0.292573, 0.292573)
+
+[node name="TrigL" parent="." instance=ExtResource("8_6thga")]
+position = Vector2(144, 85)
+scale = Vector2(0.292573, 0.292573)
 
 [node name="SL" parent="." instance=ExtResource("6_ftokp")]
 position = Vector2(336, 205)
