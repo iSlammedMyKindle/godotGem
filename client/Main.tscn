@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cmrkjib5bk7xi"]
+[gd_scene load_steps=23 format=3 uid="uid://cmrkjib5bk7xi"]
 
 [ext_resource type="Script" uid="uid://3cnt4vye7q7" path="res://Main.gd" id="1"]
 [ext_resource type="Script" uid="uid://bpneym18dt1bn" path="res://primaryUI/connectLabel.gd" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
 [ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://primaryUI/Rylan.gd" id="6"]
+[ext_resource type="Theme" uid="uid://cpowyoxndsvj1" path="res://Hud.tres" id="6_j4qnp"]
 [ext_resource type="PackedScene" uid="uid://bf3t5ws6wr4lt" path="res://primaryUI/firstTimeRun.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://bfm4c6lo00s4b" path="res://assets/menu.svg" id="10_20pc6"]
 [ext_resource type="Texture2D" uid="uid://w6s2er422loj" path="res://assets/menuClick.svg" id="11_5vvyt"]
@@ -178,11 +179,11 @@ position = Vector2(88, 104)
 script = ExtResource("2_c6i3y")
 
 [node name="urlToConnect" type="TextEdit" parent="HUD"]
-offset_left = 504.0
+offset_left = 552.0
 offset_top = 72.0
-offset_right = 611.0
-offset_bottom = 93.0
-scale = Vector2(2.5, 2.5)
+offset_right = 777.0
+offset_bottom = 127.0
+theme_override_font_sizes/font_size = 30
 text = "111.222.33.44"
 placeholder_text = "111.222.33.44"
 emoji_menu_enabled = false
@@ -191,30 +192,30 @@ caret_multiple = false
 metadata/_edit_use_anchors_ = true
 
 [node name="connectionStatus" type="Label" parent="HUD"]
-offset_left = 504.0
-offset_top = 32.0
-offset_right = 691.0
-offset_bottom = 55.0
-scale = Vector2(1.5, 1.5)
+offset_left = 488.0
+offset_top = 24.0
+offset_right = 837.0
+offset_bottom = 66.0
+theme = ExtResource("6_j4qnp")
 text = "Connect to this address:"
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true
 
 [node name="BlinderBtn" type="Button" parent="HUD"]
-offset_left = 416.0
+offset_left = 432.0
 offset_top = 72.0
-offset_right = 480.0
-offset_bottom = 109.0
-scale = Vector2(1.5, 1.5)
+offset_right = 544.0
+offset_bottom = 122.0
+theme = ExtResource("6_j4qnp")
 text = "Blinder"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="HUD"]
-offset_left = 768.0
+offset_left = 784.0
 offset_top = 72.0
-offset_right = 845.0
-offset_bottom = 109.0
-scale = Vector2(1.5, 1.5)
+offset_right = 920.0
+offset_bottom = 122.0
+theme = ExtResource("6_j4qnp")
 text = "Connect!"
 metadata/_edit_use_anchors_ = true
 

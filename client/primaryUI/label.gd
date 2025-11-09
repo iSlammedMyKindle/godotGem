@@ -8,6 +8,6 @@ func _ready():
 
 func changeTab(tabName):
 	if tabName == text:
-		print(tabName)
+		#print(tabName)
 		label_settings.shadow_color = Color('#00000000')
 	else: label_settings.shadow_color = Color(enabledShadowColor)

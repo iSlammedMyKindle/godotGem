@@ -64,6 +64,7 @@ texture = ExtResource("2_qlr0a")
 texture = ExtResource("1_dm1l1")
 
 [node name="top" type="Sprite2D" parent="container/bottom"]
+self_modulate = Color(0.35, 0.35, 0.35, 1)
 texture = ExtResource("2_413m4")
 
 [node name="turboToggleButton" type="TextureButton" parent="."]
