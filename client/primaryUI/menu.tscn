@@ -62,15 +62,14 @@ position = Vector2(640, 408)
 texture = ExtResource("1_5xnov")
 
 [node name="General" parent="pane" instance=ExtResource("4_g8mnm")]
-visible = false
 position = Vector2(-336, -264)
 
 [node name="Color" parent="pane" instance=ExtResource("5_f36gn")]
+visible = false
 position = Vector2(-304, -176)
 
 [node name="Other" parent="pane" instance=ExtResource("6_1eps8")]
-visible = false
-position = Vector2(-336, -360)
+position = Vector2(-336, -264)
 
 [node name="githubPage" type="Button" parent="."]
 offset_left = 1040.0

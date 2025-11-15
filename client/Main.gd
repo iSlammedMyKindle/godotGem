@@ -50,10 +50,15 @@ func update_save_val(sec, key, val):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Save Logic
 	add_to_group('save')
+	
 	# There's a group for each button, but a single group is going to fair better in order to get *all* of them
 	add_to_group('btnPresses')
 	$saveLogic.invoke_manual_receive(self)
+	
+	# Player select logic, as seen in player_select.gd
+	add_to_group('player_select')
 	
 	client.connect("data_received", Callable(self, "_on_data"))
 		
@@ -152,3 +157,6 @@ func toggle(btn: String, press: bool):
 	controllerBuffer.push_back(255 if press else 0) # Specifies input strength. If this is a button, just do either 0, or 255
 
 	client.send(controllerBuffer)
+
+func player_change(player_number: int):
+	print('Selected Player: ' + str(player_number))

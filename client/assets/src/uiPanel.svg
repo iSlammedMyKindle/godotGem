@@ -27,15 +27,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.4916699"
-     inkscape:cx="785.36143"
-     inkscape:cy="228.93805"
+     inkscape:zoom="2.1095398"
+     inkscape:cx="749.45256"
+     inkscape:cy="550.11998"
      inkscape:window-width="2560"
      inkscape:window-height="1368"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="false"
      showguides="false" />
   <defs
@@ -180,10 +180,10 @@
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
        id="filter51"
-       x="-0.1347476"
-       y="-0.10548842"
-       width="1.32564"
-       height="1.2549303">
+       x="-0.077430147"
+       y="-0.12528461"
+       width="1.1871229"
+       height="1.3027711">
       <feFlood
          result="flood"
          in="SourceGraphic"
@@ -367,13 +367,13 @@
          id="feComposite61" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter63"
-       x="-0.09299074"
-       y="-0.22975944"
-       width="1.2059205"
-       height="1.3972597">
+       x="-0.082243642"
+       y="-0.12425553"
+       width="1.1644873"
+       height="1.3002842">
       <feFlood
          result="flood"
          in="SourceGraphic"
@@ -388,7 +388,7 @@
       <feOffset
          result="offset"
          in="blur"
-         dx="1.500000"
+         dx="0"
          dy="1.500000"
          id="feOffset61" />
       <feComposite
@@ -408,10 +408,10 @@
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
        id="filter65"
-       x="-0.09299074"
-       y="-0.22975944"
-       width="1.2059205"
-       height="1.3972597">
+       x="-0.15872274"
+       y="-0.24636205"
+       width="1.38358"
+       height="1.595375">
       <feFlood
          result="flood"
          in="SourceGraphic"
@@ -617,7 +617,11 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter4"
-       inkscape:label="filter14" />
+       inkscape:label="filter14"
+       x="0"
+       y="0"
+       width="1"
+       height="1" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5"
@@ -664,6 +668,44 @@
          in="comp1"
          in2="SourceGraphic"
          id="feComposite32" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter21"
+       x="-0.077430147"
+       y="-0.12528461"
+       width="1.1548603"
+       height="1.2505692">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="1"
+         flood-color="rgb(100,58,2)"
+         id="feFlood20" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.500000"
+         id="feGaussianBlur20" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="0.000000"
+         dy="0.000000"
+         id="feOffset20" />
+      <feComposite
+         result="comp1"
+         operator="out"
+         in="flood"
+         in2="offset"
+         id="feComposite20" />
+      <feComposite
+         result="comp2"
+         operator="atop"
+         in="comp1"
+         in2="SourceGraphic"
+         id="feComposite21" />
     </filter>
   </defs>
   <g
@@ -739,7 +781,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="pane"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="fill:url(#linearGradient4);stroke:#eed373;stroke-width:7.9375;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter61)"
@@ -871,7 +913,8 @@
        id="g5"
        inkscape:export-filename="../pressedEmptyCheck.png"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       inkscape:export-ydpi="96"
+       transform="translate(-218.16992,-20.220627)">
       <rect
          style="display:inline;opacity:1;fill:#b7b7b7;fill-opacity:1;stroke:none;stroke-width:5.98019;stroke-linecap:round;stroke-dasharray:none"
          id="rect4"
@@ -915,8 +958,8 @@
        id="rect32"
        width="26.087837"
        height="26.087837"
-       x="299.13217"
-       y="74.500847"
+       x="257.49197"
+       y="108.78868"
        ry="7.0236487"
        inkscape:export-filename="../greenIcon.png"
        inkscape:export-xdpi="96"
@@ -926,10 +969,117 @@
        id="rect33"
        width="26.087837"
        height="26.087837"
-       x="299.13217"
-       y="111.375"
+       x="257.49197"
+       y="145.66284"
        ry="7.0236487"
        inkscape:export-filename="../magentaIcon.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-weight:500;font-size:10.5833px;font-family:'&quot;Atari800&quot;';-inkscape-font-specification:'&quot;Atari800&quot; Medium';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:1;fill:#f3df9e;fill-opacity:1;stroke-width:26.5745;stroke-linecap:round;paint-order:stroke fill markers"
+       x="197.16385"
+       y="135.64423"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="stroke-width:26.5745" /></text>
+    <g
+       id="g8"
+       transform="translate(0,-103.09713)">
+      <rect
+         style="display:inline;fill:#b7b7b7;fill-opacity:1;stroke-width:26.3833;stroke-linecap:round;paint-order:stroke fill markers"
+         id="rect8"
+         width="52.90723"
+         height="36.12162"
+         x="173.65775"
+         y="222.5325"
+         rx="0"
+         ry="0"
+         inkscape:label="buttonContainer"
+         inkscape:export-filename="../menuButton.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
+      <g
+         id="g7"
+         transform="translate(6.7949014,105.80791)"
+         inkscape:export-filename="../menuButtonPressed.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96"
+         inkscape:label="buttonPressed"
+         style="display:none">
+        <rect
+           style="opacity:1;fill:#eed373;fill-opacity:1;stroke-width:29.7065;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter65)"
+           id="rect6"
+           width="43.772381"
+           height="28.972553"
+           x="170.6722"
+           y="119.52919"
+           ry="6.3589139"
+           rx="6.3589139" />
+        <rect
+           style="opacity:1;fill:#f3df9e;fill-opacity:1;stroke-width:20.8707;stroke-linecap:round;paint-order:stroke fill markers"
+           id="rect7"
+           width="32.333889"
+           height="19.359856"
+           x="176.56766"
+           y="124.62423"
+           ry="2.540406"
+           rx="2.8083131" />
+        <path
+           style="font-stretch:condensed;font-size:30.0751px;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:center;text-anchor:middle;fill:#eed373;fill-opacity:1;stroke-width:97.3548;stroke-linecap:round;paint-order:stroke fill markers"
+           d="m 202.33998,141.49447 -22.68106,-7.30632 22.68106,-7.30632 z"
+           id="path7"
+           aria-label="&lt;"
+           sodipodi:nodetypes="cccc"
+           transform="matrix(0.75845601,0,0,0.88483513,47.301079,15.540134)" />
+      </g>
+      <g
+         id="g6"
+         transform="translate(6.775413,105.71727)"
+         inkscape:export-filename="../menuButton.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96"
+         inkscape:label="button"
+         style="display:inline">
+        <rect
+           style="opacity:1;fill:#eed373;fill-opacity:1;stroke-width:29.7065;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter63)"
+           id="rect3"
+           width="43.772381"
+           height="28.972553"
+           x="170.69975"
+           y="119.61185"
+           ry="6.3589139"
+           rx="6.3589139" />
+        <rect
+           style="opacity:1;fill:#f3df9e;fill-opacity:1;stroke-width:20.8707;stroke-linecap:round;paint-order:stroke fill markers"
+           id="rect5"
+           width="32.333889"
+           height="19.359856"
+           x="176.56766"
+           y="124.62423"
+           ry="2.540406"
+           rx="2.8083131" />
+        <path
+           style="font-stretch:condensed;font-size:30.0751px;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:center;text-anchor:middle;fill:#eed373;fill-opacity:1;stroke-width:97.3548;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter65)"
+           d="m 202.33998,141.49447 -22.68106,-7.30632 22.68106,-7.30632 z"
+           id="text6"
+           aria-label="&lt;"
+           sodipodi:nodetypes="cccc"
+           transform="matrix(0.75845601,0,0,0.88483513,47.301079,15.540134)" />
+      </g>
+    </g>
+    <rect
+       style="fill:#e6bc29;fill-opacity:1;stroke-width:26.5745;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter21)"
+       id="rect10"
+       width="46.493519"
+       height="28.734575"
+       x="174.52516"
+       y="163.53874"
+       rx="9.1428642"
+       ry="6.2174177"
+       transform="matrix(0.67319917,0,0,1.0558702,56.349696,-9.5142665)"
+       inkscape:export-filename="../numberBox.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
   </g>

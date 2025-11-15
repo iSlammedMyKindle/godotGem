@@ -45,4 +45,5 @@ func _on_controller_color_color_changed(color):
 	currSelectedColor = color
 
 func _on_controller_color_popup_closed():
-	save.set_val(sectionName, 'controllercolor', currSelectedColor.to_html())
+	if currSelectedColor != null:
+		save.set_val(sectionName, 'controllercolor', currSelectedColor.to_html())

@@ -7,13 +7,14 @@
 script = ExtResource("1_aigvo")
 
 [node name="touchScreenButtons" parent="." instance=ExtResource("2_34n8b")]
+visible = false
 position = Vector2(-32, 392)
 
 [node name="buttonSounds" parent="." instance=ExtResource("2_34n8b")]
-position = Vector2(-32, 264)
+position = Vector2(-32, 392)
 
 [node name="turboFeedback" parent="." instance=ExtResource("2_34n8b")]
-position = Vector2(-32, 136)
+position = Vector2(-32, 200)
 
 [node name="ignoreVibration" parent="." instance=ExtResource("2_34n8b")]
 position = Vector2(-32, 8)

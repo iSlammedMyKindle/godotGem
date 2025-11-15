@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://blewrsug707d6"]
+[gd_scene load_steps=4 format=3 uid="uid://blewrsug707d6"]
 
 [ext_resource type="Script" uid="uid://hd3ctm5bhgjl" path="res://primaryUI/panes/other.gd" id="1_rb3hx"]
 [ext_resource type="PackedScene" uid="uid://7i118uxxc6ox" path="res://primaryUI/elements/checkbox.tscn" id="2_l84ud"]
+[ext_resource type="PackedScene" uid="uid://cshjwyvpq0i2t" path="res://primaryUI/elements/playerSelect.tscn" id="3_l84ud"]
 
 [node name="Other" type="Node2D"]
 script = ExtResource("1_rb3hx")
 
 [node name="keyToController" parent="." instance=ExtResource("2_l84ud")]
-position = Vector2(-32, 392)
+position = Vector2(-32, 160)
 
 [node name="buttonHeatMap" parent="." instance=ExtResource("2_l84ud")]
-position = Vector2(-32, 216)
+position = Vector2(-32, 32)
+
+[node name="PlayerSelect" parent="." instance=ExtResource("3_l84ud")]
+position = Vector2(80, 368)
