@@ -10,7 +10,48 @@ using Fleck;
 //Client Mode
 using System.Net.WebSockets;
 
-class Program{
+// This is a wrapper surrounding common properties of a player. This is not a controller, and in fact they are separate entities
+class Player
+{
+    // Define variables
+    private Guid id;
+    private byte playerNumber;
+    private IWebSocketConnection socket;
+
+    public Player(IWebSocketConnection socket, Guid id, SocketCtx ctx, byte playerNumber)
+    {
+        this.id = id;
+        this.playerNumber = playerNumber;
+        this.socket = socket;
+
+        ctx.Initialize(this.socket);
+    }
+
+    // Setup
+    public void SendRumble(byte[] rumbleData)
+    {
+        this.socket.Send(rumbleData);
+    }
+}
+
+class SocketCtx
+{
+    public required Action OnOpen;
+    public required Action OnClose;
+    public required Action<string> OnMessage;
+    public required Action<byte[]> OnBinary;
+
+    public void Initialize(IWebSocketConnection socket)
+    {
+        socket.OnOpen = OnOpen;
+        socket.OnClose = OnClose;
+        socket.OnMessage = OnMessage;
+        socket.OnBinary = OnBinary;
+    }
+}
+
+class Program
+{
 
     // We don't have anymore buttons above index 14, so these will be used to determine which axis is being detected.
     static Dictionary<byte, Xbox360Property> analogMap = new Dictionary<byte, Xbox360Property>{
@@ -21,6 +62,8 @@ class Program{
         {19, Xbox360Slider.LeftTrigger},
         {20, Xbox360Slider.RightTrigger}
     };
+
+    static IXbox360Controller[] controllers = new IXbox360Controller[4];
 
     static IXbox360Controller controller = new ViGEmClient().CreateXbox360Controller();
     static byte connected = 0;
@@ -43,9 +86,9 @@ class Program{
 
             controller.FeedbackReceived += (controller, motorActivity) =>
             {
-                byte[] rumble = new byte[] { 0, motorActivity.SmallMotor, motorActivity.LargeMotor };
+                byte[] rumble = { 0, motorActivity.SmallMotor, motorActivity.LargeMotor };
 
-                foreach(Action<byte[]> act in clients.Values)
+                foreach (Action<byte[]> act in clients.Values)
                     act(rumble);
 
                 Console.WriteLine("M " + 0 + " " + motorActivity.SmallMotor + " " + motorActivity.LargeMotor);
@@ -68,7 +111,7 @@ class Program{
         if (connected == 0)
         {
             controller.Disconnect();
-            Console.WriteLine("The controller disconnected");
+            Console.WriteLine("The virtual controller disconnected");
         }
     }
 
@@ -82,11 +125,11 @@ class Program{
         {
             //Joystick X
             controller.SetAxisValue((Xbox360Axis)analogMap[(byte)resArray.RootElement[0].GetInt16()],
-            (short)resArray.RootElement[1].GetInt16());
+            resArray.RootElement[1].GetInt16());
 
             //Joystick Y
             controller.SetAxisValue((Xbox360Axis)analogMap[(byte)(resArray.RootElement[0].GetInt16() + 1)],
-            (short)resArray.RootElement[2].GetInt16());
+            resArray.RootElement[2].GetInt16());
         }
     }
 
@@ -113,18 +156,21 @@ class Program{
         cancelTokenRumble.Token.Register(() => Console.WriteLine("Could not get data from bridge! (cancelled)"));
 
         var connection = new ClientWebSocket();
-        manualClose = ()=>{
+        manualClose = () =>
+        {
             connection.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed upon godotGem bridge request", cancelTokenSrc.Token);
             connectionClosed();
         };
 
-        try{
+        try
+        {
             await connection.ConnectAsync(new Uri("ws://" + address + ":9090"), cancelTokenSrc.Token);
             await connection.SendAsync(new ArraySegment<byte>(new ASCIIEncoding().GetBytes("server")), WebSocketMessageType.Text, true, cancelTokenSrc.Token);
             Console.WriteLine("Connected to bridge!");
         }
-        catch(Exception e){
-            Console.WriteLine("Failed to connect to bridge: "+e.ToString());
+        catch (Exception e)
+        {
+            Console.WriteLine("Failed to connect to bridge: " + e.ToString());
         }
 
         //Initialize for client listening
@@ -145,10 +191,11 @@ class Program{
                 stringMsg(new string(new ASCIIEncoding().GetString(new ArraySegment<byte>(bridgeData, 0, res.Count))));
             }
 
-            else if (res.MessageType == WebSocketMessageType.Binary){
+            else if (res.MessageType == WebSocketMessageType.Binary)
+            {
                 //If it's just a ping, pong:
-                if(res.Count == 1 && bridgeData[0] == 1)
-                    await connection.SendAsync(new byte[]{1}, WebSocketMessageType.Binary, true, cancelTokenSrc.Token);
+                if (res.Count == 1 && bridgeData[0] == 1)
+                    await connection.SendAsync(new byte[] { 1 }, WebSocketMessageType.Binary, true, cancelTokenSrc.Token);
 
                 //Otherwise handle button/trigger data
                 else binMsg(bridgeData);
@@ -166,32 +213,44 @@ class Program{
         }
     }
 
-    public static void Main(string[] args){
+    public static void Main(string[] args)
+    {
 
         bool badArgs = false;
         bool bridgeMode = false; //Bool here because that collection of if-statements would make things cluttered if it lived there
 
-        if(args.Length > 0){
-            if(args.Length == 2){
+        // Initialize controllers
+        for (int i = 0; i < controllers.Count(); i++)
+        {
+            controllers[i] = new ViGEmClient().CreateXbox360Controller();
+        }
+
+        if (args.Length > 0)
+        {
+            if (args.Length == 2)
+            {
                 //The "server" beceomes a client that connects to an outside resource
-                if(args[0] == "-b") bridgeMode = true;
-                
+                if (args[0] == "-b") bridgeMode = true;
+
                 else badArgs = true;
             }
             else badArgs = true;
         }
 
-        if(badArgs){
+        if (badArgs)
+        {
             Console.WriteLine("You can launch this program without arguments.\nIf you want to use bridge mode instead of server mode, use \"-b\", followed by a space and the destination url for the bridge you wish to connect to.");
             return;
         }
 
-        if(bridgeMode){
+        if (bridgeMode)
+        {
             //Create a new connection to the bridge
             connectToBridge(args[1]);
         }
 
-        else{
+        else
+        {
             WebSocketServer server = new WebSocketServer("ws://0.0.0.0:9090");
             server.Start(socket =>
             {
@@ -199,34 +258,43 @@ class Program{
                 Action<byte[]> sendRumble = rumble => socket.Send(rumble);
 
                 //This is used in more than one place, so it's defined here.
-                Action closeRoutine = ()=>{
+                Action closeRoutine = () =>
+                {
                     //Remove this connection from the list of connections
                     clients.Remove(socket.ConnectionInfo.Id);
                     connectionClosed();
                 };
 
-                socket.OnOpen = () => connectionOpened(socket.ConnectionInfo.Id, sendRumble);
-                socket.OnClose = closeRoutine;
-
-                manualClose = ()=>{
+                manualClose = () =>
+                {
                     socket.Close();
                     closeRoutine();
                 };
 
                 //This webSocket library does the Lord's work and automatically detects and parses strings :D
-                socket.OnMessage = stringMsg;
-                socket.OnBinary = binMsg;
+                var ctx = new SocketCtx()
+                {
+                    OnOpen = () => connectionOpened(socket.ConnectionInfo.Id, sendRumble),
+                    OnClose = closeRoutine,
+                    OnMessage = stringMsg,
+                    OnBinary = binMsg,
+                };
+
+                // TODO: Temporary, needs to be done while instantiating a player object
+                ctx.Initialize(socket);
             });
         }
 
         // https://learn.microsoft.com/en-us/dotnet/api/system.consolecanceleventargs?view=net-7.0
-        Console.CancelKeyPress += new ConsoleCancelEventHandler((sender, args)=>{
+        Console.CancelKeyPress += new ConsoleCancelEventHandler((sender, args) =>
+        {
             Console.WriteLine("Interrupt signal hit, closing connections...");
+
             //Close the connection cleanly. C# doesn't seem to like that this could potentially be null, so it's making me do this -_-
-            if(manualClose != null) manualClose();
+            if (manualClose != null) manualClose();
         });
 
         // Very basic loop to keep the program alive. It's event driven, so this loop won't impact anything as things are happenning in other threads.
-        while(true) Thread.Sleep(1000);
+        while (true) Thread.Sleep(1000);
     }
 }
