@@ -4,6 +4,20 @@ In this doc, the goal will be to spell out the main properties of a connection. 
 
 In the end, this should provide someone enough info to create their own implementation of either client, or server, without having to reference the code itself.
 
+# Resources for Websockets
+
+* [C#](https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/websockets)
+* [C# Fleck](https://github.com/statianzo/Fleck)
+    * It's evident that this has aged quite a bit. It may make sense to move away to microsoft libraries
+* [JavaScript ws module](https://www.npmjs.com/package/ws)
+* [JavaScript bun module](https://bun.com/docs/runtime/http/websockets)
+* [Godot](https://docs.godotengine.org/en/stable/tutorials/networking/websocket.html)
+* [Rust](https://crates.io/crates/tungstenite)
+
+It's about 50/50 if a lanaguage has a native implementation or not. C# now as of this writing makes use of a fully custom implementation, meaning we can move *away* from Fleck. Rust has a super popular libaray called `tungstenite`. JS has the `WS` module, but moving to `bun` is going to be better for future projects, so using those libraries might be more useful
+
+`Godot` is special in that it has native implementations already baked into the GDScript Language. (Both client & server!)
+
 # Index of Buttons, Joysticks, and Triggers
 
 For the server to know what button is being pressed, it needs an index. This table is based on the requirements of ViGEm, and then adding onto it to accomodate joysticks & triggers (which aren't indexed like a button). It's done this way for consistency for this custom protocol
@@ -215,8 +229,81 @@ What this may result in, is the ability to do both, with context inferrence taki
 
 This doc will therefore assume player index is at the end of this JSON Array
 
-## Selecting a player
+## Selecting a controller
+
+> This is subject to change, since this feature hasn't been implemented
+
+> Only operational in V2 and up. V1 should in theory just silently ignore it. Upgrade to the new one!
+
+A client decides to change the current controller. The body of this message will be a JSON Object, with the controller they wish to switch to.
+
+The server should know already who's switching to what because of existing connection context
+
+## Where
+
+| Key          | Value              |
+|--------------|--------------------|
+| "controller" | `0`, `1`, `2`, `3` |
+
+### Examples
+
+#### JavaScript
+
+```js
+// Switch to controller 1
+controller.send(JSON.stringify(
+    {
+        "controller": 0
+    }
+));
+```
+
+#### GDScript
+
+```gd
+# Switch to controller 2
+var resStr = "{ \"controller\":" + str(1) + "}"
+client.send_text(resStr)
+```
+
+#### C#
+
+```cs
+// Switch to controller 3
+server[0].Send("{\"controller\":2}");
+```
 
 # Server -> client
 
-## Vibration
+These are calls the server sends back to the client. For the most part, this does not happen very often as the server tends to just do it's job with minimal fuss.
+
+Though, future implementation may involve sending messages back to the server, or notifying that something happened. (e.g you are now connected as player 3!)
+
+Examples documented here will be mainly in C#, since that's the server implementation langauge for godotGem.
+
+## Rumble / Vibration
+
+An array of bytes, indicating the controller should be vibrating.
+
+The XBox 360 controller always has a small moter & a large motor. On XBox One controller + series, they also have trigger motors, but they are not accessible using the ViGEm API.
+
+Regardless of what controller it tends to be, godot typically handles this well across the vast range of supported controllers.
+
+### Where:
+
+|Index | Name              | Potential Values   |
+|------|-------------------|--------------------|
+| `0`  | Controller Number | `0`, `1`, `2`, `3` |
+| `1`  | Small Motor       | Range: `0` - `255` |
+| `1`  | Large Motor       | Range: `0` - `255` |
+
+### Examples
+
+#### C#
+
+```cs
+// Full Throttle!
+byte[] rumble = { 0, 255, 255 };
+socket.Send(rumble);
+```
+
