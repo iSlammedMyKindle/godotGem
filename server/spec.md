@@ -126,7 +126,7 @@ A button press is an array of bytes, with a size of 3. Example:
 [ 0, 11, 255 ]
 ```
 
-Where:
+### Where
 
 | Index | Name              | Potential Values                                |
 |-------|-------------------|-------------------------------------------------|
@@ -291,11 +291,11 @@ Regardless of what controller it tends to be, godot typically handles this well 
 
 ### Where:
 
-|Index | Name              | Potential Values   |
-|------|-------------------|--------------------|
-| `0`  | Controller Number | `0`, `1`, `2`, `3` |
-| `1`  | Small Motor       | Range: `0` - `255` |
-| `1`  | Large Motor       | Range: `0` - `255` |
+| Index | Name              | Potential Values   |
+|-------|-------------------|--------------------|
+| `0`   | Controller Number | `0`, `1`, `2`, `3` |
+| `1`   | Small Motor       | Range: `0` - `255` |
+| `1`   | Large Motor       | Range: `0` - `255` |
 
 ### Examples
 

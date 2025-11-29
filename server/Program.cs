@@ -14,8 +14,8 @@ using System.Net.WebSockets;
 class Player
 {
     // Define variables
-    private Guid id;
-    private byte playerNumber;
+    public Guid id;
+    public byte playerNumber;
     private IWebSocketConnection socket;
 
     public Player(IWebSocketConnection socket, Guid id, SocketCtx ctx, byte playerNumber)
@@ -50,11 +50,106 @@ class SocketCtx
     }
 }
 
+static class serverInstance
+{
+    public static Dictionary<Guid, Player> players = new Dictionary<Guid, Player>();
+    public static IXbox360Controller[] controllers = new IXbox360Controller[4];
+
+    public static int PlayerCount
+    {
+        get
+        {
+            return players.Count;
+        }
+    }
+
+    public static byte[] PlayersPerController
+    {
+        get
+        {
+            byte[] counts = [0, 0, 0, 0];
+
+            foreach (Player p in players.Values)
+            {
+                counts[p.playerNumber - 1]++;
+            }
+
+            return counts;
+        }
+    }
+
+    public static void InitControllers()
+    {
+        for (int i = 0; i < controllers.Length; i++)
+        {
+            controllers[i] = new ViGEmClient().CreateXbox360Controller();
+        }
+    }
+
+    // Given a new player, when they are added to the server, allow them to use a controller not in-use (including ones not turned on yet)
+    public static void AddPlayerToServer(Player newPlayer)
+    {
+        // Loop through all quantities of controllers. If we find that all of them are being used, increment up
+        bool connected = false;
+        for (byte i = 0; !connected; i++)
+        {
+            foreach (byte count in PlayersPerController)
+            {
+                if (count != i) continue;
+                if (count == 0) controllers[count].Connect();
+
+                players.Add(newPlayer.id, newPlayer);
+                newPlayer.playerNumber = count;
+                connected = true;
+                break;
+            }
+        }
+    }
+
+    public static void RemovePlayerFromServer(Player player)
+    {
+        players.Remove(player.id);
+        DisconnectControllerAt(player.playerNumber);
+    }
+
+    // Go through the routine of disonnecting a controller, only if the index *after* lacks a player count
+    public static void DisconnectControllerAt(byte index)
+    {
+        byte[] ppc = PlayersPerController;
+        bool noMorePlayers = ppc[index] == 0;
+        bool nextIndexEmpty = ppc[index + 1] == 0;
+        bool atMaxPlayerCount = index == ppc.Length;
+
+        // Given a disconnected player, if there is no one playing the controller number above, OR we're at max players, diconnect the controller if that was the last person using it.
+        if (
+            (atMaxPlayerCount && noMorePlayers) ||
+            nextIndexEmpty && noMorePlayers
+        )
+        {
+            controllers[index - 1].Disconnect();
+        }
+    }
+
+    public static void SwitchPlayerToController(Player player, byte newControllerIndex)
+    {
+        // Switch the player to the new controller
+        player.playerNumber = newControllerIndex;
+
+        // Connect the new controller if needed
+        if (PlayersPerController[newControllerIndex] == 0)
+            controllers[newControllerIndex - 1].Connect();
+
+        // Disconnect from the old controller if needed
+        DisconnectControllerAt(player.playerNumber);
+    }
+}
+
 class Program
 {
 
     // We don't have anymore buttons above index 14, so these will be used to determine which axis is being detected.
-    static Dictionary<byte, Xbox360Property> analogMap = new Dictionary<byte, Xbox360Property>{
+    static readonly Dictionary<byte, Xbox360Property> analogMap = new()
+    {
         {15, Xbox360Axis.LeftThumbX},
         {16, Xbox360Axis.LeftThumbY},
         {17, Xbox360Axis.RightThumbX},
@@ -62,8 +157,6 @@ class Program
         {19, Xbox360Slider.LeftTrigger},
         {20, Xbox360Slider.RightTrigger}
     };
-
-    static IXbox360Controller[] controllers = new IXbox360Controller[4];
 
     static IXbox360Controller controller = new ViGEmClient().CreateXbox360Controller();
     static byte connected = 0;
@@ -220,10 +313,7 @@ class Program
         bool bridgeMode = false; //Bool here because that collection of if-statements would make things cluttered if it lived there
 
         // Initialize controllers
-        for (int i = 0; i < controllers.Count(); i++)
-        {
-            controllers[i] = new ViGEmClient().CreateXbox360Controller();
-        }
+        serverInstance.InitControllers();
 
         if (args.Length > 0)
         {
