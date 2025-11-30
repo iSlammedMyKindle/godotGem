@@ -3,6 +3,7 @@ using Nefarius.ViGEm.Client.Targets;
 using Nefarius.ViGEm.Client.Targets.Xbox360;
 using System.Text.Json;
 using System.Text;
+using Constants;
 
 //Server mode
 using Fleck;
@@ -10,153 +11,8 @@ using Fleck;
 //Client Mode
 using System.Net.WebSockets;
 
-// This is a wrapper surrounding common properties of a player. This is not a controller, and in fact they are separate entities
-class Player
-{
-    // Define variables
-    public Guid id;
-    public byte playerNumber;
-    private IWebSocketConnection socket;
-
-    public Player(IWebSocketConnection socket, Guid id, SocketCtx ctx, byte playerNumber)
-    {
-        this.id = id;
-        this.playerNumber = playerNumber;
-        this.socket = socket;
-
-        ctx.Initialize(this.socket);
-    }
-
-    // Setup
-    public void SendRumble(byte[] rumbleData)
-    {
-        this.socket.Send(rumbleData);
-    }
-}
-
-class SocketCtx
-{
-    public required Action OnOpen;
-    public required Action OnClose;
-    public required Action<string> OnMessage;
-    public required Action<byte[]> OnBinary;
-
-    public void Initialize(IWebSocketConnection socket)
-    {
-        socket.OnOpen = OnOpen;
-        socket.OnClose = OnClose;
-        socket.OnMessage = OnMessage;
-        socket.OnBinary = OnBinary;
-    }
-}
-
-static class serverInstance
-{
-    public static Dictionary<Guid, Player> players = new Dictionary<Guid, Player>();
-    public static IXbox360Controller[] controllers = new IXbox360Controller[4];
-
-    public static int PlayerCount
-    {
-        get
-        {
-            return players.Count;
-        }
-    }
-
-    public static byte[] PlayersPerController
-    {
-        get
-        {
-            byte[] counts = [0, 0, 0, 0];
-
-            foreach (Player p in players.Values)
-            {
-                counts[p.playerNumber - 1]++;
-            }
-
-            return counts;
-        }
-    }
-
-    public static void InitControllers()
-    {
-        for (int i = 0; i < controllers.Length; i++)
-        {
-            controllers[i] = new ViGEmClient().CreateXbox360Controller();
-        }
-    }
-
-    // Given a new player, when they are added to the server, allow them to use a controller not in-use (including ones not turned on yet)
-    public static void AddPlayerToServer(Player newPlayer)
-    {
-        // Loop through all quantities of controllers. If we find that all of them are being used, increment up
-        bool connected = false;
-        for (byte i = 0; !connected; i++)
-        {
-            foreach (byte count in PlayersPerController)
-            {
-                if (count != i) continue;
-                if (count == 0) controllers[count].Connect();
-
-                players.Add(newPlayer.id, newPlayer);
-                newPlayer.playerNumber = count;
-                connected = true;
-                break;
-            }
-        }
-    }
-
-    public static void RemovePlayerFromServer(Player player)
-    {
-        players.Remove(player.id);
-        DisconnectControllerAt(player.playerNumber);
-    }
-
-    // Go through the routine of disonnecting a controller, only if the index *after* lacks a player count
-    public static void DisconnectControllerAt(byte index)
-    {
-        byte[] ppc = PlayersPerController;
-        bool noMorePlayers = ppc[index] == 0;
-        bool nextIndexEmpty = ppc[index + 1] == 0;
-        bool atMaxPlayerCount = index == ppc.Length;
-
-        // Given a disconnected player, if there is no one playing the controller number above, OR we're at max players, diconnect the controller if that was the last person using it.
-        if (
-            (atMaxPlayerCount && noMorePlayers) ||
-            nextIndexEmpty && noMorePlayers
-        )
-        {
-            controllers[index - 1].Disconnect();
-        }
-    }
-
-    public static void SwitchPlayerToController(Player player, byte newControllerIndex)
-    {
-        // Switch the player to the new controller
-        player.playerNumber = newControllerIndex;
-
-        // Connect the new controller if needed
-        if (PlayersPerController[newControllerIndex] == 0)
-            controllers[newControllerIndex - 1].Connect();
-
-        // Disconnect from the old controller if needed
-        DisconnectControllerAt(player.playerNumber);
-    }
-}
-
 class Program
 {
-
-    // We don't have anymore buttons above index 14, so these will be used to determine which axis is being detected.
-    static readonly Dictionary<byte, Xbox360Property> analogMap = new()
-    {
-        {15, Xbox360Axis.LeftThumbX},
-        {16, Xbox360Axis.LeftThumbY},
-        {17, Xbox360Axis.RightThumbX},
-        {18, Xbox360Axis.RightThumbY},
-        {19, Xbox360Slider.LeftTrigger},
-        {20, Xbox360Slider.RightTrigger}
-    };
 
     static IXbox360Controller controller = new ViGEmClient().CreateXbox360Controller();
     static byte connected = 0;
@@ -217,11 +73,11 @@ class Program
         if (resArray.RootElement.ValueKind == JsonValueKind.Array)
         {
             //Joystick X
-            controller.SetAxisValue((Xbox360Axis)analogMap[(byte)resArray.RootElement[0].GetInt16()],
+            controller.SetAxisValue((Xbox360Axis)Mappings.ANALOG_MAP[(byte)resArray.RootElement[0].GetInt16()],
             resArray.RootElement[1].GetInt16());
 
             //Joystick Y
-            controller.SetAxisValue((Xbox360Axis)analogMap[(byte)(resArray.RootElement[0].GetInt16() + 1)],
+            controller.SetAxisValue((Xbox360Axis)Mappings.ANALOG_MAP[(byte)(resArray.RootElement[0].GetInt16() + 1)],
             resArray.RootElement[2].GetInt16());
         }
     }
@@ -230,8 +86,16 @@ class Program
     static void binMsg(byte[] message)
     {
         Console.WriteLine(message[0].ToString() + ' ' + message[1].ToString() + ' ' + message[2].ToString());
-        if (message[1] < 18) controller.SetButtonState(message[1], message[2] == 255);
-        else if (message[1] == 19 || message[1] == 20) controller.SetSliderValue((Xbox360Slider)analogMap[message[1]], message[2]);
+        if (message[1] < 18)
+            controller.SetButtonState(message[1], message[2] == 255);
+
+        else if (message[1] == 19 || message[1] == 20)
+        {
+            controller.SetSliderValue(
+                (Xbox360Slider)Mappings.ANALOG_MAP[message[1]],
+                message[2]
+            );
+        }
     }
 
     private static async void connectToBridge(string address)
