@@ -8,19 +8,31 @@ class Player
     public byte playerNumber;
     private IWebSocketConnection socket;
 
-    public Player(IWebSocketConnection socket, Guid id, SocketCtx ctx, byte playerNumber)
+    public Player(IWebSocketConnection socket, Guid id, SocketCtx? ctx = null, byte playerNumber = 0)
     {
         this.id = id;
         this.playerNumber = playerNumber;
         this.socket = socket;
 
-        ctx.Initialize(this.socket);
+        if (ctx != null)
+            ctx.Initialize(this.socket);
+    }
+
+    // Used in places where a catch-22 is hit and we need to self-reference the player within the context of the socket
+    public void InitSocket(SocketCtx value)
+    {
+        value.Initialize(socket);
+    }
+
+    public void CloseSocket()
+    {
+        socket.Close();
     }
 
     // Setup
     public void SendRumble(byte[] rumbleData)
     {
-        this.socket.Send(rumbleData);
+        socket.Send(rumbleData);
     }
 }
 

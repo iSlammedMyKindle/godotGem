@@ -33,6 +33,22 @@ static class serverInstance
         for (int i = 0; i < controllers.Length; i++)
         {
             controllers[i] = new ViGEmClient().CreateXbox360Controller();
+
+            // If we receive feedback, cycle through all players using the controller & send that feedback
+            controllers[i].FeedbackReceived += (controller, motorActivity) =>
+            {
+                byte[] rumble = { 0, motorActivity.SmallMotor, motorActivity.LargeMotor };
+
+                foreach (Player player in players.Values)
+                {
+                    if (player.playerNumber == i)
+                    {
+                        player.SendRumble(rumble);
+                    }
+                }
+
+                Console.WriteLine("M " + i + " " + motorActivity.SmallMotor + " " + motorActivity.LargeMotor);
+            };
         }
     }
 
@@ -51,6 +67,7 @@ static class serverInstance
                 players.Add(newPlayer.id, newPlayer);
                 newPlayer.playerNumber = count;
                 connected = true;
+                Console.WriteLine("New player connected to controller " + (count + 1) + "!");
                 break;
             }
         }
@@ -60,6 +77,7 @@ static class serverInstance
     {
         players.Remove(player.id);
         DisconnectControllerAt(player.playerNumber);
+        player.CloseSocket();
     }
 
     // Go through the routine of disonnecting a controller, only if the index *after* lacks a player count
