@@ -216,19 +216,23 @@ class Program
                 {
                     //Remove this connection from the list of connections
                     if (newPlayer != null)
+                    {
                         serverInstance.RemovePlayerFromServer(newPlayer);
+                        Console.WriteLine("Connection at " + socket.ConnectionInfo.ClientIpAddress + " closed");
+                    }
                 };
 
                 //This webSocket library does the Lord's work and automatically detects and parses strings :D
                 var ctx = new SocketCtx()
                 {
-                    OnOpen = () => Console.WriteLine("New connection at " + socket.ConnectionInfo.Origin),
+                    OnOpen = () => Console.WriteLine("New connection at " + socket.ConnectionInfo.ClientIpAddress),
                     OnClose = closeRoutine,
                     OnMessage = stringMsg,
                     OnBinary = binMsg,
                 };
 
                 newPlayer.InitSocket(ctx);
+                serverInstance.AddPlayerToServer(newPlayer);
             });
         }
 

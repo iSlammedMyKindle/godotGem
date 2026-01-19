@@ -26,7 +26,8 @@ class Player
 
     public void CloseSocket()
     {
-        socket.Close();
+        if (socket.IsAvailable)
+            socket.Close();
     }
 
     // Setup
