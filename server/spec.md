@@ -307,3 +307,41 @@ byte[] rumble = { 0, 255, 255 };
 socket.Send(rumble);
 ```
 
+## Server message
+
+A JSON object that lets the client know either the player's controller has changed, or there's something important to point out (e.g you were connected!)
+
+`announcement` is going to be the message that pops up above the connection address. One possible statistic that could be displayed is a number showing how many players are using your same controller (e.g 1 other player is also using this controller)
+
+`controller` is an automatically assigned controller from the server's end. The only time this would happen conventionally would be upon initial connection. In theory though a modified server could use this for the purpose of making mischief (e.g everyone's controllers are shuffled in a party game)
+
+> Note: Only a V2 capability
+
+### Where
+
+| Key            | Value                                     |
+|----------------|-------------------------------------------|
+| `announcement` | `String`                                  |
+| `controller`   | `Byte` containing a controller assignment |
+
+### Examples
+
+#### C#
+
+```cs
+// Switch to controller 3, announce "Hello world!"
+server[0].Send("{\"announcement\":\"Hello world!\" \"controller\":2}");
+```
+#### JavaScript
+
+```js
+// Switch to controller 1, say "connected as player 1!"
+
+const playerNum = 0;
+controller.send(JSON.stringify(
+    {
+        "announcement": "Connected as Player " + (playerNum + 1) + "!",
+        "controller": playerNum
+    }
+));
+```
