@@ -227,8 +227,8 @@ class Program
                 {
                     OnOpen = () => Console.WriteLine("New connection at " + socket.ConnectionInfo.ClientIpAddress),
                     OnClose = closeRoutine,
-                    OnMessage = stringMsg,
-                    OnBinary = binMsg,
+                    OnMessage = (msg) => serverInstance.stringMsg(msg, newPlayer),
+                    OnBinary = (msg) => serverInstance.binMsg(msg, newPlayer),
                 };
 
                 newPlayer.InitSocket(ctx);
