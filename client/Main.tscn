@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cmrkjib5bk7xi"]
+[gd_scene format=3 uid="uid://cmrkjib5bk7xi"]
 
 [ext_resource type="Script" uid="uid://3cnt4vye7q7" path="res://Main.gd" id="1"]
 [ext_resource type="Script" uid="uid://bpneym18dt1bn" path="res://primaryUI/connectLabel.gd" id="2"]
@@ -167,18 +167,18 @@ _data = {
 &"fade": SubResource("1")
 }
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1311478424]
 script = ExtResource("1")
 
-[node name="Bg" parent="." instance=ExtResource("2_03owx")]
+[node name="Bg" parent="." unique_id=1236897164 instance=ExtResource("2_03owx")]
 
-[node name="gamepadUI" parent="." instance=ExtResource("3")]
+[node name="gamepadUI" parent="." unique_id=706088751 instance=ExtResource("3")]
 position = Vector2(88, 104)
 
-[node name="HUD" type="Node2D" parent="."]
+[node name="HUD" type="Node2D" parent="." unique_id=1053617177]
 script = ExtResource("2_c6i3y")
 
-[node name="urlToConnect" type="TextEdit" parent="HUD"]
+[node name="urlToConnect" type="TextEdit" parent="HUD" unique_id=1612211688]
 offset_left = 552.0
 offset_top = 72.0
 offset_right = 777.0
@@ -191,17 +191,25 @@ caret_blink = true
 caret_multiple = false
 metadata/_edit_use_anchors_ = true
 
-[node name="connectionStatus" type="Label" parent="HUD"]
-offset_left = 488.0
+[node name="connectionStatus" type="Label" parent="HUD" unique_id=568467499]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 472.0
 offset_top = 24.0
-offset_right = 837.0
-offset_bottom = 66.0
+offset_right = 845.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("6_j4qnp")
 text = "Connect to this address:"
+horizontal_alignment = 1
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true
 
-[node name="BlinderBtn" type="Button" parent="HUD"]
+[node name="BlinderBtn" type="Button" parent="HUD" unique_id=2076502761]
 offset_left = 432.0
 offset_top = 72.0
 offset_right = 544.0
@@ -210,7 +218,7 @@ theme = ExtResource("6_j4qnp")
 text = "Blinder"
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="HUD"]
+[node name="Button" type="Button" parent="HUD" unique_id=273291566]
 offset_left = 784.0
 offset_top = 72.0
 offset_right = 920.0
@@ -219,7 +227,7 @@ theme = ExtResource("6_j4qnp")
 text = "Connect!"
 metadata/_edit_use_anchors_ = true
 
-[node name="Rylan" type="Sprite2D" parent="HUD"]
+[node name="Rylan" type="Sprite2D" parent="HUD" unique_id=423651283]
 visible = false
 position = Vector2(605, 655)
 scale = Vector2(0.5, 0.5)
@@ -227,15 +235,13 @@ texture = ExtResource("4")
 centered = false
 script = ExtResource("6")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD/Rylan"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD/Rylan" unique_id=1012431835]
 stream = ExtResource("5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Rylan"]
-libraries = {
-&"": SubResource("AnimationLibrary_trn2v")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Rylan" unique_id=401333747]
+libraries/ = SubResource("AnimationLibrary_trn2v")
 
-[node name="Settings" type="TextureButton" parent="HUD"]
+[node name="Settings" type="TextureButton" parent="HUD" unique_id=1967309450]
 offset_left = 1184.0
 offset_top = 2.00002
 offset_right = 1484.0
@@ -245,34 +251,30 @@ texture_normal = ExtResource("10_20pc6")
 texture_pressed = ExtResource("11_5vvyt")
 script = ExtResource("12_c6i3y")
 
-[node name="Menu" parent="HUD/Settings" instance=ExtResource("13_c2ibq")]
+[node name="Menu" parent="HUD/Settings" unique_id=51845398 instance=ExtResource("13_c2ibq")]
 position = Vector2(-3790.66, -2500)
 scale = Vector2(3.20157, 3.20157)
 
-[node name="SettingsAnimations" type="AnimationPlayer" parent="HUD/Settings"]
-libraries = {
-&"": SubResource("AnimationLibrary_j4qnp")
-}
+[node name="SettingsAnimations" type="AnimationPlayer" parent="HUD/Settings" unique_id=1027171482]
+libraries/ = SubResource("AnimationLibrary_j4qnp")
 
-[node name="Blinder" type="ColorRect" parent="."]
+[node name="Blinder" type="ColorRect" parent="." unique_id=952805823]
 visible = false
 offset_right = 1280.0
 offset_bottom = 800.0
 color = Color(0, 0, 0, 0)
 
-[node name="blinderAnimation" type="AnimationPlayer" parent="Blinder"]
+[node name="blinderAnimation" type="AnimationPlayer" parent="Blinder" unique_id=525552592]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_03owx")
-}
+libraries/ = SubResource("AnimationLibrary_03owx")
 
-[node name="saveLogic" type="Node" parent="."]
+[node name="saveLogic" type="Node" parent="." unique_id=1796650952]
 editor_description = "Intentionally on the bottom because godot loads things top-down
 
 Once everything is loaded in the scene, there will be a blast that sends the save data to all nodes. This can't be done if this node is on the top of the tree... so DON'T MOVE IT! :>"
 script = ExtResource("2_c2ibq")
 
-[node name="firstTimeRun" parent="." instance=ExtResource("8")]
+[node name="firstTimeRun" parent="." unique_id=1319928637 instance=ExtResource("8")]
 visible = false
 
 [connection signal="pressed" from="HUD/BlinderBtn" to="." method="_on_BlinderBtn_pressed"]

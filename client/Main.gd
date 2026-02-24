@@ -60,9 +60,6 @@ func _ready():
 	
 	# Player select logic, as seen in player_select.gd
 	add_to_group('player_select')
-	
-	client.connect("data_received", Callable(self, "_on_data"))
-		
 
 func _process(_delta):
 	client.poll()
@@ -73,6 +70,9 @@ func _process(_delta):
 			connecting = false;
 			$HUD/connectionStatus.text = "connected to " + $HUD/urlToConnect.text;
 			config.set_val("general", "ip", $HUD/urlToConnect.text)
+		# Old function that'll be used in this slightly new method according to 4.6 docs
+		while client.get_available_packet_count():
+			on_data()
 	elif state == WebSocketPeer.STATE_CLOSED:
 		connected = false
 
@@ -109,17 +109,40 @@ func _physics_process(_delta):
 			
 		trigIndex += trigIndex + 1;
 
-func _on_data():
-	#So far this is for rumble data only. First index of the array is target controller, second is small motor, and third is the large motor
-	if ignoreVibrationBool:
-		return
-		
-	var data = client.get_peer(1).get_packet()
-	if data[1] == 0 and data[2] == 0:
-		Input.stop_joy_vibration(0)
+func on_data():
+	# Alright, so we get the data, but we're going to "cheaply" guess what we're receiving - if the length is 3, we have a
+	# Byte array, but otherwise, we're going to assume strings. Not secure by the slightest, but ultimately that's an easy way to decipher it
+	var isString = false
+	var data: PackedByteArray = client.get_packet()
+	var decodedData
+	
+	if data.size() > 3:
+		isString = true
+		decodedData = data.get_string_from_utf8()
+	else: decodedData = data
+	
+	# This is JSON and we'll need to parse it to get the contents
+	if isString:
+		print(decodedData)
+		var res: Dictionary = JSON.parse_string(decodedData)
+		if res != null:
+			if typeof(res) == TYPE_DICTIONARY:
+				if res.has("announcement"):
+					$HUD/connectionStatus.text = res["announcement"]
+				if res.has("controller"):
+					get_tree().call_group("player_select_ui", "setPlayerNumber", res["controller"] + 1)
+			else: print("JSON not what we expected")
+		else: print("Whoop, well that wasn't JSON at all, skipping this one")
 		return
 	
-	Input.start_joy_vibration(0, (1 / 255.0) * data[1], (1 / 255.0) * data[2])
+	# Logic for vibrating the controller
+	# First index of the array is target controller, second is small motor, and third is the large motor
+	if ignoreVibrationBool: return
+	
+	if decodedData[1] == 0 and decodedData[2] == 0:
+		Input.stop_joy_vibration(0)
+	else: Input.start_joy_vibration(0, (1 / 255.0) * decodedData[1], (1 / 255.0) * decodedData[2])
+	
 
 func _on_Button_pressed():
 	if connected:
