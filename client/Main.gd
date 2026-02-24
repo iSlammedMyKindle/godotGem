@@ -5,6 +5,7 @@ var connected = false
 var connecting = false
 var config = ConfigFile.new()
 var ignoreVibrationBool = false
+var currentController = 0
 
 # This list is under the mercy of ViGEm. The buttons are sorted out here based on it's indexing, *not* godot's
 var evtList = {
@@ -100,7 +101,7 @@ func _physics_process(_delta):
 		if previousTriggerValues[trigIndex] != strength:
 			previousTriggerValues[trigIndex] = strength
 			var resArray = PackedByteArray();
-			resArray.push_back(0)
+			resArray.push_back(currentController)
 			resArray.push_back(19 + trigIndex)
 			resArray.push_back(strength)
 
@@ -152,7 +153,7 @@ func toggle(btn: String, press: bool):
 	if not connected: return
 	
 	var controllerBuffer = PackedByteArray()
-	controllerBuffer.push_back(0) #This byte is for the controller number (P1, P2, etc)
+	controllerBuffer.push_back(currentController) #This byte is for the controller number (P1, P2, etc)
 	controllerBuffer.push_back(evtList[btn]) # controller button index
 	controllerBuffer.push_back(255 if press else 0) # Specifies input strength. If this is a button, just do either 0, or 255
 
@@ -160,3 +161,8 @@ func toggle(btn: String, press: bool):
 
 func player_change(player_number: int):
 	print('Selected Player: ' + str(player_number))
+	if connected:
+		currentController = player_number - 1
+		client.send_text(JSON.stringify({
+			"controller": currentController
+		}))
