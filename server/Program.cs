@@ -225,14 +225,18 @@ class Program
                 //This webSocket library does the Lord's work and automatically detects and parses strings :D
                 var ctx = new SocketCtx()
                 {
-                    OnOpen = () => Console.WriteLine("New connection at " + socket.ConnectionInfo.ClientIpAddress),
+                    OnOpen = () =>
+                    {
+                        serverInstance.AddPlayerToServer(newPlayer);
+                        Console.WriteLine("New connection at " + socket.ConnectionInfo.ClientIpAddress);
+                        newPlayer.SendMessage("Connected to the server as Player " + (newPlayer.playerNumber + 1) + "!", true);
+                    },
                     OnClose = closeRoutine,
                     OnMessage = (msg) => serverInstance.stringMsg(msg, newPlayer),
                     OnBinary = (msg) => serverInstance.binMsg(msg, newPlayer),
                 };
 
                 newPlayer.InitSocket(ctx);
-                serverInstance.AddPlayerToServer(newPlayer);
             });
         }
 

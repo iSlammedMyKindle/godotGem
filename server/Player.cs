@@ -35,6 +35,19 @@ class Player
     {
         socket.Send(rumbleData);
     }
+
+    public void SendMessage(string? announcement = null, bool sendPlayerNumber = false)
+    {
+        // lang=json
+        string json = $$"""
+        {
+            {{(announcement != null ? "\"announcement\": \"" + announcement + "\"" : "")}},
+            {{(sendPlayerNumber ? "\"controller\": " + playerNumber : "")}}
+        }
+        """;
+
+        socket.Send(json);
+    }
 }
 
 class SocketCtx
