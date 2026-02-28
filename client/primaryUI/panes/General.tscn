@@ -1,20 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtx0a00ko6v14"]
+[gd_scene format=3 uid="uid://dtx0a00ko6v14"]
 
 [ext_resource type="Script" uid="uid://puk1jhcgk406" path="res://primaryUI/panes/general.gd" id="1_aigvo"]
 [ext_resource type="PackedScene" uid="uid://7i118uxxc6ox" path="res://primaryUI/elements/checkbox.tscn" id="2_34n8b"]
+[ext_resource type="PackedScene" uid="uid://cshjwyvpq0i2t" path="res://primaryUI/elements/playerSelect.tscn" id="3_34n8b"]
 
-[node name="General" type="Node2D"]
+[node name="General" type="Node2D" unique_id=296080340]
 script = ExtResource("1_aigvo")
 
-[node name="touchScreenButtons" parent="." instance=ExtResource("2_34n8b")]
+[node name="touchScreenButtons" parent="." unique_id=460452491 instance=ExtResource("2_34n8b")]
 visible = false
 position = Vector2(-32, 392)
 
-[node name="buttonSounds" parent="." instance=ExtResource("2_34n8b")]
-position = Vector2(-32, 392)
+[node name="buttonSounds" parent="." unique_id=606274010 instance=ExtResource("2_34n8b")]
+position = Vector2(-32, 264)
 
-[node name="turboFeedback" parent="." instance=ExtResource("2_34n8b")]
-position = Vector2(-32, 200)
+[node name="turboFeedback" parent="." unique_id=160280185 instance=ExtResource("2_34n8b")]
+position = Vector2(-32, 136)
 
-[node name="ignoreVibration" parent="." instance=ExtResource("2_34n8b")]
+[node name="ignoreVibration" parent="." unique_id=524332643 instance=ExtResource("2_34n8b")]
 position = Vector2(-32, 8)
+
+[node name="PlayerSelect" parent="." unique_id=943295156 instance=ExtResource("3_34n8b")]
+position = Vector2(80, 456)

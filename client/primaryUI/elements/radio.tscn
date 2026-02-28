@@ -1,23 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://0t21gdo7o5ri"]
+[gd_scene format=3 uid="uid://0t21gdo7o5ri"]
 
 [ext_resource type="Script" uid="uid://b6i6qrxrm2wkk" path="res://primaryUI/elements/radio.gd" id="1_tolk6"]
 [ext_resource type="Texture2D" uid="uid://c3hwbr1i5lsy5" path="res://assets/bullet.png" id="2_tolk6"]
 [ext_resource type="Texture2D" uid="uid://fut17cu5f12f" path="res://assets/bulletPressed.png" id="3_becxi"]
-
-[sub_resource type="SystemFont" id="SystemFont_wv16d"]
-font_names = PackedStringArray("Arial Black")
-subpixel_positioning = 0
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="4_becxi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
-font = SubResource("SystemFont_wv16d")
+font = ExtResource("4_becxi")
 font_size = 42
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Radio" type="Node2D"]
+[node name="Radio" type="Node2D" unique_id=935138039]
 script = ExtResource("1_tolk6")
 
-[node name="Box" type="TextureButton" parent="."]
+[node name="Box" type="TextureButton" parent="." unique_id=176517321]
 offset_left = 24.0
 offset_top = 48.0
 offset_right = 169.0
@@ -27,7 +24,7 @@ action_mode = 0
 texture_normal = ExtResource("2_tolk6")
 texture_pressed = ExtResource("3_becxi")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=2009911699]
 offset_left = 184.0
 offset_top = 80.0
 offset_right = 618.0

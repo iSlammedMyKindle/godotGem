@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bc0keobxw4aqk" path="res://gamepadUi/gamepadUi.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
+[ext_resource type="FontFile" uid="uid://2crfnkj8pv3a" path="res://assets/nimbus-sans-l/NimbusSanL-Bold.ttf" id="5_sc1dx"]
 [ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://primaryUI/Rylan.gd" id="6"]
+[ext_resource type="LabelSettings" uid="uid://b776ng5m3247v" path="res://godotgem_label_settings.tres" id="6_fpfj3"]
 [ext_resource type="Theme" uid="uid://cpowyoxndsvj1" path="res://Hud.tres" id="6_j4qnp"]
 [ext_resource type="PackedScene" uid="uid://bf3t5ws6wr4lt" path="res://primaryUI/firstTimeRun.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://bfm4c6lo00s4b" path="res://assets/menu.svg" id="10_20pc6"]
@@ -183,6 +185,7 @@ offset_left = 552.0
 offset_top = 72.0
 offset_right = 777.0
 offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("5_sc1dx")
 theme_override_font_sizes/font_size = 30
 text = "111.222.33.44"
 placeholder_text = "111.222.33.44"
@@ -205,6 +208,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_j4qnp")
 text = "Connect to this address:"
+label_settings = ExtResource("6_fpfj3")
 horizontal_alignment = 1
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true

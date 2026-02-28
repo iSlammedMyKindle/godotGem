@@ -6,6 +6,7 @@ var connecting = false
 var config = ConfigFile.new()
 var ignoreVibrationBool = false
 var currentController = 0
+var port = '9090'
 
 # This list is under the mercy of ViGEm. The buttons are sorted out here based on it's indexing, *not* godot's
 var evtList = {
@@ -44,10 +45,16 @@ func receive_save(save: Node, _status: int):
 	
 	if config.get_val("general", "hideGithubSplash") == null:
 		$firstTimeRun.visible = true
+	# Port
+	var configPort = config.get_val("general", "port")
+	port = configPort if not configPort == null else '9090'
 
 func update_save_val(sec, key, val):
-	if sec == 'general' and key == 'ignoreVibration':
-		ignoreVibrationBool = val
+	if sec == 'general':
+		if key == 'ignoreVibration':
+			ignoreVibrationBool = val
+		if key == 'port':
+			port = val if not val == null else '9090'
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,6 +82,7 @@ func _process(_delta):
 			on_data()
 	elif state == WebSocketPeer.STATE_CLOSED:
 		connected = false
+		get_tree().call_group("player_select_ui", "setVisibility", false)
 
 # Responsible for joysticks and trigger inputs
 func _physics_process(_delta):
@@ -130,6 +138,7 @@ func on_data():
 				if res.has("announcement"):
 					$HUD/connectionStatus.text = res["announcement"]
 				if res.has("controller"):
+					get_tree().call_group("player_select_ui", "setVisibility", true)
 					get_tree().call_group("player_select_ui", "setPlayerNumber", res["controller"] + 1)
 			else: print("JSON not what we expected")
 		else: print("Whoop, well that wasn't JSON at all, skipping this one")
@@ -154,12 +163,13 @@ func _on_Button_pressed():
 		$HUD/connectionStatus.text = "Connecting..."
 		print($HUD/urlToConnect.text)
 
-		var status = client.connect_to_url('ws://' + $HUD/urlToConnect.text + ':9090')
+		var status = client.connect_to_url('ws://' + $HUD/urlToConnect.text + ':' + port)
 		
 		connecting = true
 		if status != OK:
 			$HUD/connectionStatus.text = "Unable to connect: " + str(status)
 			connecting = false
+			get_tree().call_group("player_select_ui", "setVisibility", false)
 
 func _on_BlinderBtn_pressed():
 	$Blinder/blinderAnimation.play('fade')

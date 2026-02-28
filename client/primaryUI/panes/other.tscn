@@ -1,17 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://blewrsug707d6"]
+[gd_scene format=3 uid="uid://blewrsug707d6"]
 
 [ext_resource type="Script" uid="uid://hd3ctm5bhgjl" path="res://primaryUI/panes/other.gd" id="1_rb3hx"]
 [ext_resource type="PackedScene" uid="uid://7i118uxxc6ox" path="res://primaryUI/elements/checkbox.tscn" id="2_l84ud"]
-[ext_resource type="PackedScene" uid="uid://cshjwyvpq0i2t" path="res://primaryUI/elements/playerSelect.tscn" id="3_l84ud"]
+[ext_resource type="Script" uid="uid://bmlo7cym0xf8i" path="res://primaryUI/panes/connection_port.gd" id="3_1arwd"]
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="4_0j1xn"]
+[ext_resource type="FontFile" uid="uid://2crfnkj8pv3a" path="res://assets/nimbus-sans-l/NimbusSanL-Bold.ttf" id="5_l3gur"]
 
-[node name="Other" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_vrmua"]
+font = ExtResource("4_0j1xn")
+font_size = 42
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3, 3)
+
+[node name="Other" type="Node2D" unique_id=1211095120]
 script = ExtResource("1_rb3hx")
 
-[node name="keyToController" parent="." instance=ExtResource("2_l84ud")]
-position = Vector2(-32, 160)
+[node name="keyToController" parent="." unique_id=1896129666 instance=ExtResource("2_l84ud")]
+position = Vector2(-32, 256)
 
-[node name="buttonHeatMap" parent="." instance=ExtResource("2_l84ud")]
-position = Vector2(-32, 32)
+[node name="buttonHeatMap" parent="." unique_id=1346791155 instance=ExtResource("2_l84ud")]
+position = Vector2(-32, 64)
 
-[node name="PlayerSelect" parent="." instance=ExtResource("3_l84ud")]
-position = Vector2(80, 368)
+[node name="connectionPort" type="Node2D" parent="." unique_id=1993285721]
+position = Vector2(104, 448)
+script = ExtResource("3_1arwd")
+
+[node name="Label" type="Label" parent="connectionPort" unique_id=1134075535]
+offset_left = 16.0
+offset_top = 50.0
+offset_right = 372.0
+offset_bottom = 102.0
+text = "Connection Port:"
+label_settings = SubResource("LabelSettings_vrmua")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit" type="TextEdit" parent="connectionPort" unique_id=1898794733]
+offset_left = 400.0
+offset_top = 48.0
+offset_right = 504.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("5_l3gur")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "9090"
+
+[connection signal="text_changed" from="connectionPort/TextEdit" to="connectionPort" method="_on_text_edit_text_changed"]
