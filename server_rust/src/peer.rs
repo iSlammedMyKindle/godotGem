@@ -6,6 +6,7 @@ use tokio::net::TcpStream;
 use tokio_tungstenite::tungstenite::Message;
 use tracing::warn;
 use uuid::Uuid;
+use virtual_gamepad::GamepadUpdate;
 
 use crate::{
     State,
@@ -63,20 +64,24 @@ pub async fn handle_peer(state: Arc<State>, stream: TcpStream) {
 
     // Spawns a task that writes incoming events to the assigned controller.
     let handle_incoming = incoming.try_for_each(|msg| {
-        match msg.into_text() {
-            Err(err) => warn!("Error while processing incoming message: '{err}'"),
-            Ok(text) => match serde_json::from_str::<ClientMessage>(&text) {
-                Err(err) => warn!("Failed to deserialize client message: '{err}'"),
-                Ok(msg) => match msg {
-                    ClientMessage::ControllerInput { update, .. } => {
-                        if let Some(controller) =
-                            state.peers.read().get_assigned_controller(peer_id)
-                        {
-                            state.controllers.write().emit(controller, update);
-                        }
+        if msg.is_binary() {
+            let data = msg.into_data();
+            if data.len() == 6 {
+                if let Some(update) = GamepadUpdate::from_bytes(&data[..5]) {
+                    // TODO: check for controller override in input update
+                    if let Some(controller) = state.peers.read().get_assigned_controller(peer_id) {
+                        state.controllers.write().emit(controller, update);
                     }
+                }
+            }
+        } else {
+            match msg.into_text() {
+                Err(err) => warn!("Error while processing incoming message: '{err}'"),
+                Ok(text) => match serde_json::from_str::<ClientMessage>(&text) {
+                    Err(err) => warn!("Failed to deserialize client message: '{err}'"),
+                    Ok(_msg) => {}
                 },
-            },
+            }
         }
         future::ok(())
     });
@@ -88,7 +93,8 @@ pub async fn handle_peer(state: Arc<State>, stream: TcpStream) {
     // tells tokio to run both the send and receive futures
     future::select(handle_incoming, handle_outgoing).await;
 
-    // client has disconnected; clean up
+    // client has disconnected; remove their assigned controller and remove
+    // them from the peers map.
     if let Some(peer) = state.peers.write().peers.remove(&peer_id) {
         state.controllers.write().unassign(peer.controller, peer_id);
     }

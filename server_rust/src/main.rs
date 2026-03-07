@@ -13,9 +13,11 @@ mod types;
 #[derive(clap::Parser)]
 #[command(version, about, long_about = None)]
 struct Cli {
+    /// Defaults to 9090.
     #[arg(long)]
     port: Option<u16>,
 
+    /// Defaults to 4.
     #[arg(long)]
     controller_limit: Option<usize>,
 }
@@ -44,6 +46,10 @@ async fn main() -> Result<(), io::Error> {
 }
 
 /// Global (Shared) state of the Server.
+///
+/// # DEADLOCK WARNING:
+/// Attempting to acquire both the `peers` lock and `controllers` lock
+/// at the same time may cause a deadlock. Avoid acquiring both simultaneously.
 struct State {
     peers: RwLock<Peers>,
     controllers: RwLock<Controllers>,
