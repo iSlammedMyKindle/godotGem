@@ -3,6 +3,7 @@ use std::{io, sync::Arc};
 use clap::Parser;
 use parking_lot::RwLock;
 use tokio::net::TcpListener;
+use tracing::info;
 
 use crate::{controller::Controllers, peer::Peers};
 
@@ -24,8 +25,15 @@ struct Cli {
 
 #[tokio::main]
 async fn main() -> Result<(), io::Error> {
+    // Parse CLI Arguments
     let args = Cli::parse();
 
+    // Initialize logger
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::DEBUG)
+        .init();
+
+    // Construct global state
     let state = Arc::new(State {
         peers: RwLock::default(),
         controllers: RwLock::new(Controllers::new(args.controller_limit.unwrap_or(4))),
@@ -35,11 +43,12 @@ async fn main() -> Result<(), io::Error> {
     let addr = format!("0.0.0.0:{}", args.port.unwrap_or(9090));
     let try_socket = TcpListener::bind(&addr).await;
     let listener = try_socket.expect("Failed to bind");
-    println!("Listening on: {}", addr);
+    info!("Listening on: {}", listener.local_addr().unwrap());
 
     // Begin accepting clients.
-    while let Ok((stream, _)) = listener.accept().await {
-        tokio::spawn(peer::handle_peer(state.clone(), stream));
+    while let Ok((stream, addr)) = listener.accept().await {
+        info!("Accepted client connection from '{}'", addr);
+        tokio::spawn(peer::handle_peer(state.clone(), stream, addr));
     }
 
     Ok(())

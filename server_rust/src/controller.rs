@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 
+use tracing::debug;
 use virtual_gamepad::{GamepadType, GamepadUpdate, VirtualGamepad};
 
 use crate::peer::PeerId;
@@ -41,6 +42,7 @@ impl Controllers {
             let id = ControllerId(self.slots.len());
             let mut assignees = HashSet::new();
             assignees.insert(peer_id);
+            debug!("Creating new controller in slot '{id:?}'");
             self.slots.push(Controller {
                 gamepad: VirtualGamepad::new(GamepadType::Xbox360)
                     .expect("Failed to init controller"),
@@ -65,7 +67,12 @@ impl Controllers {
 
     pub fn emit(&mut self, controller: ControllerId, update: GamepadUpdate) {
         if let Some(slot) = self.slots.get_mut(controller.0) {
+            debug!("Emitting gamepad update '{update:?}' for controller '{controller:?}'");
             slot.gamepad.update(update);
+        } else {
+            debug!(
+                "Attempted to emit update '{update:?}', for controller '{controller:?}', but the controller does not exist."
+            );
         }
     }
 

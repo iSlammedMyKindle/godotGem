@@ -1,10 +1,10 @@
-use std::{collections::HashMap, sync::Arc};
+use std::{collections::HashMap, net::SocketAddr, sync::Arc};
 
 use futures_channel::mpsc::{UnboundedSender, unbounded};
 use futures_util::{StreamExt, future, stream::TryStreamExt};
 use tokio::net::TcpStream;
 use tokio_tungstenite::tungstenite::Message;
-use tracing::warn;
+use tracing::{info, warn};
 use uuid::Uuid;
 use virtual_gamepad::GamepadUpdate;
 
@@ -37,7 +37,7 @@ pub struct Peer {
     pub controller: ControllerId,
 }
 
-pub async fn handle_peer(state: Arc<State>, stream: TcpStream) {
+pub async fn handle_peer(state: Arc<State>, stream: TcpStream, addr: SocketAddr) {
     // Create websocket from TCP Stream
     let websocket = tokio_tungstenite::accept_async(stream)
         .await
@@ -46,6 +46,7 @@ pub async fn handle_peer(state: Arc<State>, stream: TcpStream) {
     // Construct peer data and assign controller
     let peer_id = PeerId(Uuid::new_v4());
     let controller = state.controllers.write().assign(peer_id);
+    info!("Assigned controller '{controller:?}' to client '{addr:?}'");
     let (tx, rx) = unbounded::<Message>();
     let peer = Peer { tx, controller };
 
@@ -98,4 +99,6 @@ pub async fn handle_peer(state: Arc<State>, stream: TcpStream) {
     if let Some(peer) = state.peers.write().peers.remove(&peer_id) {
         state.controllers.write().unassign(peer.controller, peer_id);
     }
+
+    info!("Client disconnected: '{addr:?}'");
 }
