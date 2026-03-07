@@ -18,7 +18,7 @@ For Button and Analog Trigger inputs, the Y-axis value will be ignored entirely.
 You can find the full list of supported `GamepadButton` IDs [here](https://github.com/RylanYancey/virtual-gamepad/blob/0a18cf69ba40370df888af9608d57765b007d21f/src/lib.rs#L34). 
 
 **Binary Layout**\
-A controller update is an array of 6 bytes. The server will expect all 6 bytes to be present in the message, even they are unused. The X/Y axis values should be an f32 quantized as an i16. A value of 1.0 would become 32767, a value of -1.0 would become -32768. You can do this by just multiplying the float by 32767 and casting to a 16-bit signed integer. As mentioned above, the X-axis value acts as the pressure value for triggers, and as the activation value for buttons.
+A controller update is an array of 6 bytes. The server will expect all 6 bytes to be present in the message, even if they are unused. The X/Y axis values should be an f32 quantized as an i16. A value of 1.0 would become 32767, a value of -1.0 would become -32768. You can do this by just multiplying the float by 32767 and casting to a 16-bit signed integer. As mentioned above, the X-axis value acts as the pressure value for triggers, and as the activation value for buttons.
  - Gamepad Button ID (1 byte)
  - X-Axis value (2 bytes, quantized f32)
  - Y-Axis value (2 bytes, quantized f32)
