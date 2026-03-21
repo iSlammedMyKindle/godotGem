@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bc0keobxw4aqk" path="res://gamepadUi/gamepadUi.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
+[ext_resource type="PackedScene" uid="uid://debo13kwies2p" path="res://primaryUI/elements/hudBtn.tscn" id="5_kjvhd"]
 [ext_resource type="FontFile" uid="uid://2crfnkj8pv3a" path="res://assets/nimbus-sans-l/NimbusSanL-Bold.ttf" id="5_sc1dx"]
 [ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://primaryUI/Rylan.gd" id="6"]
 [ext_resource type="LabelSettings" uid="uid://b776ng5m3247v" path="res://godotgem_label_settings.tres" id="6_fpfj3"]
@@ -101,6 +102,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(3.20157, 3.20157)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Menu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_c6i3y"]
 resource_name = "toggle"
@@ -128,6 +141,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(3.202, 3.202), Vector2(3.202, 2.5), Vector2(3.202, 3.202)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Menu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j4qnp"]
@@ -163,6 +188,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.46666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_ui_visibility"
+}, {
+"args": [false],
+"method": &"set_ui_visibility"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_03owx"]
 _data = {
@@ -179,6 +221,8 @@ position = Vector2(88, 104)
 
 [node name="HUD" type="Node2D" parent="." unique_id=1053617177]
 script = ExtResource("2_c6i3y")
+
+[node name="HudBtn" parent="HUD" unique_id=1398882889 instance=ExtResource("5_kjvhd")]
 
 [node name="urlToConnect" type="TextEdit" parent="HUD" unique_id=1612211688]
 offset_left = 552.0
@@ -256,6 +300,7 @@ texture_pressed = ExtResource("11_5vvyt")
 script = ExtResource("12_c6i3y")
 
 [node name="Menu" parent="HUD/Settings" unique_id=51845398 instance=ExtResource("13_c2ibq")]
+visible = false
 position = Vector2(-3790.66, -2500)
 scale = Vector2(3.20157, 3.20157)
 
@@ -266,7 +311,7 @@ libraries/ = SubResource("AnimationLibrary_j4qnp")
 visible = false
 offset_right = 1280.0
 offset_bottom = 800.0
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="blinderAnimation" type="AnimationPlayer" parent="Blinder" unique_id=525552592]
 root_node = NodePath("../..")

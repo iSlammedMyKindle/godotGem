@@ -63,7 +63,7 @@ func _ready():
 	
 	# There's a group for each button, but a single group is going to fair better in order to get *all* of them
 	add_to_group('btnPresses')
-	$saveLogic.invoke_manual_receive(self)
+	$saveLogic.invoke_manual_receive(self )
 	
 	# Player select logic, as seen in player_select.gd
 	add_to_group('player_select')
@@ -178,17 +178,19 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and $Blinder.visible:
 		$Blinder/blinderAnimation.stop()
 		$Blinder/blinderAnimation.play_backwards('fade')
+		
+func set_ui_visibility(visible: bool):
+	$Bg.visible = visible
+	$gamepadUI.visible = visible
 
 func toggle(btn: String, press: bool):
-	
 	#print('btn ', btn, 'press ', str(press))
-	
 	if not connected: return
 	
 	var controllerBuffer = PackedByteArray()
-	controllerBuffer.push_back(currentController) #This byte is for the controller number (P1, P2, etc)
-	controllerBuffer.push_back(evtList[btn]) # controller button index
-	controllerBuffer.push_back(255 if press else 0) # Specifies input strength. If this is a button, just do either 0, or 255
+	controllerBuffer.push_back(currentController)  # This byte is for the controller number (P1, P2, etc)
+	controllerBuffer.push_back(evtList[btn])  # controller button index
+	controllerBuffer.push_back(255 if press else 0)  # Specifies input strength. If this is a button, just do either 0, or 255
 
 	client.send(controllerBuffer)
 

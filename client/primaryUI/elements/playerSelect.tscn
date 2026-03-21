@@ -68,6 +68,11 @@ offset_bottom = 40.0
 text = "Select Player"
 label_settings = SubResource("LabelSettings_8uwpd")
 
+[node name="disabledRect" type="ColorRect" parent="." unique_id=1402621656]
+offset_right = 520.0
+offset_bottom = 120.0
+color = Color(1, 1, 1, 0)
+
 [connection signal="pressed" from="ButtonL/TextureButton" to="." method="_on_button_l_pressed"]
 [connection signal="pressed" from="ButtonR/TextureButton" to="." method="_on_button_r_pressed"]
 

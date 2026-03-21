@@ -6,7 +6,7 @@ var enabledColor = Color('FFF')
 
 func _ready():
 	add_to_group("player_select_ui")
-	visible = false
+	modulate = Color("ffffff7f")
 
 func toggleDisable(element: TextureButton, disabled: bool):
 	element.disabled = disabled
@@ -28,4 +28,5 @@ func setPlayerNumber(playerNumber = 1):
 	toggleDisable($ButtonR/TextureButton, selectedPlayer == 4)
 
 func setVisibility(vb: bool = false):
-	visible = vb
+	$disabledRect.visible = not vb
+	modulate = Color("ffffff") if vb else Color("bdbdbd")

@@ -16,7 +16,6 @@ func _ready():
 	heat.polygon[1].y = bottom
 	
 func _process(_delta):
-	
 	var strength = Input.get_action_strength("TrigR" if name == "TrigR" else "TrigL")
 	
 	# Change the strength levels
@@ -26,10 +25,10 @@ func _process(_delta):
 	# Calculate the color of the bar
 	var redToGreen = strength <= .5
 	
-	if redToGreen: heat.color = Color(1 * (1 - (strength * 1.5) ), 1 * strength * 1.5, 0 )
+	if redToGreen: heat.color = Color(1 * (1 - (strength * 1.5)), 1 * strength * 1.5, 0)
 	
 	# Ohterwise Green to blue
-	else: heat.color = Color(0, 1 * (1 - (strength / 1.5) ), 1 * (strength / 1.5 ) )
+	else: heat.color = Color(0, 1 * (1 - (strength / 1.5)), 1 * (strength / 1.5))
 	
 	# Play bump animation if we hit full strength!
 	if strength == 1 and not popped:

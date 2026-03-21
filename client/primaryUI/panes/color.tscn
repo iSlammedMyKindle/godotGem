@@ -7,11 +7,12 @@
 [ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="6_4by7r"]
 [ext_resource type="Texture2D" uid="uid://b37bl6gragfix" path="res://assets/magentaIcon.png" id="6_8rukb"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_4by7r"]
+
 [sub_resource type="ButtonGroup" id="ButtonGroup_jb6ys"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_gqfor"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_xe4w6"]
+allow_unpress = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
 font = ExtResource("6_4by7r")
@@ -26,7 +27,7 @@ script = ExtResource("1_4by7r")
 position = Vector2(0, -56)
 
 [node name="Box" parent="Default" index="0" unique_id=176517321]
-button_group = SubResource("ButtonGroup_jb6ys")
+button_group = SubResource("ButtonGroup_4by7r")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="Default" index="1" unique_id=2009911699]
@@ -36,7 +37,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(0, 72)
 
 [node name="Box" parent="Green" index="0" unique_id=176517321]
-button_group = SubResource("ButtonGroup_gqfor")
+button_group = SubResource("ButtonGroup_jb6ys")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="Green" index="1" unique_id=2009911699]
@@ -46,7 +47,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(0, 208)
 
 [node name="Box" parent="Magenta" index="0" unique_id=176517321]
-button_group = SubResource("ButtonGroup_xe4w6")
+button_group = SubResource("ButtonGroup_gqfor")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="Magenta" index="1" unique_id=2009911699]
