@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://gamepadUi/buttonsAndSticks/sideButtonR.tscn" id="3_7yqh2"]
 [ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://gamepadUi/buttonsAndSticks/sideButtonL.tscn" id="3_tdk0p"]
 [ext_resource type="Texture2D" uid="uid://b7avr0e5dua5p" path="res://assets/controllerHousing.png" id="4_6thga"]
-[ext_resource type="Texture2D" uid="uid://3247mg2jwp0e" path="res://assets/controllerHousingShadow.png" id="4_bw2s0"]
 [ext_resource type="Script" uid="uid://cdxeicuaronjw" path="res://gamepadUi/controller_shadow.gd" id="5_021lf"]
 [ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://gamepadUi/buttonsAndSticks/dPad.tscn" id="5_rrs3a"]
 [ext_resource type="PackedScene" uid="uid://cnkrcitq2d0ui" path="res://gamepadUi/buttonsAndSticks/joystick.tscn" id="6_ftokp"]
@@ -14,6 +13,9 @@
 [ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="12_jcj5b"]
 [ext_resource type="Script" uid="uid://bjawm7wjw32cq" path="res://gamepadUi/dpadAudio.gd" id="13_bl1fc"]
 [ext_resource type="Script" uid="uid://6g2iyj4u8ey5" path="res://gamepadUi/d_pad_turbo_texture_btn.gd" id="14_bl1fc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jcj5b"]
+load_path = "res://.godot/imported/controllerHousingShadow.png-e0255aa66c7c8d383467edcb2ebf6aab.ctex"
 
 [sub_resource type="World3D" id="World3D_rrs3a"]
 
@@ -35,7 +37,7 @@ position = Vector2(696, 69)
 [node name="controllerShadow" type="Sprite2D" parent="." unique_id=198077250]
 position = Vector2(560, 365)
 scale = Vector2(0.857882, 0.865809)
-texture = ExtResource("4_bw2s0")
+texture = SubResource("CompressedTexture2D_jcj5b")
 script = ExtResource("5_021lf")
 
 [node name="controllerShell" type="Sprite2D" parent="." unique_id=585121749]

@@ -1,28 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://cck8rbj7yeox7"]
+[gd_scene format=3 uid="uid://cck8rbj7yeox7"]
 
 [ext_resource type="Texture2D" uid="uid://c4cxe25o5gsd3" path="res://assets/gradientBg.png" id="1_ay5w6"]
 [ext_resource type="Script" uid="uid://dfgp2a4pcn7lm" path="res://primaryUI/bg/bg.gd" id="1_o4r8b"]
 
-[node name="Bg" type="Node2D"]
+[node name="Bg" type="Node2D" unique_id=1709169103]
 script = ExtResource("1_o4r8b")
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="." unique_id=1513150211]
 modulate = Color(0.98, 0.2744, 0.76832, 1)
 position = Vector2(632, 400)
 scale = Vector2(0.737662, 0.737662)
 texture = ExtResource("1_ay5w6")
 
-[node name="chromaGreen" type="Polygon2D" parent="."]
+[node name="chromaGreen" type="Polygon2D" parent="." unique_id=945726856]
 visible = false
 color = Color(0, 1, 0, 1)
 polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 800, 0, 800)
 
-[node name="chromaMagenta" type="Polygon2D" parent="."]
+[node name="chromaMagenta" type="Polygon2D" parent="." unique_id=589904868]
 visible = false
 color = Color(0.943358, 0.000827271, 0.959374, 1)
 polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 800, 0, 800)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=331330063]
 wait_time = 15.0
 autostart = true
 

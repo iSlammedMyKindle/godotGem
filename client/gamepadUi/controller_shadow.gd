@@ -5,11 +5,11 @@ func _ready():
 	add_to_group('save')
 
 func receive_save(saveNode: Node, _status):
-	var currSavedBg = saveNode.get_val('bg', 'color', null)
+	var currSavedBg = saveNode.get_val('color', 'color', "Default")
 	
 	# Change the background
 	visible = currSavedBg == 'Default'
 
 func update_save_val(sec, key, val):
-	if sec == 'bg' and key == 'color':
+	if sec == 'color' and key == 'color':
 		visible = val == 'Default'

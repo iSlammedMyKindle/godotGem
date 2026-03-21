@@ -24,11 +24,12 @@ func _ready():
 	}
 	
 	add_to_group('save')
+	bgAnim()
 
 func bgAnim():
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($background, "modulate", colors[colorIndex], 2)
+	tween.tween_property($background, "modulate", colors[colorIndex], 15)
 	tween.play()
 	
 	colorIndex += 1
