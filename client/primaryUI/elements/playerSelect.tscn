@@ -1,40 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://cshjwyvpq0i2t"]
+[gd_scene format=3 uid="uid://cshjwyvpq0i2t"]
 
 [ext_resource type="Script" uid="uid://0fv3e3xsu03n" path="res://primaryUI/elements/player_select.gd" id="1_8uwpd"]
 [ext_resource type="PackedScene" uid="uid://droylayk24fix" path="res://primaryUI/elements/button.tscn" id="1_eh46c"]
 [ext_resource type="Texture2D" uid="uid://c3h7xcdyn52kd" path="res://assets/numberBox.png" id="2_t573v"]
-
-[sub_resource type="SystemFont" id="SystemFont_8uwpd"]
-font_names = PackedStringArray("Impact", "Arial")
-subpixel_positioning = 0
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="4_j8vfv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j8vfv"]
-font = SubResource("SystemFont_8uwpd")
+font = ExtResource("4_j8vfv")
 font_size = 84
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(3, 3)
 
-[sub_resource type="SystemFont" id="SystemFont_wv16d"]
-font_names = PackedStringArray("Arial Black")
-subpixel_positioning = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_8uwpd"]
-font = SubResource("SystemFont_wv16d")
-font_size = 42
+font = ExtResource("4_j8vfv")
+font_size = 24
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="PlayerSelect" type="Node2D"]
+[node name="PlayerSelect" type="Node2D" unique_id=943295156]
 script = ExtResource("1_8uwpd")
 
-[node name="ButtonL" parent="." instance=ExtResource("1_eh46c")]
+[node name="ButtonL" parent="." unique_id=2143110927 instance=ExtResource("1_eh46c")]
 position = Vector2(-8, -8)
 
 [node name="TextureButton" parent="ButtonL" index="0"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 disabled = true
 
-[node name="ButtonR" parent="." instance=ExtResource("1_eh46c")]
+[node name="ButtonR" parent="." unique_id=1319596478 instance=ExtResource("1_eh46c")]
 position = Vector2(168, -8)
 
 [node name="TextureButton" parent="ButtonR" index="0"]
@@ -44,7 +37,7 @@ offset_bottom = 137.0
 flip_h = true
 metadata/_edit_use_anchors_ = true
 
-[node name="NumberBox" type="TextureRect" parent="."]
+[node name="NumberBox" type="TextureRect" parent="." unique_id=1199332478]
 offset_left = 192.0
 offset_top = -8.0
 offset_right = 329.0
@@ -52,7 +45,7 @@ offset_bottom = 135.0
 texture = ExtResource("2_t573v")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="NumberBox"]
+[node name="Label" type="Label" parent="NumberBox" unique_id=872221307]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.02189781
@@ -67,13 +60,18 @@ text = "1"
 label_settings = SubResource("LabelSettings_j8vfv")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 562.0
-offset_bottom = 200.0
+[node name="Label" type="Label" parent="." unique_id=65764689]
+offset_left = 184.0
+offset_top = -32.0
+offset_right = 618.0
+offset_bottom = 40.0
 text = "Select Player"
 label_settings = SubResource("LabelSettings_8uwpd")
+
+[node name="disabledRect" type="ColorRect" parent="." unique_id=1402621656]
+offset_right = 520.0
+offset_bottom = 120.0
+color = Color(1, 1, 1, 0)
 
 [connection signal="pressed" from="ButtonL/TextureButton" to="." method="_on_button_l_pressed"]
 [connection signal="pressed" from="ButtonR/TextureButton" to="." method="_on_button_r_pressed"]

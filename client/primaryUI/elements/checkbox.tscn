@@ -1,29 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://7i118uxxc6ox"]
+[gd_scene format=3 uid="uid://7i118uxxc6ox"]
 
 [ext_resource type="Script" uid="uid://d13t6hbvt55k0" path="res://primaryUI/elements/checkbox.gd" id="1_72kbx"]
 [ext_resource type="Texture2D" uid="uid://dnd8a6b5yvkyl" path="res://assets/emptyCheck.png" id="1_sp2vs"]
 [ext_resource type="Texture2D" uid="uid://8bedcolu5ckv" path="res://assets/pressedEmptyCheck.png" id="3_66uaq"]
-
-[sub_resource type="SystemFont" id="SystemFont_wv16d"]
-font_names = PackedStringArray("Arial Black")
-subpixel_positioning = 0
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="4_66uaq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
-font = SubResource("SystemFont_wv16d")
+font = ExtResource("4_66uaq")
 font_size = 42
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Checkbox" type="Node2D"]
+[node name="Checkbox" type="Node2D" unique_id=424255135]
 script = ExtResource("1_72kbx")
 
-[node name="Box" type="TextureButton" parent="."]
+[node name="Box" type="TextureButton" parent="." unique_id=1182780068]
 offset_right = 145.0
 offset_bottom = 176.0
 texture_normal = ExtResource("1_sp2vs")
 texture_pressed = ExtResource("3_66uaq")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=675041221]
 offset_left = 184.0
 offset_top = 80.0
 offset_right = 618.0

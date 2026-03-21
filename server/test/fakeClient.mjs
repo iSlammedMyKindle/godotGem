@@ -1,4 +1,4 @@
-//Informal used for debugging the server, but also having a little fun in the process
+// Informal test used for debugging the server, but also having a little fun in the process
 import WebSocket from "ws";
 
 const fakeController = new WebSocket('ws://0.0.0.0:9090');

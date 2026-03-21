@@ -20,8 +20,12 @@ func _ready():
 	for node in checkIndex.keys():
 		node.get_node('Label').text = checkIndex[node]
 		node.radioSig.connect(onSettingChecked)
-		
+
+# When a radio is checked, save the value, which then triggers the background change. Also updated the other radioss (introducted in godot 4.6)
 func onSettingChecked(caller: Node2D):
+	# Uncheck the radio if it's not the caller
+	for rad in checkIndex.keys():
+		if not rad.get_node("Box") == caller: rad.get_node("Box").button_pressed = false
 	save.set_val(sectionName, 'color' , caller.name)
 
 # From save_logic

@@ -1,4 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://cpowyoxndsvj1"]
 
+[ext_resource type="FontFile" uid="uid://2crfnkj8pv3a" path="res://assets/nimbus-sans-l/NimbusSanL-Bold.ttf" id="1_4picd"]
+
 [resource]
+default_font = ExtResource("1_4picd")
 default_font_size = 30

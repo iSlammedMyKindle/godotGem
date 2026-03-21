@@ -7,7 +7,7 @@
    viewBox="0 0 338.66666 211.66667"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    sodipodi:docname="uiPanel.svg"
    inkscape:export-filename="../uiPanel.png"
    inkscape:export-xdpi="96"
@@ -27,11 +27,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="2.1095398"
-     inkscape:cx="749.45256"
-     inkscape:cy="550.11998"
-     inkscape:window-width="2560"
-     inkscape:window-height="1368"
+     inkscape:zoom="1.8245041"
+     inkscape:cx="707.58954"
+     inkscape:cy="489.17402"
+     inkscape:window-width="1805"
+     inkscape:window-height="1131"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -408,10 +408,10 @@
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
        id="filter65"
-       x="-0.15872274"
-       y="-0.24636205"
-       width="1.38358"
-       height="1.595375">
+       x="-0.16107077"
+       y="-0.21279803"
+       width="1.3892544"
+       height="1.5142619">
       <feFlood
          result="flood"
          in="SourceGraphic"
@@ -707,6 +707,44 @@
          in2="SourceGraphic"
          id="feComposite21" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter65-9"
+       x="-0.16107077"
+       y="-0.21279803"
+       width="1.3892544"
+       height="1.5142619">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="1.000000"
+         flood-color="rgb(100,58,2)"
+         id="feFlood63-3" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.500000"
+         id="feGaussianBlur63-6" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="1.500000"
+         dy="1.500000"
+         id="feOffset63-0" />
+      <feComposite
+         result="comp1"
+         operator="out"
+         in="flood"
+         in2="offset"
+         id="feComposite64-6" />
+      <feComposite
+         result="comp2"
+         operator="atop"
+         in="comp1"
+         in2="SourceGraphic"
+         id="feComposite65-2" />
+    </filter>
   </defs>
   <g
      inkscape:label="tabs"
@@ -997,7 +1035,7 @@
          rx="0"
          ry="0"
          inkscape:label="buttonContainer"
-         inkscape:export-filename="../menuButton.png"
+         inkscape:export-filename="../menuButtonPressed.png"
          inkscape:export-xdpi="96"
          inkscape:export-ydpi="96" />
       <g
@@ -1007,7 +1045,7 @@
          inkscape:export-xdpi="96"
          inkscape:export-ydpi="96"
          inkscape:label="buttonPressed"
-         style="display:none">
+         style="display:inline">
         <rect
            style="opacity:1;fill:#eed373;fill-opacity:1;stroke-width:29.7065;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter65)"
            id="rect6"
@@ -1027,12 +1065,11 @@
            ry="2.540406"
            rx="2.8083131" />
         <path
-           style="font-stretch:condensed;font-size:30.0751px;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:center;text-anchor:middle;fill:#eed373;fill-opacity:1;stroke-width:97.3548;stroke-linecap:round;paint-order:stroke fill markers"
-           d="m 202.33998,141.49447 -22.68106,-7.30632 22.68106,-7.30632 z"
-           id="path7"
+           style="font-stretch:condensed;font-size:30.0751px;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:center;text-anchor:middle;display:inline;fill:#eed373;fill-opacity:1;stroke-width:79.7542;stroke-linecap:round;paint-order:stroke fill markers"
+           d="m 201.21049,140.9923 c 0,3.17695 -14.67193,-4.1265 -15.95895,-4.86956 -1.28702,-0.74306 -1.38117,-2.36285 0.062,-3.19605 1.44313,-0.8332 15.89698,-9.20906 15.89698,-4.86417 z"
+           id="text6-8"
            aria-label="&lt;"
-           sodipodi:nodetypes="cccc"
-           transform="matrix(0.75845601,0,0,0.88483513,47.301079,15.540134)" />
+           sodipodi:nodetypes="szzss" />
       </g>
       <g
          id="g6"
@@ -1041,7 +1078,7 @@
          inkscape:export-xdpi="96"
          inkscape:export-ydpi="96"
          inkscape:label="button"
-         style="display:inline">
+         style="display:none">
         <rect
            style="opacity:1;fill:#eed373;fill-opacity:1;stroke-width:29.7065;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter63)"
            id="rect3"
@@ -1061,11 +1098,11 @@
            ry="2.540406"
            rx="2.8083131" />
         <path
-           style="font-stretch:condensed;font-size:30.0751px;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:center;text-anchor:middle;fill:#eed373;fill-opacity:1;stroke-width:97.3548;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter65)"
-           d="m 202.33998,141.49447 -22.68106,-7.30632 22.68106,-7.30632 z"
+           style="font-stretch:condensed;font-size:30.0751px;font-family:Impact;-inkscape-font-specification:'Impact Condensed';text-align:center;text-anchor:middle;display:inline;fill:#eed373;fill-opacity:1;stroke-width:97.3548;stroke-linecap:round;paint-order:stroke fill markers;filter:url(#filter65)"
+           d="m 202.33998,141.49447 c 0,3.59045 -19.34448,-4.66358 -21.04137,-5.50335 -1.69689,-0.83977 -1.82103,-2.67039 0.0817,-3.61203 1.90273,-0.94164 20.95967,-10.40765 20.95967,-5.49726 z"
            id="text6"
            aria-label="&lt;"
-           sodipodi:nodetypes="cccc"
+           sodipodi:nodetypes="szzss"
            transform="matrix(0.75845601,0,0,0.88483513,47.301079,15.540134)" />
       </g>
     </g>

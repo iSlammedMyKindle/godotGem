@@ -8,18 +8,27 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="godotGemClient"
 run/main_scene="res://Main.tscn"
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.6")
 config/icon="res://assets/godotGemLogo.png"
+
+[audio]
+
+buses/default_bus_layout="uid://bc31ggqibsiab"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
-window/stretch/mode="2d"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [global]
 

@@ -1,27 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcjg3jxo4oe0w"]
+[gd_scene format=3 uid="uid://dcjg3jxo4oe0w"]
 
 [ext_resource type="Script" uid="uid://f4brvc0nik38" path="res://primaryUI/tab.gd" id="1_pqugp"]
 [ext_resource type="Texture2D" uid="uid://crua0dc6gy4ku" path="res://assets/inactiveTab.png" id="2_h7vav"]
 [ext_resource type="Texture2D" uid="uid://blxspxmcfxcte" path="res://assets/pressedTab.png" id="2_pqugp"]
 [ext_resource type="Script" uid="uid://dhc4to1eaes2y" path="res://primaryUI/label.gd" id="4_h7vav"]
-
-[sub_resource type="SystemFont" id="SystemFont_h7vav"]
-font_names = PackedStringArray("Arial Black")
-subpixel_positioning = 0
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="4_kmjxk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h7vav"]
-font = SubResource("SystemFont_h7vav")
+font = ExtResource("4_kmjxk")
 font_size = 50
 font_color = Color(0.933333, 0.827451, 0.45098, 1)
 shadow_offset = Vector2(2, 2)
 
-[node name="Tab" type="Node2D"]
+[node name="Tab" type="Node2D" unique_id=1038959677]
 editor_description = "The label needs to be re-done on each tab if the properties there are changed!
 
 On each tab (for now) I've made them all editable children on the options scene. Better method would be to have the tabs dynamically created, but we only have three as of this writing."
 script = ExtResource("1_pqugp")
 
-[node name="Body" type="TextureButton" parent="."]
+[node name="Body" type="TextureButton" parent="." unique_id=1415733909]
 offset_left = -168.0
 offset_top = -80.0
 offset_right = 175.0
@@ -29,7 +26,7 @@ offset_bottom = 81.0
 texture_normal = ExtResource("2_h7vav")
 texture_pressed = ExtResource("2_pqugp")
 
-[node name="Label" type="Label" parent="Body"]
+[node name="Label" type="Label" parent="Body" unique_id=1426633283]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0

@@ -4,26 +4,29 @@ var selectedPlayer = 1
 var disabledColor = Color("808080")
 var enabledColor = Color('FFF')
 
+func _ready():
+	add_to_group("player_select_ui")
+	modulate = Color("ffffff7f")
+
 func toggleDisable(element: TextureButton, disabled: bool):
 	element.disabled = disabled
 	element.modulate = disabledColor if disabled else enabledColor
 
 func _on_button_l_pressed():
 	if selectedPlayer > 1:
-		selectedPlayer = selectedPlayer - 1
-		get_tree().call_group('player_select', 'player_change', selectedPlayer)
-		$NumberBox/Label.text = str(selectedPlayer)
-		if selectedPlayer == 1:
-			toggleDisable($ButtonL/TextureButton, true)
-		if $ButtonR/TextureButton.disabled:
-			toggleDisable($ButtonR/TextureButton, false)
+		setPlayerNumber(selectedPlayer - 1)
 
 func _on_button_r_pressed():
 	if selectedPlayer < 4:
-		selectedPlayer = selectedPlayer + 1
-		get_tree().call_group('player_select', 'player_change', selectedPlayer)
-		$NumberBox/Label.text = str(selectedPlayer)
-		if selectedPlayer == 4:
-			toggleDisable($ButtonR/TextureButton, true)
-		if $ButtonL/TextureButton.disabled:
-			toggleDisable($ButtonL/TextureButton, false)
+		setPlayerNumber(selectedPlayer + 1)
+
+func setPlayerNumber(playerNumber = 1):
+	selectedPlayer = int(playerNumber)
+	get_tree().call_group('player_select', 'player_change', selectedPlayer)
+	$NumberBox/Label.text = str(selectedPlayer)
+	toggleDisable($ButtonL/TextureButton, selectedPlayer == 1)
+	toggleDisable($ButtonR/TextureButton, selectedPlayer == 4)
+
+func setVisibility(vb: bool = false):
+	$disabledRect.visible = not vb
+	modulate = Color("ffffff") if vb else Color("bdbdbd")

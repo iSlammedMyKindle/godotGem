@@ -12,7 +12,7 @@ var shaftTween
 var originalPlateColor
 var heatMapActivated = false
 var shaftColors = {
-	'333333': -1,
+	'333333': - 1,
 	'0da399': .2,
 	'fbff00': .1,
 	'ffaa00': .05
@@ -49,15 +49,14 @@ func update_save_val(sec, key, val):
 # End save boilerplate
 
 func _process(delta: float):
-	
 	# Create X & Y values to represent a traditional value (from -1 to 1)
-	var positiveX = Input.get_action_strength( prefix + 'StickR') > 0
-	var positiveY = Input.get_action_strength( prefix + 'StickD') > 0
-	var x = Input.get_action_strength( prefix + 'StickR' if positiveX else prefix + 'StickL')
+	var positiveX = Input.get_action_strength(prefix + 'StickR') > 0
+	var positiveY = Input.get_action_strength(prefix + 'StickD') > 0
+	var x = Input.get_action_strength(prefix + 'StickR' if positiveX else prefix + 'StickL')
 	if not positiveX:
 		x = 0 - x
 		
-	var y = Input.get_action_strength( prefix + 'StickD' if positiveY else prefix + 'StickU')
+	var y = Input.get_action_strength(prefix + 'StickD' if positiveY else prefix + 'StickU')
 	if not positiveY:
 		y = 0 - y
 	
@@ -67,7 +66,7 @@ func _process(delta: float):
 	# Sound - The joysticks will have a "wooshing" effect like in tetris worlds. It'll be fluid - depending on where the joystick is in conjunction with the entire space, the volume will adjust
 	if not buttonSounds: return
 
-	var newVal = snappedf((x+y), 0.1)
+	var newVal = snappedf((x + y), 0.1)
 	if newVal != prev:
 		# Perform some subtraction on the largest and smallest numbers, then raise the volume by that amount
 		var diff = abs(newVal) - abs(prev) if abs(newVal) > abs(prev) else abs(prev) - abs(newVal)
@@ -123,7 +122,7 @@ func release_internal():
 func _on_turbo_toggle_button_pressed():
 	# Change the color based on index. If the index is too big, default to the original one
 	turboMode = turboMode + 1
-	if turboMode > shaftColors.keys().size() -1:
+	if turboMode > shaftColors.keys().size() - 1:
 		turboMode = 0
 	
 	$shaft.modulate = Color(shaftColors.keys()[turboMode])
@@ -147,4 +146,4 @@ func heatMapPress(btnName):
 	else: heatMap.everyoneElse = heatMap.everyoneElse + 1.0
 	
 	var fadeMath = ((1.0 / (heatMap.selfPress + heatMap.everyoneElse)) * heatMap.selfPress)
-	$container/bottom/top.self_modulate = originalPlateColor + Color( fadeMath, 0, 0, 0)
+	$container/bottom/top.self_modulate = originalPlateColor + Color(fadeMath, 0, 0, 0)
