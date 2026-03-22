@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://cu44qdu4atklp"]
+
+[ext_resource type="Script" uid="uid://d0oba6c4a3ocx" path="res://tests/test.gd" id="1_8uh7m"]
+[ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="1_37kl0"]
+
+[sub_resource type="Environment" id="Environment_8uh7m"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_6uqi0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uh7m"]
+albedo_texture = ExtResource("1_37kl0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8uh7m"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_8uh7m"]
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_8uh7m")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8uh7m")
+camera_attributes = SubResource("CameraAttributesPractical_6uqi0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.46214)
+material_override = SubResource("StandardMaterial3D_8uh7m")
+mesh = SubResource("BoxMesh_8uh7m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5467)
+fov = 93.4123
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18955, 0, -0.657149)
+mesh = SubResource("QuadMesh_8uh7m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

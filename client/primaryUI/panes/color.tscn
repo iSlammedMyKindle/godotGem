@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://drug6sdug2vs"]
+
+[ext_resource type="Script" uid="uid://ciaomfrn1qeov" path="res://primaryUI/panes/color.gd" id="1_4by7r"]
+[ext_resource type="PackedScene" uid="uid://0t21gdo7o5ri" path="res://primaryUI/elements/radio.tscn" id="2_jb6ys"]
+[ext_resource type="Texture2D" uid="uid://cgn340xrvn6ax" path="res://assets/rainbowIcon.png" id="4_xe4w6"]
+[ext_resource type="Texture2D" uid="uid://c1ciqgbw7er3q" path="res://assets/greenIcon.png" id="5_ux5gn"]
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="6_4by7r"]
+[ext_resource type="Texture2D" uid="uid://b37bl6gragfix" path="res://assets/magentaIcon.png" id="6_8rukb"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_4by7r"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_jb6ys"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_gqfor"]
+allow_unpress = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_72kbx"]
+font = ExtResource("6_4by7r")
+font_size = 42
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="color" type="Node2D" unique_id=83859581]
+script = ExtResource("1_4by7r")
+
+[node name="Default" parent="." unique_id=1999539321 instance=ExtResource("2_jb6ys")]
+position = Vector2(0, -56)
+
+[node name="Box" parent="Default" index="0" unique_id=176517321]
+button_group = SubResource("ButtonGroup_4by7r")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Default" index="1" unique_id=2009911699]
+metadata/_edit_use_anchors_ = true
+
+[node name="Green" parent="." unique_id=1868458968 instance=ExtResource("2_jb6ys")]
+position = Vector2(0, 72)
+
+[node name="Box" parent="Green" index="0" unique_id=176517321]
+button_group = SubResource("ButtonGroup_jb6ys")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Green" index="1" unique_id=2009911699]
+metadata/_edit_use_anchors_ = true
+
+[node name="Magenta" parent="." unique_id=162020053 instance=ExtResource("2_jb6ys")]
+position = Vector2(0, 208)
+
+[node name="Box" parent="Magenta" index="0" unique_id=176517321]
+button_group = SubResource("ButtonGroup_gqfor")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Magenta" index="1" unique_id=2009911699]
+metadata/_edit_use_anchors_ = true
+
+[node name="DefaultIcon" type="Sprite2D" parent="." unique_id=1948370743]
+position = Vector2(474, 65)
+texture = ExtResource("4_xe4w6")
+
+[node name="GreenIcon" type="Sprite2D" parent="." unique_id=14131919]
+position = Vector2(473, 192)
+texture = ExtResource("5_ux5gn")
+
+[node name="MagentaIcon" type="Sprite2D" parent="." unique_id=1781550027]
+position = Vector2(473, 320)
+texture = ExtResource("6_8rukb")
+
+[node name="controllerColor" type="ColorPickerButton" parent="." unique_id=676378407]
+offset_left = 104.0
+offset_top = 399.99997
+offset_right = 204.0
+offset_bottom = 499.99997
+scale = Vector2(0.73788273, 0.73788273)
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Label" type="Label" parent="controllerColor" unique_id=306560122]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.09090909
+anchor_bottom = -0.09090909
+offset_left = 119.260124
+offset_top = 30.774597
+offset_right = 553.26013
+offset_bottom = 102.77463
+text = "Controller's Color"
+label_settings = SubResource("LabelSettings_72kbx")
+
+[connection signal="color_changed" from="controllerColor" to="." method="_on_controller_color_color_changed"]
+[connection signal="popup_closed" from="controllerColor" to="." method="_on_controller_color_popup_closed"]
+
+[editable path="Default"]
+[editable path="Green"]
+[editable path="Magenta"]

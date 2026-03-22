@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://debo13kwies2p"]
+
+[ext_resource type="Texture2D" uid="uid://chnjourj2noqn" path="res://assets/frameBtn.svg" id="1_6j33e"]
+[ext_resource type="Script" uid="uid://pvuw6l2nm260" path="res://primaryUI/elements/hud_btn.gd" id="1_n5aoc"]
+[ext_resource type="Texture2D" uid="uid://cd860lvkxehet" path="res://assets/hudBtnClick.svg" id="2_g3uva"]
+[ext_resource type="FontFile" uid="uid://dh3clcfh2j6r6" path="res://assets/bedstead.otf" id="4_ofgil"]
+[ext_resource type="Texture2D" uid="uid://cqymfgendqobo" path="res://assets/infinity.svg" id="5_wfosu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b3x6o"]
+font = ExtResource("4_ofgil")
+font_size = 40
+font_color = Color(0.69411767, 0.69411767, 0.69411767, 1)
+
+[node name="HudBtn" type="Node2D" unique_id=1398882889]
+modulate = Color(0.83137256, 0.23921569, 0.20784314, 1)
+script = ExtResource("1_n5aoc")
+
+[node name="Btn" type="TextureButton" parent="." unique_id=1618427477]
+offset_right = 300.0
+offset_bottom = 325.0
+scale = Vector2(0.312347, 0.312347)
+texture_normal = ExtResource("1_6j33e")
+texture_pressed = ExtResource("2_g3uva")
+
+[node name="LabelContainer" type="Node2D" parent="." unique_id=685596535]
+
+[node name="Num" type="Label" parent="LabelContainer" unique_id=1725352152]
+visible = false
+offset_left = 11.0
+offset_top = 22.999998
+offset_right = 60.0
+offset_bottom = 71.0
+scale = Vector2(1.3016078, 1.3220125)
+text = "15"
+label_settings = SubResource("LabelSettings_b3x6o")
+
+[node name="Inf" type="Sprite2D" parent="LabelContainer" unique_id=1643183724]
+position = Vector2(45.999996, 48.000004)
+scale = Vector2(0.112486765, 0.10819032)
+texture = ExtResource("5_wfosu")
+
+[connection signal="button_down" from="Btn" to="." method="_on_btn_button_down"]
+[connection signal="button_up" from="Btn" to="." method="_on_btn_button_up"]
+[connection signal="pressed" from="Btn" to="." method="_on_btn_pressed"]

@@ -1,60 +1,88 @@
 extends Node2D
 
-var client = WebSocketClient.new()
+var client = WebSocketPeer.new()
 var connected = false
+var connecting = false
 var config = ConfigFile.new()
 var ignoreVibrationBool = false
+var currentController = 0
+var port = '9090'
 
 # This list is under the mercy of ViGEm. The buttons are sorted out here based on it's indexing, *not* godot's
 var evtList = {
-	"Up":0,
-	"Down":1,
-	"Left":2,
-	"Right":3,
-	"Start":4,
-	"Select":5,
-	"SL":6,
-	"SR":7,
-	"LB":8,
-	"RB":9,
-	"Guide":10,
-	"A":11,
-	"B":12,
-	"X":13,
-	"Y":14,
+	"Up": 0,
+	"Down": 1,
+	"Left": 2,
+	"Right": 3,
+	"Start": 4,
+	"Select": 5,
+	"SL": 6,
+	"SR": 7,
+	"LB": 8,
+	"RB": 9,
+	"Guide": 10,
+	"A": 11,
+	"B": 12,
+	"X": 13,
+	"Y": 14,
 }
 
 var joySticks = [
-	['LStickL', 'LStickR', 'LStickD', 'LStickU' ],
+	['LStickL', 'LStickR', 'LStickD', 'LStickU'],
 	['RStickL', 'RStickR', 'RStickD', 'RStickU'],
 ]
 
 var previousStickValues = [
-	[0,0],
-	[0,0]
+	[0, 0],
+	[0, 0]
 ]
 
-var previousTriggerValues = [0,0]
+var previousTriggerValues = [0, 0]
+
+# Save data loads from [root] -> saveLogic
+func receive_save(save: Node, _status: int):
+	config = save
+	
+	if config.get_val("general", "hideGithubSplash") == null:
+		$firstTimeRun.visible = true
+	# Port
+	var configPort = config.get_val("general", "port")
+	port = configPort if not configPort == null else '9090'
+
+func update_save_val(sec, key, val):
+	if sec == 'general':
+		if key == 'ignoreVibration':
+			ignoreVibrationBool = val
+		if key == 'port':
+			port = val if not val == null else '9090'
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	client.connect("connection_established", self, "_connected")
-	client.connect("data_received", self, "_on_data")
-	# client.connect("connection_error", self, "_closed")
-	# client.connect("connection_closed", self, "_closed")
-
-	# Load the config file:
-	var err = config.load("user://godotGem.cfg")
-	if err == OK and config.get_value("general", "ip") != null:
-		$urlToConnect.text = config.get_value("general", "ip")
+	# Save Logic
+	add_to_group('save')
 	
-	if config.get_value("general", "hideGithubSplash")	== null:
-		$firstTimeRun.visible = true
-		
+	# There's a group for each button, but a single group is going to fair better in order to get *all* of them
+	add_to_group('btnPresses')
+	$saveLogic.invoke_manual_receive(self )
+	
+	# Player select logic, as seen in player_select.gd
+	add_to_group('player_select')
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	client.poll()
+	var state = client.get_ready_state()
+	if state == WebSocketPeer.STATE_OPEN:
+		connected = true
+		if connecting:
+			connecting = false;
+			$HUD/connectionStatus.text = "connected to " + $HUD/urlToConnect.text;
+			config.set_val("general", "ip", $HUD/urlToConnect.text)
+		# Old function that'll be used in this slightly new method according to 4.6 docs
+		while client.get_available_packet_count():
+			on_data()
+	elif state == WebSocketPeer.STATE_CLOSED:
+		connected = false
+		get_tree().call_group("player_select_ui", "setVisibility", false)
 
 # Responsible for joysticks and trigger inputs
 func _physics_process(_delta):
@@ -68,10 +96,9 @@ func _physics_process(_delta):
 			previousStickValues[index] = resArray
 			# Send this off to the server This is a joystick position that hasn't been sent
 			# In order: joystick index (either 15 or 16), joystick X strength, joystick Y strength
-			setWriteMode(0)
-			var resStr = "["+str(15+(index*2))+","+str(resArray[0])+","+str(resArray[1])+"]"
-			client.get_peer(1).put_packet(resStr.to_utf8())
-		index += index+1
+			var resStr = "[" + str(15 + (index * 2)) + "," + str(resArray[0]) + "," + str(resArray[1]) + "]"
+			client.send_text(resStr)
+		index += index + 1
 
 	#Left & Right Triggers
 	var trigIndex = 0
@@ -81,93 +108,96 @@ func _physics_process(_delta):
 
 		if previousTriggerValues[trigIndex] != strength:
 			previousTriggerValues[trigIndex] = strength
-			setWriteMode(1)
-			var resArray = PoolByteArray();
-			resArray.push_back(0)
-			resArray.push_back(19+trigIndex)
+			var resArray = PackedByteArray();
+			resArray.push_back(currentController)
+			resArray.push_back(19 + trigIndex)
 			resArray.push_back(strength)
 
-			client.get_peer(1).put_packet(resArray)
+			client.send(resArray)
 			
-		trigIndex += trigIndex+1;
+		trigIndex += trigIndex + 1;
 
-func _connected(_proto = ""):
-	connected = true
-	$connectionStatus.text = "connected to "+$urlToConnect.text;
-	config.set_value("general", "ip", $urlToConnect.text)
-	config.save("user://godotGem.cfg")
-
-func _on_data():
-	#So far this is for rumble data only. First index of the array is target controller, second is small motor, and third is the large motor
-	if ignoreVibrationBool:
-		return
-		
-	var data = client.get_peer(1).get_packet()
-	if data[1] == 0 and data[2] == 0:
-		Input.stop_joy_vibration(0)
+func on_data():
+	# Alright, so we get the data, but we're going to "cheaply" guess what we're receiving - if the length is 3, we have a
+	# Byte array, but otherwise, we're going to assume strings. Not secure by the slightest, but ultimately that's an easy way to decipher it
+	var isString = false
+	var data: PackedByteArray = client.get_packet()
+	var decodedData
+	
+	if data.size() > 3:
+		isString = true
+		decodedData = data.get_string_from_utf8()
+	else: decodedData = data
+	
+	# This is JSON and we'll need to parse it to get the contents
+	if isString:
+		print(decodedData)
+		var res: Dictionary = JSON.parse_string(decodedData)
+		if res != null:
+			if typeof(res) == TYPE_DICTIONARY:
+				if res.has("announcement"):
+					$HUD/connectionStatus.text = res["announcement"]
+				if res.has("controller"):
+					get_tree().call_group("player_select_ui", "setVisibility", true)
+					get_tree().call_group("player_select_ui", "setPlayerNumber", res["controller"] + 1)
+			else: print("JSON not what we expected")
+		else: print("Whoop, well that wasn't JSON at all, skipping this one")
 		return
 	
-	Input.start_joy_vibration(0, (1 / 255.0) * data[1], (1 / 255.0) * data[2])
+	# Logic for vibrating the controller
+	# First index of the array is target controller, second is small motor, and third is the large motor
+	if ignoreVibrationBool: return
+	
+	if decodedData[1] == 0 and decodedData[2] == 0:
+		Input.stop_joy_vibration(0)
+	else: Input.start_joy_vibration(0, (1 / 255.0) * decodedData[1], (1 / 255.0) * decodedData[2])
+	
 
 func _on_Button_pressed():
-	var wsPeer = client.get_peer(1)
-
-	if wsPeer.is_connected_to_host():
-		wsPeer.close()
-		$Button.text = "Connect!"
-		$connectionStatus.text = "Connect to this address:"
+	if connected:
+		client.close()
+		$HUD/Button.text = "Connect!"
+		$HUD/connectionStatus.text = "Connect to this address:"
 	else:
-		$Button.text = "Disconnect"
-		$connectionStatus.text = "Connecting..."
-		print($urlToConnect.text)
-		var status = client.connect_to_url('ws://'+$urlToConnect.text+':9090')
+		$HUD/Button.text = "Disconnect"
+		$HUD/connectionStatus.text = "Connecting..."
+		print($HUD/urlToConnect.text)
+
+		var status = client.connect_to_url('ws://' + $HUD/urlToConnect.text + ':' + port)
+		
+		connecting = true
 		if status != OK:
-			$connectionStatus.text = "Unable to connect: "+status
+			$HUD/connectionStatus.text = "Unable to connect: " + str(status)
+			connecting = false
+			get_tree().call_group("player_select_ui", "setVisibility", false)
 
 func _on_BlinderBtn_pressed():
-	$AnimationPlayer.play('fade')
-		
+	$Blinder/blinderAnimation.play('fade')
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and $Blinder.visible:
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play_backwards('fade')
+		$Blinder/blinderAnimation.stop()
+		$Blinder/blinderAnimation.play_backwards('fade')
+		
+func set_ui_visibility(visible: bool):
+	$Bg.visible = visible
+	$gamepadUI.visible = visible
 
-		return
-	for item in evtList.keys():
-		if connected:
-			if Input.is_action_just_pressed(item) and not event is InputEventJoypadMotion:
-				var controllerBuffer = PoolByteArray()
-				#This byte is for the controller number (P1, P2, etc)
-				controllerBuffer.push_back(0)
-				# controller button index
-				controllerBuffer.push_back(evtList[item])
-				# Specifies input strength. If this is a button, just do either 0, or 255
-				controllerBuffer.push_back(255)
+func toggle(btn: String, press: bool):
+	#print('btn ', btn, 'press ', str(press))
+	if not connected: return
+	
+	var controllerBuffer = PackedByteArray()
+	controllerBuffer.push_back(currentController)  # This byte is for the controller number (P1, P2, etc)
+	controllerBuffer.push_back(evtList[btn])  # controller button index
+	controllerBuffer.push_back(255 if press else 0)  # Specifies input strength. If this is a button, just do either 0, or 255
 
-				setWriteMode(1)
-				client.get_peer(1).put_packet(controllerBuffer)
-				print(item + " " + str(event.button_index), str(controllerBuffer));
+	client.send(controllerBuffer)
 
-			elif Input.is_action_just_released(item) and not event is InputEventJoypadMotion:
-				#Basically same as above, only we tell the server we released the button
-				var controllerBuffer = PoolByteArray()
-				controllerBuffer.push_back(0)
-				controllerBuffer.push_back(evtList[item])
-				controllerBuffer.push_back(0)
-				
-				setWriteMode(1)
-				client.get_peer(1).put_packet(controllerBuffer)
-
-# 0 for utf8 text and 1 for bytes
-func setWriteMode(writeMode):
-	if client.get_peer(1).get_write_mode() != writeMode:
-		client.get_peer(1).set_write_mode(writeMode)
-
-
-func _on_githubPage_pressed():
-	OS.shell_open("https://github.com/iSlammedMyKindle/godotGem")
-
-
-func _on_CheckButton_pressed():
-	ignoreVibrationBool = !ignoreVibrationBool
+func player_change(player_number: int):
+	print('Selected Player: ' + str(player_number))
+	if connected:
+		currentController = player_number - 1
+		client.send_text(JSON.stringify({
+			"controller": currentController
+		}))

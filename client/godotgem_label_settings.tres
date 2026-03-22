@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://b776ng5m3247v"]
+
+[ext_resource type="FontFile" uid="uid://2crfnkj8pv3a" path="res://assets/nimbus-sans-l/NimbusSanL-Bold.ttf" id="1_rm4b5"]
+
+[resource]
+font = ExtResource("1_rm4b5")
+font_size = 26

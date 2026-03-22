@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://droylayk24fix"]
+
+[ext_resource type="Texture2D" uid="uid://wnahxm1nh2ph" path="res://assets/menuButton.png" id="1_r3ts6"]
+[ext_resource type="Texture2D" uid="uid://bxy2vsh2yawqr" path="res://assets/menuButtonPressed.png" id="2_nckap"]
+
+[node name="Button" type="Node2D"]
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_r3ts6")
+texture_pressed = ExtResource("2_nckap")

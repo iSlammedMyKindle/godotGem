@@ -1,5 +1,8 @@
 # godotGem
 
+
+<img src="./images/0.png" alt="godotGem's main interface" />
+
 **godotGem** is a project designed to help you connect a controller over the network to your Windows gaming PC. It makes use of [ViGEm.NET](https://github.com/ViGEm/ViGEm.NET), [Godot](https://godotengine.org/), and [webSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) to bridge the gap between a wired controller and send those inputs to a virtual controller that's being run on Windows!
 
 This program was designed with the **Steam Deck** in mind. It features a "blinder" button that fades the screen to black, so that your deck doesn't have burn-in while sending it's inputs over to the other machine.
@@ -62,8 +65,12 @@ You're done! Enjoy your fancy new ~~wired~~ wireless controller / Steam deck con
 
 ## Extras!
 
-* [How to use the godotGem bridge - a way to send controller inputs outside the LAN](./extras/bridgeHowTo.md)
-* [How to use advanced haptics from the DualSense controller through the weird quirks of Linux](./extras/usingAdvancedDualsenseVibration.md)
+* [How to use the godotGem bridge - a way to send controller inputs outside the LAN](./docs/bridgeHowTo.md)
+* [How to use advanced haptics from the DualSense controller through the weird quirks of Linux](./docs/usingAdvancedDualsenseVibration.md)
+
+## FAQ
+
+[Check out this page if there are other questions!](./docs/faq.md)
 
 # License
 

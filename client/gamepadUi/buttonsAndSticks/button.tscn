@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://cybf6napyai44"]
+
+[ext_resource type="Script" uid="uid://7xsf8ifpcqt7" path="res://gamepadUi/buttonsAndSticks/button.gd" id="1_lt4la"]
+[ext_resource type="Texture2D" uid="uid://boxsv8dql1bx7" path="res://assets/buttonShaft.png" id="1_vxja4"]
+[ext_resource type="Texture2D" uid="uid://ck0re7m68wm7r" path="res://assets/A.png" id="3_4amfo"]
+[ext_resource type="Texture2D" uid="uid://f0ixy2prycd6" path="res://assets/button.svg" id="3_ch4dw"]
+[ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="5_v1ut2"]
+[ext_resource type="Script" uid="uid://cw8vcrqmw6mue" path="res://gamepadUi/buttonsAndSticks/turbo_timer.gd" id="6_1o8tk"]
+
+[sub_resource type="Animation" id="Animation_lt4la"]
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("plate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_vxja4"]
+resource_name = "press"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("plate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4amfo"]
+_data = {
+&"RESET": SubResource("Animation_lt4la"),
+&"press": SubResource("Animation_vxja4")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v1ut2"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("5_v1ut2")
+
+[node name="Button" type="Node2D"]
+script = ExtResource("1_lt4la")
+
+[node name="shaft" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 1)
+position = Vector2(0, 24)
+texture = ExtResource("1_vxja4")
+
+[node name="plate" type="Sprite2D" parent="."]
+self_modulate = Color(0.12941177, 0.12941177, 0.12941177, 1)
+texture = ExtResource("3_ch4dw")
+
+[node name="letter" type="Sprite2D" parent="plate"]
+position = Vector2(0, -8)
+texture = ExtResource("3_4amfo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4amfo")
+}
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_v1ut2")
+volume_db = -5.0
+pitch_scale = 2.0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -104.0
+offset_top = -100.0
+offset_right = 104.0
+offset_bottom = 128.0
+
+[node name="turboTimer" type="Timer" parent="."]
+script = ExtResource("6_1o8tk")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="timeout" from="turboTimer" to="turboTimer" method="_on_timeout"]

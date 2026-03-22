@@ -1,176 +1,331 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene format=3 uid="uid://cmrkjib5bk7xi"]
 
-[ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://connectLabel.gd" type="Script" id=2]
-[ext_resource path="res://gamepadUi.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/rylan.png" type="Texture" id=4]
-[ext_resource path="res://assets/cough.mp3" type="AudioStream" id=5]
-[ext_resource path="res://Rylan.gd" type="Script" id=6]
-[ext_resource path="res://assets/godotGemLogo.svg" type="Texture" id=7]
-[ext_resource path="res://firstTimeRun.tscn" type="PackedScene" id=8]
+[ext_resource type="Script" uid="uid://3cnt4vye7q7" path="res://Main.gd" id="1"]
+[ext_resource type="Script" uid="uid://bpneym18dt1bn" path="res://primaryUI/connectLabel.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cck8rbj7yeox7" path="res://primaryUI/bg/bg.tscn" id="2_03owx"]
+[ext_resource type="Script" uid="uid://dt6xye1g1q4pm" path="res://save_logic.gd" id="2_c2ibq"]
+[ext_resource type="Script" uid="uid://cjvwbywbisn06" path="res://hud.gd" id="2_c6i3y"]
+[ext_resource type="PackedScene" uid="uid://bc0keobxw4aqk" path="res://gamepadUi/gamepadUi.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dqulof8b7mume" path="res://assets/rylan.png" id="4"]
+[ext_resource type="AudioStream" uid="uid://iu2qecixnqw8" path="res://assets/cough.mp3" id="5"]
+[ext_resource type="PackedScene" uid="uid://debo13kwies2p" path="res://primaryUI/elements/hudBtn.tscn" id="5_kjvhd"]
+[ext_resource type="FontFile" uid="uid://2crfnkj8pv3a" path="res://assets/nimbus-sans-l/NimbusSanL-Bold.ttf" id="5_sc1dx"]
+[ext_resource type="Script" uid="uid://bd11u8bkgl6re" path="res://primaryUI/Rylan.gd" id="6"]
+[ext_resource type="LabelSettings" uid="uid://b776ng5m3247v" path="res://godotgem_label_settings.tres" id="6_fpfj3"]
+[ext_resource type="Theme" uid="uid://cpowyoxndsvj1" path="res://Hud.tres" id="6_j4qnp"]
+[ext_resource type="PackedScene" uid="uid://bf3t5ws6wr4lt" path="res://primaryUI/firstTimeRun.tscn" id="8"]
+[ext_resource type="Texture2D" uid="uid://bfm4c6lo00s4b" path="res://assets/menu.svg" id="10_20pc6"]
+[ext_resource type="Texture2D" uid="uid://w6s2er422loj" path="res://assets/menuClick.svg" id="11_5vvyt"]
+[ext_resource type="Script" uid="uid://dunbl3mqrd8ma" path="res://primaryUI/settings.gd" id="12_c6i3y"]
+[ext_resource type="PackedScene" uid="uid://dpgcb13r8ekpy" path="res://primaryUI/menu.tscn" id="13_c2ibq"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "spin"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0.0, 360.0 ]
+"values": [0.0, 360.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ) ]
+"values": [Vector2(0, 0), Vector2(0.5, 0.5)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("AudioStreamPlayer:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trn2v"]
+_data = {
+&"spin": SubResource("2")
+}
+
+[sub_resource type="Animation" id="Animation_c2ibq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3790.66, -2500)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Menu:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.20157, 3.20157)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Menu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_c6i3y"]
+resource_name = "toggle"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-3790.66, -2500), Vector2(-3790.66, 0), Vector2(-3790.66, 200), Vector2(-3790.66, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Menu:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.166782, 0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3.202, 3.202), Vector2(3.202, 2.5), Vector2(3.202, 3.202)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Menu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4qnp"]
+_data = {
+&"RESET": SubResource("Animation_c2ibq"),
+&"toggle": SubResource("Animation_c6i3y")
+}
+
+[sub_resource type="Animation" id="1"]
 resource_name = "fade"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Blinder:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.13 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0.1, 0.13),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Blinder:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.46666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_ui_visibility"
+}, {
+"args": [false],
+"method": &"set_ui_visibility"
+}]
 }
 
-[node name="Main" type="Node2D"]
-script = ExtResource( 1 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03owx"]
+_data = {
+&"fade": SubResource("1")
+}
 
-[node name="githubPage" type="Button" parent="."]
-margin_left = 1200.0
-margin_top = 1.0
-margin_right = 1712.0
-margin_bottom = 507.0
-rect_scale = Vector2( 0.15, 0.15 )
-icon = ExtResource( 7 )
+[node name="Main" type="Node2D" unique_id=1311478424]
+script = ExtResource("1")
 
-[node name="urlToConnect" type="TextEdit" parent="."]
-margin_left = 504.0
-margin_top = 96.0
-margin_right = 611.0
-margin_bottom = 117.0
-rect_scale = Vector2( 2.5, 2.5 )
+[node name="Bg" parent="." unique_id=1236897164 instance=ExtResource("2_03owx")]
+
+[node name="gamepadUI" parent="." unique_id=706088751 instance=ExtResource("3")]
+position = Vector2(88, 104)
+
+[node name="HUD" type="Node2D" parent="." unique_id=1053617177]
+script = ExtResource("2_c6i3y")
+
+[node name="HudBtn" parent="HUD" unique_id=1398882889 instance=ExtResource("5_kjvhd")]
+
+[node name="urlToConnect" type="TextEdit" parent="HUD" unique_id=1612211688]
+offset_left = 552.0
+offset_top = 72.0
+offset_right = 777.0
+offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("5_sc1dx")
+theme_override_font_sizes/font_size = 30
 text = "111.222.33.44"
+placeholder_text = "111.222.33.44"
+emoji_menu_enabled = false
+caret_blink = true
+caret_multiple = false
+metadata/_edit_use_anchors_ = true
 
-[node name="connectionStatus" type="Label" parent="."]
-margin_left = 504.0
-margin_top = 56.0
-margin_right = 681.0
-margin_bottom = 76.0
-rect_scale = Vector2( 1.5, 1.5 )
+[node name="connectionStatus" type="Label" parent="HUD" unique_id=568467499]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 472.0
+offset_top = 24.0
+offset_right = 845.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_j4qnp")
 text = "Connect to this address:"
-script = ExtResource( 2 )
+label_settings = ExtResource("6_fpfj3")
+horizontal_alignment = 1
+script = ExtResource("2")
+metadata/_edit_use_anchors_ = true
 
-[node name="gamepadUI" parent="." instance=ExtResource( 3 )]
-position = Vector2( 24, 70 )
-
-[node name="BlinderBtn" type="Button" parent="."]
-margin_left = 416.0
-margin_top = 96.0
-margin_right = 474.0
-margin_bottom = 133.0
-rect_scale = Vector2( 1.5, 1.5 )
+[node name="BlinderBtn" type="Button" parent="HUD" unique_id=2076502761]
+offset_left = 432.0
+offset_top = 72.0
+offset_right = 544.0
+offset_bottom = 122.0
+theme = ExtResource("6_j4qnp")
 text = "Blinder"
+metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="."]
-margin_left = 768.0
-margin_top = 96.0
-margin_right = 842.0
-margin_bottom = 133.0
-rect_scale = Vector2( 1.5, 1.5 )
+[node name="Button" type="Button" parent="HUD" unique_id=273291566]
+offset_left = 784.0
+offset_top = 72.0
+offset_right = 920.0
+offset_bottom = 122.0
+theme = ExtResource("6_j4qnp")
 text = "Connect!"
+metadata/_edit_use_anchors_ = true
 
-[node name="Rylan" type="Sprite" parent="."]
+[node name="Rylan" type="Sprite2D" parent="HUD" unique_id=423651283]
 visible = false
-position = Vector2( 592, 520 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 4 )
+position = Vector2(605, 655)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4")
 centered = false
-script = ExtResource( 6 )
+script = ExtResource("6")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Rylan"]
-stream = ExtResource( 5 )
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD/Rylan" unique_id=1012431835]
+stream = ExtResource("5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Rylan"]
-anims/spin = SubResource( 2 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Rylan" unique_id=401333747]
+libraries/ = SubResource("AnimationLibrary_trn2v")
 
-[node name="IgnoreVibration" type="CheckButton" parent="."]
-margin_left = 512.0
-margin_top = 693.0
-margin_right = 694.0
-margin_bottom = 733.0
-rect_scale = Vector2( 1.5, 1.5 )
-text = "Ignore Vibration"
+[node name="Settings" type="TextureButton" parent="HUD" unique_id=1967309450]
+offset_left = 1184.0
+offset_top = 2.00002
+offset_right = 1484.0
+offset_bottom = 327.0
+scale = Vector2(0.312347, 0.312347)
+texture_normal = ExtResource("10_20pc6")
+texture_pressed = ExtResource("11_5vvyt")
+script = ExtResource("12_c6i3y")
 
-[node name="Blinder" type="ColorRect" parent="."]
+[node name="Menu" parent="HUD/Settings" unique_id=51845398 instance=ExtResource("13_c2ibq")]
 visible = false
-margin_right = 1280.0
-margin_bottom = 800.0
-color = Color( 0, 0, 0, 1 )
+position = Vector2(-3790.66, -2500)
+scale = Vector2(3.20157, 3.20157)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fade = SubResource( 1 )
+[node name="SettingsAnimations" type="AnimationPlayer" parent="HUD/Settings" unique_id=1027171482]
+libraries/ = SubResource("AnimationLibrary_j4qnp")
 
-[node name="firstTimeRun" parent="." instance=ExtResource( 8 )]
+[node name="Blinder" type="ColorRect" parent="." unique_id=952805823]
+visible = false
+offset_right = 1280.0
+offset_bottom = 800.0
+color = Color(0, 0, 0, 1)
+
+[node name="blinderAnimation" type="AnimationPlayer" parent="Blinder" unique_id=525552592]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_03owx")
+
+[node name="saveLogic" type="Node" parent="." unique_id=1796650952]
+editor_description = "Intentionally on the bottom because godot loads things top-down
+
+Once everything is loaded in the scene, there will be a blast that sends the save data to all nodes. This can't be done if this node is on the top of the tree... so DON'T MOVE IT! :>"
+script = ExtResource("2_c2ibq")
+
+[node name="firstTimeRun" parent="." unique_id=1319928637 instance=ExtResource("8")]
 visible = false
 
-[connection signal="pressed" from="githubPage" to="." method="_on_githubPage_pressed"]
-[connection signal="pressed" from="BlinderBtn" to="." method="_on_BlinderBtn_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="IgnoreVibration" to="." method="_on_CheckButton_pressed"]
+[connection signal="pressed" from="HUD/BlinderBtn" to="." method="_on_BlinderBtn_pressed"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HUD/Settings" to="HUD/Settings" method="_on_pressed"]

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dpgcb13r8ekpy"]
+
+[ext_resource type="Script" uid="uid://bvg0hy76u45cs" path="res://primaryUI/menu.gd" id="1_1um31"]
+[ext_resource type="Texture2D" uid="uid://bg07parvm3057" path="res://assets/uiPanel.png" id="1_5xnov"]
+[ext_resource type="PackedScene" uid="uid://dcjg3jxo4oe0w" path="res://primaryUI/tab.tscn" id="1_rhplt"]
+[ext_resource type="PackedScene" uid="uid://dtx0a00ko6v14" path="res://primaryUI/panes/General.tscn" id="4_g8mnm"]
+[ext_resource type="Texture2D" uid="uid://c00m3uw5ed75r" path="res://assets/docs.png" id="5_d73ic"]
+[ext_resource type="PackedScene" uid="uid://drug6sdug2vs" path="res://primaryUI/panes/color.tscn" id="5_f36gn"]
+[ext_resource type="PackedScene" uid="uid://blewrsug707d6" path="res://primaryUI/panes/other.tscn" id="6_1eps8"]
+
+[node name="Menu" type="Node2D" unique_id=848859103]
+script = ExtResource("1_1um31")
+
+[node name="General" parent="." unique_id=838054552 instance=ExtResource("1_rhplt")]
+position = Vector2(296, 104)
+
+[node name="Label" parent="General/Body" parent_id_path=PackedInt32Array(838054552, 1415733909) index="0" unique_id=1426633283]
+text = "General"
+metadata/_edit_use_anchors_ = true
+
+[node name="Color" parent="." unique_id=1847859967 instance=ExtResource("1_rhplt")]
+position = Vector2(632, 104)
+
+[node name="Label" parent="Color/Body" parent_id_path=PackedInt32Array(1847859967, 1415733909) index="0" unique_id=1426633283]
+text = "Color"
+metadata/_edit_use_anchors_ = true
+
+[node name="Other" parent="." unique_id=990151689 instance=ExtResource("1_rhplt")]
+position = Vector2(968, 104)
+
+[node name="Label" parent="Other/Body" parent_id_path=PackedInt32Array(990151689, 1415733909) index="0" unique_id=1426633283]
+text = "Other"
+metadata/_edit_use_anchors_ = true
+
+[node name="pane" type="Sprite2D" parent="." unique_id=1453246614]
+position = Vector2(640, 408)
+texture = ExtResource("1_5xnov")
+
+[node name="General" parent="pane" unique_id=613803936 instance=ExtResource("4_g8mnm")]
+position = Vector2(-336, -264)
+
+[node name="Color" parent="pane" unique_id=682159766 instance=ExtResource("5_f36gn")]
+visible = false
+position = Vector2(-304, -176)
+
+[node name="Other" parent="pane" unique_id=1993926561 instance=ExtResource("6_1eps8")]
+position = Vector2(-336, -264)
+
+[node name="githubPage" type="Button" parent="." unique_id=910392942]
+offset_left = 1040.0
+offset_top = 608.0
+offset_right = 1552.0
+offset_bottom = 1316.0
+scale = Vector2(0.15, 0.15)
+icon = ExtResource("5_d73ic")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="githubPage" to="." method="_on_github_page_pressed"]
+
+[editable path="General"]
+[editable path="Color"]
+[editable path="Other"]

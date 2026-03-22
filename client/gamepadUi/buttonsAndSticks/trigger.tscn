@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://rs45mxwjhxde"]
+
+[ext_resource type="Texture2D" uid="uid://b4trums7htaew" path="res://assets/thermometer.png" id="1_4jwb6"]
+[ext_resource type="Script" uid="uid://b125trbeadlat" path="res://gamepadUi/buttonsAndSticks/trigger.gd" id="1_737jc"]
+[ext_resource type="Texture2D" uid="uid://d2qkgut834raf" path="res://assets/thermometerContainer.png" id="2_hldph"]
+
+[sub_resource type="Animation" id="Animation_wyarw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hldph"]
+resource_name = "pop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("container:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -40), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4sadf"]
+_data = {
+&"RESET": SubResource("Animation_wyarw"),
+&"pop": SubResource("Animation_hldph")
+}
+
+[node name="Trigger" type="Node2D"]
+script = ExtResource("1_737jc")
+
+[node name="container" type="Sprite2D" parent="."]
+texture = ExtResource("2_hldph")
+
+[node name="heat" type="Polygon2D" parent="container"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-80, -208, 80, -208, 80, 208, -80, 208)
+
+[node name="thermometer" type="Sprite2D" parent="container"]
+texture = ExtResource("1_4jwb6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4sadf")
+}

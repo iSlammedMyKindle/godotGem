@@ -4,5 +4,8 @@
 */obj
 */.mono
 */.import
+**/out
 clientOut
 .mono
+client/.godot
+server/server.zip

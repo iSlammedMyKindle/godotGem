@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://bc0keobxw4aqk"]
+
+[ext_resource type="Script" uid="uid://dw51fm3xe8l7b" path="res://gamepadUi/gamepadUi.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cybf6napyai44" path="res://gamepadUi/buttonsAndSticks/button.tscn" id="2_u1mn1"]
+[ext_resource type="PackedScene" uid="uid://cuq5w8la4e1uu" path="res://gamepadUi/buttonsAndSticks/sideButtonR.tscn" id="3_7yqh2"]
+[ext_resource type="PackedScene" uid="uid://70fnvrl4fp3v" path="res://gamepadUi/buttonsAndSticks/sideButtonL.tscn" id="3_tdk0p"]
+[ext_resource type="Texture2D" uid="uid://b7avr0e5dua5p" path="res://assets/controllerHousing.png" id="4_6thga"]
+[ext_resource type="Script" uid="uid://cdxeicuaronjw" path="res://gamepadUi/controller_shadow.gd" id="5_021lf"]
+[ext_resource type="PackedScene" uid="uid://dxycnuef1a7un" path="res://gamepadUi/buttonsAndSticks/dPad.tscn" id="5_rrs3a"]
+[ext_resource type="PackedScene" uid="uid://cnkrcitq2d0ui" path="res://gamepadUi/buttonsAndSticks/joystick.tscn" id="6_ftokp"]
+[ext_resource type="PackedScene" uid="uid://dvibaeomn4a2i" path="res://gamepadUi/buttonsAndSticks/shaft.tscn" id="6_t6gqd"]
+[ext_resource type="PackedScene" uid="uid://rs45mxwjhxde" path="res://gamepadUi/buttonsAndSticks/trigger.tscn" id="8_6thga"]
+[ext_resource type="AudioStream" uid="uid://bl4yqu3xml5me" path="res://assets/audio/press.mp3" id="12_jcj5b"]
+[ext_resource type="Script" uid="uid://bjawm7wjw32cq" path="res://gamepadUi/dpadAudio.gd" id="13_bl1fc"]
+[ext_resource type="Script" uid="uid://6g2iyj4u8ey5" path="res://gamepadUi/d_pad_turbo_texture_btn.gd" id="14_bl1fc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jcj5b"]
+load_path = "res://.godot/imported/controllerHousingShadow.png-e0255aa66c7c8d383467edcb2ebf6aab.ctex"
+
+[sub_resource type="World3D" id="World3D_rrs3a"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mvmqu"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("12_jcj5b")
+
+[node name="gamepadUI" type="Node2D" unique_id=1593519260]
+position = Vector2(112, -5)
+script = ExtResource("1")
+
+[node name="LB" parent="." unique_id=1351444133 instance=ExtResource("3_tdk0p")]
+position = Vector2(424, 77)
+
+[node name="RB" parent="." unique_id=1873708353 instance=ExtResource("3_7yqh2")]
+position = Vector2(696, 69)
+
+[node name="controllerShadow" type="Sprite2D" parent="." unique_id=198077250]
+position = Vector2(560, 365)
+scale = Vector2(0.857882, 0.865809)
+texture = SubResource("CompressedTexture2D_jcj5b")
+script = ExtResource("5_021lf")
+
+[node name="controllerShell" type="Sprite2D" parent="." unique_id=585121749]
+position = Vector2(560, 365)
+scale = Vector2(0.857882, 0.865809)
+texture = ExtResource("4_6thga")
+
+[node name="Shaft" parent="." unique_id=238371946 instance=ExtResource("6_t6gqd")]
+position = Vector2(412, 370)
+scale = Vector2(0.26, 0.26)
+
+[node name="dpadVPContainer" type="SubViewportContainer" parent="." unique_id=1978726569]
+offset_left = 240.0
+offset_top = 196.0
+offset_right = 752.0
+offset_bottom = 708.0
+scale = Vector2(0.68, 0.68)
+
+[node name="dpadVP" type="SubViewport" parent="dpadVPContainer" unique_id=676166110]
+world_3d = SubResource("World3D_rrs3a")
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="DPad" parent="dpadVPContainer/dpadVP" unique_id=1053431207 instance=ExtResource("5_rrs3a")]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="dpadVPContainer" unique_id=572985609]
+stream = SubResource("AudioStreamRandomizer_mvmqu")
+script = ExtResource("13_bl1fc")
+
+[node name="DPadTurboOverlay" type="Node2D" parent="." unique_id=199020977]
+editor_description = "These are texture buttons in order to make toggling turbo mode possible on the DPad.
+
+This will involve talking to the dpad component indirectly in order to change shadow colors"
+
+[node name="Up" type="TextureButton" parent="DPadTurboOverlay" unique_id=522023039]
+offset_left = 385.0
+offset_top = 291.0
+offset_right = 437.0
+offset_bottom = 348.0
+script = ExtResource("14_bl1fc")
+
+[node name="Right" type="TextureButton" parent="DPadTurboOverlay" unique_id=657044139]
+offset_left = 436.0
+offset_top = 344.0
+offset_right = 490.0
+offset_bottom = 396.0
+script = ExtResource("14_bl1fc")
+
+[node name="Down" type="TextureButton" parent="DPadTurboOverlay" unique_id=438664995]
+offset_left = 385.0
+offset_top = 392.0
+offset_right = 437.0
+offset_bottom = 449.0
+script = ExtResource("14_bl1fc")
+
+[node name="Left" type="TextureButton" parent="DPadTurboOverlay" unique_id=1357043401]
+offset_left = 332.0
+offset_top = 343.0
+offset_right = 386.0
+offset_bottom = 395.0
+script = ExtResource("14_bl1fc")
+
+[node name="Start" parent="." unique_id=2066039422 instance=ExtResource("2_u1mn1")]
+position = Vector2(648, 205)
+scale = Vector2(0.240002, 0.240002)
+
+[node name="Guide" parent="." unique_id=51346235 instance=ExtResource("2_u1mn1")]
+position = Vector2(568, 101)
+scale = Vector2(0.400003, 0.400003)
+
+[node name="Select" parent="." unique_id=1364236311 instance=ExtResource("2_u1mn1")]
+position = Vector2(496, 205)
+scale = Vector2(0.240002, 0.240002)
+
+[node name="A" parent="." unique_id=351579632 instance=ExtResource("2_u1mn1")]
+position = Vector2(808, 293)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="B" parent="." unique_id=686529120 instance=ExtResource("2_u1mn1")]
+position = Vector2(872, 229)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="X" parent="." unique_id=1637400444 instance=ExtResource("2_u1mn1")]
+position = Vector2(744, 229)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="Y" parent="." unique_id=1430624590 instance=ExtResource("2_u1mn1")]
+position = Vector2(808, 173)
+scale = Vector2(0.360002, 0.360002)
+
+[node name="SR" parent="." unique_id=1771209073 instance=ExtResource("6_ftokp")]
+position = Vector2(696, 381)
+scale = Vector2(0.4, 0.4)
+
+[node name="TrigR" parent="." unique_id=1520619230 instance=ExtResource("8_6thga")]
+position = Vector2(976, 85)
+scale = Vector2(0.292573, 0.292573)
+
+[node name="TrigL" parent="." unique_id=479331629 instance=ExtResource("8_6thga")]
+position = Vector2(144, 85)
+scale = Vector2(0.292573, 0.292573)
+
+[node name="SL" parent="." unique_id=474690379 instance=ExtResource("6_ftokp")]
+position = Vector2(336, 205)
+scale = Vector2(0.4, 0.4)
+
+[connection signal="pressed" from="DPadTurboOverlay/Up" to="DPadTurboOverlay/Up" method="_on_pressed"]
+[connection signal="pressed" from="DPadTurboOverlay/Right" to="DPadTurboOverlay/Right" method="_on_pressed"]
+[connection signal="pressed" from="DPadTurboOverlay/Down" to="DPadTurboOverlay/Down" method="_on_pressed"]
+[connection signal="pressed" from="DPadTurboOverlay/Left" to="DPadTurboOverlay/Left" method="_on_pressed"]
