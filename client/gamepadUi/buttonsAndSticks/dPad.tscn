@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxycnuef1a7un"]
+[gd_scene format=3 uid="uid://dxycnuef1a7un"]
 
 [ext_resource type="Script" uid="uid://i6px0psovceg" path="res://gamepadUi/buttonsAndSticks/d_pad.gd" id="1_7umuv"]
 [ext_resource type="Texture2D" uid="uid://cm448p6c2v6mu" path="res://assets/dpadU.png" id="2_s3sqd"]
@@ -39,44 +39,44 @@ albedo_texture = ExtResource("5_v6axv")
 [sub_resource type="QuadMesh" id="QuadMesh_50e6q"]
 material = SubResource("StandardMaterial3D_ibhol")
 
-[node name="DPad" type="Node3D"]
+[node name="DPad" type="Node3D" unique_id=841780930]
 script = ExtResource("1_7umuv")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1816191272]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=635478070]
 
-[node name="dpadButtonContainer" type="Node3D" parent="."]
+[node name="dpadButtonContainer" type="Node3D" parent="." unique_id=1349491558]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)
 
-[node name="Up" type="MeshInstance3D" parent="dpadButtonContainer"]
+[node name="Up" type="MeshInstance3D" parent="dpadButtonContainer" unique_id=1669405371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
 mesh = SubResource("QuadMesh_hc0pe")
 skeleton = NodePath("../..")
 script = ExtResource("3_r8w13")
 
-[node name="Right" type="MeshInstance3D" parent="dpadButtonContainer"]
+[node name="Right" type="MeshInstance3D" parent="dpadButtonContainer" unique_id=845287525]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
 mesh = SubResource("QuadMesh_q1apk")
 skeleton = NodePath("../..")
 script = ExtResource("3_r8w13")
 
-[node name="Down" type="MeshInstance3D" parent="dpadButtonContainer"]
+[node name="Down" type="MeshInstance3D" parent="dpadButtonContainer" unique_id=194703787]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
 mesh = SubResource("QuadMesh_a3vql")
 skeleton = NodePath("../..")
 script = ExtResource("3_r8w13")
 
-[node name="Left" type="MeshInstance3D" parent="dpadButtonContainer"]
+[node name="Left" type="MeshInstance3D" parent="dpadButtonContainer" unique_id=1786457983]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147343, 0, 0.0002501011)
 mesh = SubResource("QuadMesh_50e6q")
 skeleton = NodePath("../..")
 script = ExtResource("3_r8w13")
 
-[node name="timerU" type="Timer" parent="."]
+[node name="timerU" type="Timer" parent="." unique_id=1900697448]
 
-[node name="timerR" type="Timer" parent="."]
+[node name="timerR" type="Timer" parent="." unique_id=498376249]
 
-[node name="timerD" type="Timer" parent="."]
+[node name="timerD" type="Timer" parent="." unique_id=1701342398]
 
-[node name="timerL" type="Timer" parent="."]
+[node name="timerL" type="Timer" parent="." unique_id=122499948]

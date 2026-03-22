@@ -4,6 +4,7 @@ extends Node3D
 var pressTween
 var saveObj: Node
 var heatMapActivated = false
+var buttonSounds = false
 
 var presses = {
 	"Up":false,
@@ -38,6 +39,7 @@ func _ready():
 func receive_save(save: Node, _status: int):
 	saveObj = save
 	heatMapActivated = save.get_val('other', 'buttonheatmap', false)
+	buttonSounds = save.get_val('general', 'buttonsounds', false)
 
 func update_save_val(section: String, key: String, val):
 	if section == 'other' and key == 'buttonheatmap':
@@ -45,6 +47,8 @@ func update_save_val(section: String, key: String, val):
 		if not heatMapActivated:
 			for btn in presses.keys():
 				$dpadButtonContainer.get_node(btn).resetColor()
+	if section == 'general' and key == 'buttonsounds':
+		buttonSounds = val
 
 # Upon the turbo being incremented for a turbo state, record that in our object above:
 func setTurbo(udlr):
@@ -85,7 +89,8 @@ func press_internal(udlr: String):
 	get_tree().call_group('btnPresses', 'toggle', udlr, true)
 	presses[udlr] = true
 	rock()
-	get_tree().call_group('dpadAudio', 'playSound')
+	if buttonSounds:
+		get_tree().call_group('dpadAudio', 'playSound')
 	if heatMapActivated:
 		get_tree().call_group('heatMap', 'heatMapPress', udlr)
 
