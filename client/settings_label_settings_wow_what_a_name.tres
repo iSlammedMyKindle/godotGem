@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://ify0ljipjgpj"]
+
+[ext_resource type="FontFile" uid="uid://dgw2kn6k4ecpe" path="res://assets/Jellee_1223/TTF/Jellee-Bold.ttf" id="1_1j4ll"]
+
+[resource]
+font = ExtResource("1_1j4ll")
+font_size = 42
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)

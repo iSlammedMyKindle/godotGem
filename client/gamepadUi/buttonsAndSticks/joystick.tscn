@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnkrcitq2d0ui"]
+[gd_scene format=3 uid="uid://cnkrcitq2d0ui"]
 
 [ext_resource type="Script" uid="uid://q3iwstja5qp2" path="res://gamepadUi/buttonsAndSticks/joystick.gd" id="1_413m4"]
 [ext_resource type="Texture2D" uid="uid://cbnb4acxmhlcf" path="res://assets/joystickBottom.png" id="1_dm1l1"]
@@ -50,45 +50,43 @@ random_pitch = 1.5
 streams_count = 1
 stream_0/stream = ExtResource("5_fivjq")
 
-[node name="Joystick" type="Node2D"]
+[node name="Joystick" type="Node2D" unique_id=1938077098]
 script = ExtResource("1_413m4")
 
-[node name="shaft" type="Sprite2D" parent="."]
+[node name="shaft" type="Sprite2D" parent="." unique_id=1935802039]
 modulate = Color(0.2, 0.2, 0.2, 1)
 position = Vector2(0, 22)
 texture = ExtResource("2_qlr0a")
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=501167579]
 
-[node name="bottom" type="Sprite2D" parent="container"]
+[node name="bottom" type="Sprite2D" parent="container" unique_id=1117592996]
 texture = ExtResource("1_dm1l1")
 
-[node name="top" type="Sprite2D" parent="container/bottom"]
+[node name="top" type="Sprite2D" parent="container/bottom" unique_id=547382237]
 self_modulate = Color(0.35, 0.35, 0.35, 1)
 texture = ExtResource("2_413m4")
 
-[node name="turboToggleButton" type="TextureButton" parent="."]
+[node name="turboToggleButton" type="TextureButton" parent="." unique_id=122632764]
 offset_left = -136.0
 offset_top = -136.0
 offset_right = 136.0
 offset_bottom = 144.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_dbkwe")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=700594169]
+libraries/ = SubResource("AnimationLibrary_dbkwe")
 
-[node name="audio" type="AudioStreamPlayer2D" parent="."]
+[node name="audio" type="AudioStreamPlayer2D" parent="." unique_id=968627163]
 stream = SubResource("AudioStreamRandomizer_54q5s")
 volume_db = -5.0
 pitch_scale = 0.5
 
-[node name="analogSfx" type="AudioStreamPlayer2D" parent="."]
+[node name="analogSfx" type="AudioStreamPlayer2D" parent="." unique_id=1151750684]
 stream = ExtResource("6_fivjq")
 pitch_scale = 0.58
 bus = &"stickBus"
 
-[node name="turboTimer" type="Timer" parent="."]
+[node name="turboTimer" type="Timer" parent="." unique_id=1464596156]
 script = ExtResource("7_qlr0a")
 
 [connection signal="pressed" from="turboToggleButton" to="." method="_on_turbo_toggle_button_pressed"]

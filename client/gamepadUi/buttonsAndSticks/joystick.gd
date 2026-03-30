@@ -101,7 +101,9 @@ func press(_stick):
 func press_internal():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play('press')
-	$audio.play()
+	
+	if buttonSounds:
+		$audio.play()
 	if turboMode > 0:
 		Input.start_joy_vibration(0, 0, 1, .05)
 	get_tree().call_group('btnPresses', 'toggle', name, true)
