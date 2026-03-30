@@ -48,4 +48,6 @@ Huh, that's an interesting question; But we do have an answer - this [community 
 
 # What do you like on your pizza?
 
-Meatlovers pizza with sausage, pepperoni, ham, and bacon. New york style with thin crust and balanced tomato sauce is the bomb!
+(Kindle) Meatlovers pizza with sausage, pepperoni, ham, and bacon. New york style with thin crust and balanced tomato sauce is the bomb!
+
+Rylan Wade Loves a good Pepperoni & Bacon pizza, with a "chez e crust" to boot!
