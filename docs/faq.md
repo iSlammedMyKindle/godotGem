@@ -22,7 +22,7 @@ Note that the V2 server is in *beta*, I haven't worked with bridge mode in this 
 
 Looks like you might need to have .NET installed:
 
-* For V1 Users, [Grab .NET v6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+* For V1 Users, [Grab .NET v7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
 * For V2 [Beta] Users, [Grab .NET v10](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
 # I'm having trouble connecting!

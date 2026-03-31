@@ -46,6 +46,8 @@ io.github.iSlammedMyKindle.godotGem
 * Please download the latest version in the [releases](https://github.com/iSlammedMyKindle/godotGem/releases) page.
 * On the computer you will be playing games on (host):
     * [You will need the ViGEm controller driver](https://github.com/ViGEm/ViGEmBus/releases/). Install that and move on to the next step
+    * You will also need to get [.NET Runtime 7.0 for server.zip](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) or [.NET Runtime 10.0 for the server_beta.zip](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) and install it.
+        * `beta` let's you use the new multiplayer features (runtime 10), while non-beta allows for using the niche `bridge` feature. (runtime 7)
     * download the `serverWindows.zip`. You can extract this anywhere and execute `server.exe`. Windows will ask to verify what networks this should work on. Select "Private Networks".
 * On the machine you're sharing the controller with (guest), download the `client`.
     * If you are on **Windows** (`godotGemClientWindow.zip`), you are basically good, just run the exe and slect "private networks" on your first run
